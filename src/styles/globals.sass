@@ -1,0 +1,38 @@
+@import "npm:sanitize.css"
+@import "npm:sanitize.css/typography.css"
+
+:root
+    font-size: 100%
+
+    &, body, #app
+        height: 100%
+
+    --color-white-primary: hsla(0, 0%, 100%, 1)
+    --color-black-primary: hsla(0, 0%, 14.9%, 1)
+    --color-grey-dark: hsla(0, 0%, 35.3%, 1)
+    --color-black-primary-disabled: hsla(0, 0%, 65.1%, 1)
+    --color-grey-primary: hsla(0, 0%, 85.1%, 1)
+
+    --color-red-dangerous: hsla(0, 100%, 62.5%, 1)
+    --color-red-dangerous-disabled: hsla(0, 100%, 80%, 1)
+    --color-blue-focus: hsla(205, 100%, 50%, 1)
+    --color-orange-attention: hsla(43, 100%, 50%, 1)
+
+    --color-yellow-status: hsla(65, 100%, 50%, 1)
+    --color-green-status: hsla(126, 100%, 50%, 1)
+    --color-red-status: hsla(0, 100%, 71.4%, 1)
+
+    --shadow-primary: 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.35)
+    --shadow-primary-hover: 0.3rem 0.3rem 0 rgba(0, 0, 0, 0.15)
+    --shadow-focus: inset 0 0 0 0.25rem var(--color-blue-focus)
+
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+
+path
+    fill: var(--color-black-primary)
+
+ul
+    list-style: none

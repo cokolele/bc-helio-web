@@ -1,0 +1,68 @@
+{
+    "simulations": [
+        {
+            "uuid": "ab5f34b6-e4c4-4ad3-a249-4abaaeb84ef3",
+            "name": "My simulation 1",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "ONE_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": null,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": true
+        },
+        {
+            "uuid": "1a452cbe-b72d-4e20-94d6-91a4e5e0414e",
+            "name": "My simulation 2 name too long to render properly and probably breaks layout",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "beginTime": 100,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 480,
+            "kparKper": 0.06,
+            "k0": 5e+22,
+            "v": 1400,
+            "finished": false
+        },
+        {
+            "uuid": "b4f797b7-cc26-4fae-a4db-49b413e124b8",
+            "name": "My simulation #3️⃣<掳𘏑򇫞㣞טQ𼉵󜕄򪛦𒚤򗟸췼񜢩窖낯᚟s¤ݓ𤡜",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": 0.01,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": false
+        },
+        {
+            "uuid": "s4f797b7-cc26-4fae-a4db-49b413e124b8",
+            "name": "My simulation 4",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "beginTime": 100,
+            "endTime": 200,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": 0.01,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": false
+        }
+    ]
+}

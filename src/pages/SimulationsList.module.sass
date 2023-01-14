@@ -1,0 +1,48 @@
+@import "/src/styles/mixins.sass"
+
+.list
+    display: flex
+    flex-direction: column
+
+    .labels
+        padding: 1rem 2rem
+        margin: 0 0 1em 0.2rem
+        display: flex
+
+        span
+            @include label-large
+            flex: 1
+
+    ul
+        @include button
+        padding: 1rem 1rem
+
+        li
+            @include clickable
+            padding: 0 1rem
+            display: flex
+            align-items: center
+
+            div
+                @include text
+                padding: 2rem 0
+                margin-right: 1rem
+                flex: 1
+                display: flex
+                align-items: center
+                gap: 0.4rem
+
+                &:first-child
+                    display: block
+                    overflow: hidden
+                    text-overflow: ellipsis
+                    white-space: nowrap
+
+                &:last-child
+                    justify-content: center
+
+                .iconArrow
+                    transition: margin-left 0.2s ease
+
+            &:hover .iconArrow, &:focus-visible .iconArrow
+                margin-left: 1.5rem

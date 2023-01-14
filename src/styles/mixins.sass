@@ -1,0 +1,63 @@
+@mixin clickable
+    border-radius: 0.75rem
+    cursor: pointer
+
+    &:focus-visible
+        outline: none
+        box-shadow: var(--shadow-focus)
+
+@mixin button
+    background-color: var(--color-white-primary)
+    border: 0.2rem solid var(--color-black-primary)
+    box-shadow: var(--shadow-primary)
+    transition: box-shadow 0.2s ease
+
+    &:hover
+        box-shadow: var(--shadow-primary-hover)
+
+    &:active
+        box-shadow: none
+
+    @include clickable
+
+    &:focus-visible
+        outline: none
+        box-shadow: var(--shadow-focus), var(--shadow-primary)
+
+@mixin font-style($size, $weight, $uppercase: false, $spaced: false)
+    font-size: $size
+    font-weight: $weight
+    font-family: "Roboto"
+    line-height: normal
+    color: var(--color-black-primary)
+    text-decoration: none
+
+    @if $uppercase
+        text-transform: uppercase
+
+    @if $spaced
+        letter-spacing: 0.06rem
+
+@mixin text
+    @include font-style(1rem, 500)
+
+@mixin text--regular
+    @include font-style(1rem, 400)
+
+@mixin text--thin
+    @include font-style(1rem, 300)
+
+@mixin text-small
+    @include font-style(0.88rem, 500)
+
+@mixin label
+    @include font-style(0.75rem, 700, $spaced: true)
+
+@mixin label-large
+    @include font-style(1rem, 700, $uppercase: true, $spaced: true)
+
+@mixin header
+    @include font-style(1.12rem, 700, $uppercase: true, $spaced: true)
+
+@mixin input
+    @include font-style(1rem, 700, $spaced: true)
