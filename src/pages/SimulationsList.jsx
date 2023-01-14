@@ -8,8 +8,10 @@ import {
     IconCheckCircleStatus,
     IconScheduleStatus,
     IconHistoryStatus,
-    IconCancelStatus
+    IconCancelStatus,
 } from "/src/components/Icons/Emph/20"
+import { IconSwapVert } from "/src/components/Icons/20"
+import { ButtonRaw } from "/src/components/Inputs"
 import * as classes from "./SimulationsList.module.sass"
 import fakeData from "/src/fakeData"
 
@@ -52,7 +54,7 @@ const fetchAllSimulations = async (dispatch) => {
 }
 
 const fetchAllSimulationsFake = async (dispatch) => {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 4000));
 
     dispatch({
         type: "setSimulations",
@@ -61,7 +63,7 @@ const fetchAllSimulationsFake = async (dispatch) => {
 }
 
 function SimulationsList() {
-    const [{ simulations }, dispatch] = useAppState()
+    let [{ simulations }, dispatch] = useAppState()
     const [searchParams] = useSearchParams()
 
     const [page, setPage] = useState(searchParams.page ?? 1)
@@ -95,7 +97,9 @@ function SimulationsList() {
         <>
             <section className={classes.primaryActions}></section>
             <section className={classes.list}>
-                <div className={classes.controls}></div>
+                <div className={classes.controls}>
+                    <ButtonRaw label="Najnovšie" IconLeft={IconSwapVert}/>
+                </div>
                 <div className={classes.labels}>
                     <span>názov</span>
                     <span>dátum</span>
@@ -104,7 +108,13 @@ function SimulationsList() {
                     <span></span>
                 </div>
                 <div className={classes.filters}></div>
-                <ul>
+                <ul className={
+                    !simulations ?
+                        classes.itemsLoading :
+                    simulations.length ?
+                        classes.items :
+                        classes.itemsEmpty
+                }>
                     <ListContent simulations={simulations} />
                 </ul>
             </section>
@@ -114,11 +124,11 @@ function SimulationsList() {
 
 function ListContent({ simulations }) {
     if (!simulations) {
-        return <li>{"loading"}</li>
+        return <>Načítavam</>
     }
 
     if (!simulations.length) {
-        return <li>{"empty"}</li>
+        return <>Žiadne simulácie</>
     }
 
     return simulations.map(({ name, simulationType, beginTime, finished, endTime }, i) => (

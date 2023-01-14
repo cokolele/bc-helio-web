@@ -1,6 +1,11 @@
 import { Outlet, Link  } from "react-router-dom"
-import { IconManageSearch, IconDns, IconSettings, IconReceiptLong } from "/src/components/Icon"
-import useCurrentRoute from "/src/utils/hooks/useCurrentRoute"
+import { 
+    IconManageSearch,
+    IconDns,
+    IconSettings,
+    IconReceiptLong
+} from "/src/components/Icons/40"
+import { useCurrentRoute } from "/src/utils/hooks"
 import * as classes from "./Layout.module.sass"
 
 function Layout() {

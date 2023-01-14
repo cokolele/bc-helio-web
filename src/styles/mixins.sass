@@ -1,36 +1,53 @@
+@mixin reset
+    background-color: transparent
+    border: none
+    text-decoration: none
+
 @mixin clickable
-    border-radius: 0.75rem
     cursor: pointer
 
     &:focus-visible
+        border-radius: 0.75rem
         outline: none
-        box-shadow: var(--shadow-focus)
+        box-shadow: var(--shadow-focus) !important
 
-@mixin button
+@mixin button($disabled: false)
     background-color: var(--color-white-primary)
-    border: 0.2rem solid var(--color-black-primary)
-    box-shadow: var(--shadow-primary)
-    transition: box-shadow 0.2s ease
+    border-radius: 0.75rem
 
-    &:hover
-        box-shadow: var(--shadow-primary-hover)
+    @if $disabled
 
-    &:active
-        box-shadow: none
+        border: 0.2rem solid var(--color-black-primary-disabled)
 
-    @include clickable
+    @else
 
-    &:focus-visible
-        outline: none
-        box-shadow: var(--shadow-focus), var(--shadow-primary)
+        border: 0.2rem solid var(--color-black-primary)
+        box-shadow: var(--shadow-primary)
+        transition: box-shadow 0.2s ease
 
-@mixin font-style($size, $weight, $uppercase: false, $spaced: false)
+        &:hover
+            box-shadow: var(--shadow-primary-hover)
+
+        &:active
+            box-shadow: none
+
+        @include clickable
+
+        &:focus-visible
+            outline: none
+            box-shadow: var(--shadow-focus), var(--shadow-primary)
+
+@mixin font-style($size, $weight, $uppercase: false, $spaced: false, $disabled)
     font-size: $size
     font-weight: $weight
     font-family: "Roboto"
     line-height: normal
-    color: var(--color-black-primary)
     text-decoration: none
+
+    @if $disabled
+        color: var(--color-black-primary-disabled)
+    @else
+        color: var(--color-black-primary)
 
     @if $uppercase
         text-transform: uppercase
@@ -38,26 +55,26 @@
     @if $spaced
         letter-spacing: 0.06rem
 
-@mixin text
-    @include font-style(1rem, 500)
+@mixin text($disabled: false)
+    @include font-style(1rem, 500, $disabled: $disabled)
 
-@mixin text--regular
-    @include font-style(1rem, 400)
+@mixin text--regular($disabled: false)
+    @include font-style(1rem, 400, $disabled: $disabled)
 
-@mixin text--thin
-    @include font-style(1rem, 300)
+@mixin text--thin($disabled: false)
+    @include font-style(1rem, 300, $disabled: $disabled)
 
-@mixin text-small
-    @include font-style(0.88rem, 500)
+@mixin text-small($disabled: false)
+    @include font-style(0.875rem, 500, $disabled: $disabled)
 
-@mixin label
-    @include font-style(0.75rem, 700, $spaced: true)
+@mixin label($disabled: false)
+    @include font-style(0.75rem, 700, $spaced: true, $disabled: $disabled)
 
-@mixin label-large
-    @include font-style(1rem, 700, $uppercase: true, $spaced: true)
+@mixin label-large($disabled: false)
+    @include font-style(1rem, 700, $uppercase: true, $spaced: true, $disabled: $disabled)
 
-@mixin header
-    @include font-style(1.12rem, 700, $uppercase: true, $spaced: true)
+@mixin header($disabled: false)
+    @include font-style(1.75rem, 700, $uppercase: true, $spaced: true, $disabled: $disabled)
 
-@mixin input
-    @include font-style(1rem, 700, $spaced: true)
+@mixin input($disabled: false)
+    @include font-style(1rem, 700, $spaced: true, $disabled: $disabled)
