@@ -1,5 +1,5 @@
 import api from "/src/utils/api"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useLayoutEffect } from "react"
 import { useSearchParams } from "react-router-dom"
 import { useAppState } from "/src/states/app"
 import { typeMapper } from "/src/utils/simulation"
@@ -62,60 +62,85 @@ const fetchAllSimulationsFake = async (dispatch) => {
     })
 }
 
+const sortings = {
+    new: (a, b) => a,
+    recent: (a, b) => b,
+    alph: (a, b) => a.name.localeCompare(b.name, "en", { sensitivity: "base" })
+}
+
+const sortLabels = {
+    new: "Najnovšie",
+    recent: "Posledné navštívené",
+    alph: "Abecedne"
+}
+
 function SimulationsList() {
-    let [{ simulations }, dispatch] = useAppState()
-    const [searchParams] = useSearchParams()
+    const [{ simulations }, dispatch] = useAppState()
+    const [params, setParams] = useSearchParams()
 
-    const [page, setPage] = useState(searchParams.page ?? 1)
-
-    // all simulations fetch
-    useEffect(() => {
-        if (simulations) {
-            return
-        }
-
-        //fetchAllSimulations(dispatch)
-        fetchAllSimulationsFake(dispatch)
-    }, [])
+    const [page, setPage] = useState(parseInt(params.get("page")))
+    const [sort, setSort] = useState(params.get("sort"))
 
     // page correction
-    useEffect(() => {
-        if (!simulations) {
-            return
-        }
-
-        if (page < 1) {
+    useLayoutEffect(() => {
+        if (!page || page < 1) {
             setPage(1)
-            return
-        } else if (page > Math.ceil(simulations.length / 10)) {
+        } else if (simulations && page > Math.ceil(simulations.length / 10)) {
             setPage(Math.ceil(simulations.length / 10))
-            return
         }
     }, [simulations])
 
+    // sort correction
+    useLayoutEffect(() => {
+        if (!sortings[sort]) {
+            setSort(Object.keys(sortings)[0])
+        }
+    }, [])
+    
+    //page correction
+    useEffect(() => {
+        if (!page || page < 1) {
+            setPage(1)
+            return
+        } else if (simulations && page > Math.ceil(simulations.length / 10)) {
+            setPage(Math.ceil(simulations.length / 10))
+            return
+        }
+    }, [page, simulations])
+    
+    // all simulations fetch
+    useEffect(() => {
+        if (!simulations) {
+            //fetchAllSimulations(dispatch)
+            fetchAllSimulationsFake(dispatch)
+        }
+    }, [])
+    
     return (
         <>
             <section className={classes.primaryActions}></section>
             <section className={classes.container}>
-                <ListControls />
+                <ListControls sort={sort} setSort={setSort}/>
                 <ListLabels />
                 <ListFilters />
-                <List simulations={simulations} />
+                <List simulations={simulations} sort={sort} />
             </section>
         </>
     )
 }
 
-function ListControls() {
+function ListControls({ sort, setSort }) {
+    const sortIds = Object.keys(sortings)
+
     return (
         <div className={classes.controls}> 
             <SelectButtonRaw
                 IconLeft={IconSwapVert}
-                list={["Posledné navštívené", "Najnovšie", "Abecedne"]}
-                selected={1}
-                onSelect={i => {}}
+                list={sortIds.map(sortId => sortLabels[sortId])}
+                selected={sortIds.indexOf(sort)}
+                onSelect={i => setSort(sortIds[i])}
             >
-                Najnovšie
+                {sortLabels[sort]}
             </SelectButtonRaw>
         </div>
     )
@@ -139,7 +164,7 @@ function ListFilters() {
     )
 }
 
-function List({ simulations }) {
+function List({ simulations, sort }) {
     if (!simulations) {
         return <ul className={classes.listLoading}>Načítavam</ul>
     }
@@ -151,7 +176,7 @@ function List({ simulations }) {
     return (
         <ul className={classes.list}>
             {
-                simulations.map(({ name, simulationType, beginTime, finished, endTime }, i) => (
+                simulations.sort(sortings[sort]).map(({ name, simulationType, beginTime, finished, endTime }, i) => (
                     <li tabIndex={0} key={i}>
                         <div><span>{name}</span></div>
                         <div><span>1.1.2023</span></div>

@@ -18,7 +18,7 @@
         },
         {
             "uuid": "1a452cbe-b72d-4e20-94d6-91a4e5e0414e",
-            "name": "My simulation 2 name too long to render properly and probably breaks layout",
+            "name": "Đ My simulation 2 name too long to render properly and probably breaks layout",
             "billionsOfSimulations": 10,
             "billionsOfSimulationsLeft": 10,
             "resultMap": {},
@@ -34,7 +34,7 @@
         },
         {
             "uuid": "b4f797b7-cc26-4fae-a4db-49b413e124b8",
-            "name": "My simulation #3️⃣<掳𘏑򇫞㣞טQ𼉵󜕄򪛦𒚤򗟸췼񜢩窖낯᚟s¤ݓ𤡜",
+            "name": "Á My simulation #3️⃣<掳𘏑򇫞㣞טQ𼉵󜕄򪛦𒚤򗟸췼񜢩窖낯᚟s¤ݓ𤡜",
             "billionsOfSimulations": 10,
             "billionsOfSimulationsLeft": 10,
             "resultMap": {},
