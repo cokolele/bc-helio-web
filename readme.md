@@ -4,11 +4,11 @@
 
 ## To do
 Thing                | Progress
----------------------|-------------------------------------------------------------------------------------
+---------------------|----------------------------------------------------------------------------------------------
 UI design mobile     | ✔️ všetky podstránky ❌ stavy = filtre, modal, snackbar, bottom sheet; dropdown input
 UI design desktop    | ✔️ list simulácií ❌ všetko ostatné
 Docker               | ❌
-Funkcionalita        | ✔️ načítanie simulácií ❌ načítanie uzlov, filtrovanie, vytváranie simulácií
+Funkcionalita        | ✔️ načítanie simulácií ❌ detail simulácie, načítanie uzlov, filtrovanie, vytváranie simulácií
 Typescript           | ❌
 PWA                  | ❌
 App State            | ✔️ globálny state

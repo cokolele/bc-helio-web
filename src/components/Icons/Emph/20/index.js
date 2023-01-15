@@ -55,3 +55,7 @@ export const IconCancelStatus = wrapper(
 export const IconSwapVert = wrapper(
     <path d="M6.438 11.25V5.396L4.479 7.354 3.021 5.917l4.437-4.459 4.438 4.459-1.458 1.437-1.959-1.958v5.854Zm6.104 7.25-4.438-4.458 1.458-1.438 1.959 1.958V8.708h2.041v5.854l1.959-1.958 1.458 1.438Z" />
 )
+
+export const IconCheck = wrapper(
+    <path d="m8.229 14.521-4.021-4.042 1.417-1.417 2.604 2.584 6.188-6.167 1.416 1.438Z" />
+)

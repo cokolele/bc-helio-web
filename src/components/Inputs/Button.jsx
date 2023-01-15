@@ -1,14 +1,18 @@
 import * as classes from "./Button.module.sass"
 
-export function ButtonRaw({ label, IconLeft, IconRight, IconTop, ...props }) {
+function ButtonRaw({children, IconLeft, IconRight, IconTop, ...props }) {
     return (
         <button type="button" {...props} className={[classes.buttonRaw, props.className].join(" ")} >
             { IconTop && <IconTop /> }
             <span>
                 { IconLeft && <IconLeft />}
-                {label}
+                { children }
                 { IconRight && <IconRight />}
-                </span>
+            </span>
         </button>
     )
+}
+
+export {
+    ButtonRaw
 }

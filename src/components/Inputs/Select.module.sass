@@ -1,0 +1,33 @@
+@import "/src/styles/mixins.sass"
+
+.dropdown
+    @include clickable-styled
+    cursor: auto
+    position: absolute
+    top: 100%
+    margin-top: 1rem
+    max-width: 20rem
+    max-height: 15rem
+    overflow-y: auto
+
+    .list
+        padding: 0.375rem
+
+        li
+            @include clickable
+            padding: 0.75rem
+            display: flex
+            align-items: center
+
+            &:hover
+                border-radius: 0.75rem
+                background-color: var(--color-grey-light)
+
+            span
+                display: inline-block
+                text-overflow: ellipsis
+                white-space: nowrap
+                overflow: hidden
+
+            svg
+                margin: 0 0.375rem 0 -0.375rem

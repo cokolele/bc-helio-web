@@ -11,7 +11,7 @@ import {
     IconCancelStatus,
 } from "/src/components/Icons/Emph/20"
 import { IconSwapVert } from "/src/components/Icons/20"
-import { ButtonRaw } from "/src/components/Inputs"
+import { SelectButtonRaw } from "/src/components/Inputs"
 import * as classes from "./SimulationsList.module.sass"
 import fakeData from "/src/fakeData"
 
@@ -96,62 +96,85 @@ function SimulationsList() {
     return (
         <>
             <section className={classes.primaryActions}></section>
-            <section className={classes.list}>
-                <div className={classes.controls}>
-                    <ButtonRaw label="Najnovšie" IconLeft={IconSwapVert}/>
-                </div>
-                <div className={classes.labels}>
-                    <span>názov</span>
-                    <span>dátum</span>
-                    <span>typ</span>
-                    <span>status</span>
-                    <span></span>
-                </div>
-                <div className={classes.filters}></div>
-                <ul className={
-                    !simulations ?
-                        classes.itemsLoading :
-                    simulations.length ?
-                        classes.items :
-                        classes.itemsEmpty
-                }>
-                    <ListContent simulations={simulations} />
-                </ul>
+            <section className={classes.container}>
+                <ListControls />
+                <ListLabels />
+                <ListFilters />
+                <List simulations={simulations} />
             </section>
         </>
     )
 }
 
-function ListContent({ simulations }) {
+function ListControls() {
+    return (
+        <div className={classes.controls}> 
+            <SelectButtonRaw
+                IconLeft={IconSwapVert}
+                list={["Posledné navštívené", "Najnovšie", "Abecedne"]}
+                selected={1}
+                onSelect={i => {}}
+            >
+                Najnovšie
+            </SelectButtonRaw>
+        </div>
+    )
+}
+
+function ListLabels() {
+    return (
+        <div className={classes.labels}>
+            <span>názov</span>
+            <span>dátum</span>
+            <span>typ</span>
+            <span>status</span>
+            <span></span>
+        </div>
+    )
+}
+
+function ListFilters() {
+    return (
+        <div className={classes.filters}></div>
+    )
+}
+
+function List({ simulations }) {
     if (!simulations) {
-        return <>Načítavam</>
+        return <ul className={classes.listLoading}>Načítavam</ul>
     }
 
     if (!simulations.length) {
-        return <>Žiadne simulácie</>
+        return <ul className={classes.listEmpty}>Žiadne simulácie</ul>
     }
 
-    return simulations.map(({ name, simulationType, beginTime, finished, endTime }, i) => (
-        <li tabIndex={0} key={i}>
-            <div>{name}</div>
-            <div>1.1.2023</div>
-            <div>{typeMapper(simulationType)}</div>
-            <div>
-                {
-                    finished ?
-                        <><IconCheckCircleStatus />Dokončené</> :
-                    endTime ?
-                        <><IconCancelStatus />Zrušené</> :
-                    beginTime ?
-                        <><IconHistoryStatus />Vykonáva sa</> :
-                        <><IconScheduleStatus />V poradí</>
-                }
-            </div>
-            <div>
-                <IconArrowForwardIos className={classes.iconArrow}/>
-            </div>
-        </li>
-    ))
+    return (
+        <ul className={classes.list}>
+            {
+                simulations.map(({ name, simulationType, beginTime, finished, endTime }, i) => (
+                    <li tabIndex={0} key={i}>
+                        <div><span>{name}</span></div>
+                        <div><span>1.1.2023</span></div>
+                        <div><span>{typeMapper(simulationType)}</span></div>
+                        <div>
+                            {
+                                finished ?
+                                    <><IconCheckCircleStatus /><span>Dokončené</span></> :
+                                endTime ?
+                                    <><IconCancelStatus /><span>Zrušené</span></> :
+                                beginTime ?
+                                    <><IconHistoryStatus /><span>Vykonáva sa</span></> :
+                                    <><IconScheduleStatus /><span>V poradí</span></>
+                            }
+                        </div>
+                        <div>
+                            <IconArrowForwardIos className={classes.iconArrow}/>
+                        </div>
+                    </li>
+                ))
+            }
+        </ul>
+    )
 }
 
 export default SimulationsList
