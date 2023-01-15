@@ -34,5 +34,5 @@ Parcel skeleton     | ✔️
 
 ## Nedostatky
 
-Nedostatočný endpoint /simulations/all
-SimulationsList flex namiesto table
+- Nedostatočný endpoint /simulations/all
+- SimulationsList flex namiesto table

@@ -1,6 +1,6 @@
 import api from "/src/utils/api"
 import { useEffect, useState, useLayoutEffect } from "react"
-import { useSearchParams } from "react-router-dom"
+import { useSearchParams, Link } from "react-router-dom"
 import { useAppState } from "/src/states/app"
 import { typeMapper } from "/src/utils/simulation"
 import {
@@ -11,7 +11,7 @@ import {
     IconCancelStatus,
 } from "/src/components/Icons/Emph/20"
 import { IconSwapVert } from "/src/components/Icons/20"
-import { SelectButtonRaw } from "/src/components/Inputs"
+import { Select } from "/src/components/Inputs"
 import * as classes from "./SimulationsList.module.sass"
 import fakeData from "/src/fakeData"
 
@@ -63,8 +63,8 @@ const fetchAllSimulationsFake = async (dispatch) => {
 }
 
 const sortings = {
-    new: (a, b) => a,
-    recent: (a, b) => b,
+    new: (a, b) => false,
+    recent: (a, b) => Math.random() < 1/2,
     alph: (a, b) => a.name.localeCompare(b.name, "en", { sensitivity: "base" })
 }
 
@@ -134,14 +134,15 @@ function ListControls({ sort, setSort }) {
 
     return (
         <div className={classes.controls}> 
-            <SelectButtonRaw
+            <Select
+                className={classes.button}
                 IconLeft={IconSwapVert}
                 list={sortIds.map(sortId => sortLabels[sortId])}
                 selected={sortIds.indexOf(sort)}
                 onSelect={i => setSort(sortIds[i])}
             >
                 {sortLabels[sort]}
-            </SelectButtonRaw>
+            </Select>
         </div>
     )
 }
@@ -176,25 +177,27 @@ function List({ simulations, sort }) {
     return (
         <ul className={classes.list}>
             {
-                simulations.sort(sortings[sort]).map(({ name, simulationType, beginTime, finished, endTime }, i) => (
-                    <li tabIndex={0} key={i}>
-                        <div><span>{name}</span></div>
-                        <div><span>1.1.2023</span></div>
-                        <div><span>{typeMapper(simulationType)}</span></div>
-                        <div>
-                            {
-                                finished ?
-                                    <><IconCheckCircleStatus /><span>Dokončené</span></> :
-                                endTime ?
-                                    <><IconCancelStatus /><span>Zrušené</span></> :
-                                beginTime ?
-                                    <><IconHistoryStatus /><span>Vykonáva sa</span></> :
-                                    <><IconScheduleStatus /><span>V poradí</span></>
-                            }
-                        </div>
-                        <div>
-                            <IconArrowForwardIos className={classes.iconArrow}/>
-                        </div>
+                simulations.sort(sortings[sort]).map(({ name, simulationType, beginTime, finished, endTime, uuid }, i) => (
+                    <li key={i}>
+                        <Link to={"/simulation/" + uuid}>
+                            <div><span>{name}</span></div>
+                            <div><span>1.1.2023</span></div>
+                            <div><span>{typeMapper(simulationType)}</span></div>
+                            <div>
+                                {
+                                    finished ?
+                                        <><IconCheckCircleStatus /><span>Dokončené</span></> :
+                                    endTime ?
+                                        <><IconCancelStatus /><span>Zrušené</span></> :
+                                    beginTime ?
+                                        <><IconHistoryStatus /><span>Vykonáva sa</span></> :
+                                        <><IconScheduleStatus /><span>V poradí</span></>
+                                }
+                            </div>
+                            <div>
+                                <IconArrowForwardIos className={classes.iconArrow}/>
+                            </div>
+                        </Link>
                     </li>
                 ))
             }

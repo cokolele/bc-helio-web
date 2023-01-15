@@ -1,13 +1,7 @@
-import { ButtonRaw } from "./Button"
-import {
-    SelectDropdown,
-    SelectList,
-    SelectButtonRaw
-} from "./Select"
+import Button from "./Button"
+import Select from "./Select"
 
 export {
-    ButtonRaw,
-    SelectDropdown,
-    SelectList,
-    SelectButtonRaw
+    Button,
+    Select
 }

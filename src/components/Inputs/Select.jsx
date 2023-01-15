@@ -1,37 +1,33 @@
 import { useState, useRef } from "react"
 import { IconCheck } from "/src/components/Icons/Emph/20"
-import { ButtonRaw } from "./Button"
+import Button from "./Button"
+import { useClickedOutside } from "/src/utils/hooks"
 import * as classes from "./Select.module.sass"
-
-function SelectDropdown({ children }) {
-    return <div className={classes.dropdown}>{ children }</div>
-}
 
 function SelectList({ list, selected, onSelect }) {
     return (
-        <SelectDropdown>
-            <ul className={classes.list}>
-                {
-                    list.map((label, i) => 
-                        <li
-                            key={i}
+        <ul className={classes.list}>
+            {
+                list.map((label, i) => 
+                    <li key={i}>
+                        <Button raw
                             tabIndex={i == selected ? -1 : 0}
                             onClick={() => i != selected && onSelect(i)}
                         >
-                            { i == selected && <IconCheck /> }
+                            {i == selected && <IconCheck />}
                             <span>{label}</span>
-                        </li>
-                    )
-                }
-            </ul>
-        </SelectDropdown>
+                        </Button>
+                    </li>
+                )
+            }
+        </ul>
     )
 }
 
-function SelectButtonRaw({ children, list, selected, onSelect, ...buttonProps }) {
+function Select({ children, list, selected, onSelect, ...buttonProps }) {
     const [show, setShow] = useState(false)
 
-    const onClick = (e) => {
+    const onClick = e => {
         setShow(!show)
 
         if (buttonProps.onClick) {
@@ -39,36 +35,36 @@ function SelectButtonRaw({ children, list, selected, onSelect, ...buttonProps })
         }
     }
 
-    const onBlur = (e) => {
-        if (
-            !e.target.contains(e.relatedTarget) // is children: button li
-            && !Array.from(e.target.parentNode.children).includes(e.relatedTarget) // are siblings: li + li 
-        ) {
-            setShow(false)
-        }
+    const _onSelect = i => {
+        setShow(false)
+        onSelect(i)
+    }
 
-        if (buttonProps.onClick) {
-            buttonProps.onClick(e)
+    const onBlur = e => {
+        if (ref.current && !ref.current.contains(e.relatedTarget)) {
+            setShow(false)
         }
     }
 
+    const ref = useRef(null)
+
+    useClickedOutside(ref, () => setShow(false))
+
     return (
-        <ButtonRaw {...buttonProps} onClick={onClick} onBlur={onBlur}>
-            { children }
+        <div className={classes.container} ref={ref} onBlur={onBlur}>
+            <Button unstyled {...buttonProps} onClick={onClick}>
+                { children }
+            </Button>
             {
                 show &&
                 <SelectList
                     list={list}
                     selected={selected}
-                    onSelect={onSelect}
+                    onSelect={_onSelect}
                 />
             }
-        </ButtonRaw>
+        </div>
     )
 }
 
-export {
-    SelectDropdown,
-    SelectList,
-    SelectButtonRaw
-}
+export default Select
