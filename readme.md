@@ -1,3 +1,9 @@
+# prod
+
+>docker-compose up
+
+# dev
+
 >npm install
 
 >npm start
@@ -7,7 +13,7 @@ Thing               | Progress
 --------------------|---------------------------------------------------------------------------------
 UI design mobile    | ✔️ všetky podstránky ❌ filtre, modal, snackbar, bottom sheet
 UI design desktop   | ✔️ list simulácií ❌ všetko ostatné
-Docker              | ❌
+Docker              | ✔️
 Functionality       | ✔️ načítanie simulácií ❌ detail simulácie, načítanie uzlov, vytváranie simulácií
 Typescript          | ❌
 PWA                 | ❌

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export default useCurrentDevice = () => {
+export default function useCurrentDevice() {
     const [width, setWidth] = useState(window.innerWidth)
     const handleWindowSizeChange = () => {
         setWidth(window.innerWidth)

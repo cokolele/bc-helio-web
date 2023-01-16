@@ -1,14 +1,13 @@
 {
   "name": "bc-helio-web",
   "version": "1.0.0",
-  "main": "index.js",
   "repository": "git@github.com:cokolele/bc-helio-web.git",
   "author": "lukas <lukasdz9457@gmail.com>",
   "license": "UNLICENSED",
   "browserslist": "defaults",
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.html --no-cache"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.2",
