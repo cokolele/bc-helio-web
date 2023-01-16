@@ -4,8 +4,8 @@ WORKDIR /app
 
 COPY ./ ./
 
-RUN npm install
-RUN npm run build
+RUN yarn
+RUN yarn build
 
 FROM nginx:1.23.3-alpine-slim
 
