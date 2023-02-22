@@ -2,6 +2,7 @@ import { useReducer, createContext, useContext } from 'react'
 
 const initialState = {
     simulations: null,
+    nodes: null,
     locale: "sk-SK",
     theme: window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
 }
@@ -11,6 +12,12 @@ function reducer(state, action) {
 
     try {
         switch (action.type) {
+            case "toggleLocale": {
+                return {
+                    ...state,
+                    locale: state.locale === "sk-SK" ? "en-GB" : "sk-SK"
+                }
+            }
             case "toggleTheme": {
                 return {
                     ...state,
@@ -21,6 +28,12 @@ function reducer(state, action) {
                 return {
                     ...state,
                     simulations: action.simulations
+                }
+            }
+            case "setNodes": {
+                return {
+                    ...state,
+                    nodes: action.nodes
                 }
             }
             default: {

@@ -11,8 +11,8 @@
         outline: none
         box-shadow: var(--shadow-focus)
 
-@mixin clickable-styled($subclasses: false, $disabled: false, $outlined: false, $dangerous: false)
-    border-radius: 0.75rem
+@mixin clickable-styled($subclasses: false, $disabled: false, $outlined: false, $dangerous: false, $block: false)
+    border-radius: if($block, 2px 2px 0.75rem 2px, 0.75rem)
 
     @if $subclasses
 

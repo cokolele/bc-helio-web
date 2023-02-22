@@ -65,7 +65,7 @@ const fetchAllSimulationsFake = async (dispatch) => {
 }
 
 const sortings = {
-    new: (a, b) => false,
+    new: (a, b) => Date.parse(a.createTime) < Date.parse(b.createTime),
     recent: (a, b) => Math.random() < 1/2,
     alph: (a, b) => a.name.localeCompare(b.name, "en", { sensitivity: "base" })
 }
@@ -77,7 +77,7 @@ const sortLabels = {
 }
 
 function SimulationsList() {
-    const [{ simulations }, dispatch] = useAppState()
+    const [{ simulations, locale }, dispatch] = useAppState()
     const [params, setParams] = useSearchParams()
 
     const [page, setPage] = useState(parseInt(params.get("page")))
@@ -85,7 +85,6 @@ function SimulationsList() {
 
     // page correction
     useLayoutEffect(() => {
-        console.log(page)
         if (!page || page < 1) {
             setPage(1)
         } else if (simulations?.length && page > Math.ceil(simulations.length / 10)) {
@@ -100,7 +99,6 @@ function SimulationsList() {
         }
     }, [])
     
-    // all simulations fetch
     useEffect(() => {
         if (!simulations) {
             //fetchAllSimulations(dispatch)
@@ -111,13 +109,13 @@ function SimulationsList() {
     return (
         <>
             <section className={classes.primaryActions}>
-                <Button IconTop={IconAdd} outlined>Pridať simuláciu</Button>
+                <Button IconTop={IconAdd} outlined >Pridať simuláciu</Button>
             </section>
-            <section className={classes.container}>
-                <ListControls sort={sort} setSort={setSort}/>
+            <section>
+                <ListControls sort={sort} setSort={setSort} />
                 <ListLabels />
                 <ListFilters />
-                <List simulations={simulations} sort={sort} />
+                <List simulations={simulations} sort={sort} locale={locale} />
             </section>
         </>
     )
@@ -129,7 +127,6 @@ function ListControls({ sort, setSort }) {
     return (
         <div className={classes.controls}> 
             <Select
-                className={classes.button}
                 IconLeft={IconSwapVert}
                 list={sortIds.map(sortId => sortLabels[sortId])}
                 selected={sortIds.indexOf(sort)}
@@ -159,49 +156,42 @@ function ListFilters() {
     )
 }
 
-function List({ simulations, sort }) {
+function List({ simulations, sort, locale }) {
+    const loading = !simulations
+    const empty = simulations?.length === 0
+
     return (
-        <ul className={classes.list}>
+        <ul className={loading || empty ? classes.listSkeleton : classes.list}>
             {
-                !simulations &&
-                <div className={classes.skeleton}>
-                    <a href="#" tabindex="-1" aria-disabled="true">
-                        <div><Skeleton /></div>
-                        <div><Skeleton /></div>
-                        <div><Skeleton /></div>
-                        <div><Skeleton /></div>
-                        <div><Skeleton /></div>
-                    </a>
-                </div>
-            }
-            {
-                simulations?.length == 0 &&
-                <div className={classes.empty}>Žiadné simulácie</div>
-            }
-            {
-                simulations?.sort(sortings[sort]).map(sim => 
-                    <li key={sim.uuid}>
-                        <Link to={"/simulations/" + sim.uuid}>
-                            <div><span>{sim.name}</span></div>
-                            <div><span>1.1.2023</span></div>
-                            <div><span>{typeMapper(sim.simulationType)}</span></div>
-                            <div>
-                                {
-                                    sim.finished ?
-                                        <><IconCheckCircleStatus /><span>Dokončené</span></> :
-                                    sim.endTime ?
-                                        <><IconCancelStatus /><span>Zrušené</span></> :
-                                    sim.beginTime ?
-                                        <><IconHistoryStatus /><span>Vykonáva sa</span></> :
-                                        <><IconScheduleStatus /><span>V poradí</span></>
-                                }
-                            </div>
-                            <div>
-                                <IconArrowForwardIos className={classes.iconArrow}/>
-                            </div>
-                        </Link>
-                    </li>
-                )
+                loading ?
+                    <Skeleton inline count={5}/>
+                :
+                empty ?
+                    "Žiadne simulácie"
+                :
+                    simulations?.sort(sortings[sort]).map(sim => 
+                        <li key={sim.uuid}>
+                            <Link to={"/simulations/" + sim.uuid}>
+                                <div><span>{sim.name}</span></div>
+                                <div><span>{new Date(sim.createTime).toLocaleDateString(locale)}</span></div>
+                                <div><span>{typeMapper(sim.simulationType)}</span></div>
+                                <div>
+                                    {
+                                        sim.finished ?
+                                            <><IconCheckCircleStatus /><span>Dokončené</span></> :
+                                        sim.endTime ?
+                                            <><IconCancelStatus /><span>Zrušené</span></> :
+                                        sim.beginTime ?
+                                            <><IconHistoryStatus /><span>Vykonáva sa</span></> :
+                                            <><IconScheduleStatus /><span>V poradí</span></>
+                                    }
+                                </div>
+                                <div>
+                                    <IconArrowForwardIos className={classes.iconArrow}/>
+                                </div>
+                            </Link>
+                        </li>
+                    )
             }
         </ul>
     )

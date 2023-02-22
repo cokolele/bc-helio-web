@@ -7,6 +7,7 @@
             "billionsOfSimulationsLeft": 10,
             "resultMap": {},
             "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-20T11:59:17.171",
             "beginTime": null,
             "endTime": null,
             "simulationType": "ONE_DIMENSION_BP",
@@ -23,6 +24,7 @@
             "billionsOfSimulationsLeft": 10,
             "resultMap": {},
             "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-18T11:59:17.171",
             "beginTime": 100,
             "endTime": null,
             "simulationType": "TWO_DIMENSION_BP",
@@ -39,6 +41,7 @@
             "billionsOfSimulationsLeft": 10,
             "resultMap": {},
             "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-05T11:59:17.171",
             "beginTime": null,
             "endTime": null,
             "simulationType": "TWO_DIMENSION_BP",
@@ -55,6 +58,7 @@
             "billionsOfSimulationsLeft": 10,
             "resultMap": {},
             "nodeSimulationApiModelList": [],
+            "createTime": "2023-01-22T11:59:17.171",
             "beginTime": 100,
             "endTime": 200,
             "simulationType": "TWO_DIMENSION_BP",
@@ -64,5 +68,49 @@
             "v": 400,
             "finished": false
         }
+    ],
+    "nodes": [
+        {
+            "gpu": "GTX_1080",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-01T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1070",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-08T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2060",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-10T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2080_TI",
+            "isActive": true,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-12T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1660_TI",
+            "isActive": false,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-15T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080_TI",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-22T18:59:17.171"
+        },
+        {
+            "gpu": "UKNOWN",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-25T13:59:17.171"
+        },
     ]
 }

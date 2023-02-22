@@ -1,9 +1,10 @@
-const wrapper = (path) => (props => (
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="1.25rem" height="100%" {...props}>
+const wrapper = (path) => (props =>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" height="100%" width="1.25rem" {...props}>
         {path}
     </svg>
-))
+)
+
 
 export const IconSwapVert = wrapper(
-    <path d="M6.75 11V4.875L4.562 7.062 3.5 6l4-4 4 4-1.062 1.062L8.25 4.875V11Zm5.75 7-4-4 1.062-1.062 2.188 2.187V9h1.5v6.125l2.188-2.187L16.5 14Z" />
+    <path d="M324 624V330L219 435l-51-51 192-192 192 192-51 51-105-105v294h-72Zm276 336L408 768l51-51 105 105V528h72v294l105-105 51 51-192 192Z" />
 )
