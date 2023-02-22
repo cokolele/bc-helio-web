@@ -1,15 +1,23 @@
 @import "/src/styles/mixins.sass"
 
-.buttonRaw, .buttonUnstyled
+.raw, .unstyled
     @include reset
     @include clickable
 
-.buttonUnstyled
+.unstyled, .styled
     display: flex
     flex-direction: column
+    justify-content: center
     align-items: center
+    gap: 0.375rem
 
     span
         display: flex
         align-items: center
         gap: 0.375rem
+
+.styled
+    @include reset
+    @include label-large
+    @include clickable-styled($subclasses: true)
+    padding: 0.75rem

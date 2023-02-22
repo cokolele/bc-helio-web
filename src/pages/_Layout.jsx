@@ -34,21 +34,28 @@ function Layout() {
 function NavigationMain({ currentRoute }) {
     return (
         <nav>
-            <div className={classes.top}>
-                <h3>HelioLogo</h3>  
+            <div className={classes.section}>
+                <div className={classes.top}>
+                    Helio
+                </div>
+                <div className={classes.middle}>
+                    <NavigationItem onClick={() => {}} label="Vyhľadávať" Icon={IconManageSearch}/>
+                    {
+                        currentRoute == "/simulations" ?
+                            <NavigationItem href="/nodes" label="Zoznam uzlov" Icon={IconDns}/>
+                        :
+                            <NavigationItem href="/simulations" label="Zoznam Simulácií" Icon={IconReceiptLong}/>
+                        
+                    }
+                </div>
+                <div className={classes.bottom}>
+                    <NavigationItem href="/settings" label="Nastavenia" Icon={IconSettings}/>
+                </div>
             </div>
-            <div className={classes.middle}>
-                <NavigationItem onClick={() => {}} label="Vyhľadávať" Icon={IconManageSearch}/>
-                {
-                    currentRoute == "/simulations" ?
-                        <NavigationItem href="/nodes" label="Zoznam uzlov" Icon={IconDns}/>
-                    :
-                        <NavigationItem href="/simulations" label="Zoznam Simulácií" Icon={IconReceiptLong}/>
-                    
-                }
-            </div>
-            <div className={classes.bottom}>
-                <NavigationItem href="/settings" label="Nastavenia" Icon={IconSettings}/>
+            <div className={classes.section}>
+                <div className={classes.middle}>
+                    <NavigationItem href={-1} label="Vrátiť sa" Icon={IconArrowBackIosNew} collapsed/>
+                </div>
             </div>
         </nav>
     )

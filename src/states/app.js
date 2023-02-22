@@ -2,6 +2,7 @@ import { useReducer, createContext, useContext } from 'react'
 
 const initialState = {
     simulations: null,
+    locale: "sk-SK",
     theme: window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
 }
 

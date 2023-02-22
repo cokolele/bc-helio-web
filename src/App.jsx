@@ -4,6 +4,7 @@ import { AppStateProvider } from "/src/states/app"
 import Layout from "/src/pages/Layout"
 import NotFound from "/src/pages/NotFound"
 import SimulationsList from "/src/pages/SimulationsList"
+import SimulationDetail from "/src/pages/SimulationDetail"
 
 function App() {
     return (
@@ -15,7 +16,7 @@ function App() {
                         <Route path="simulations">
                             <Route index element={<SimulationsList />} />
                             <Route path=":id">
-                                <Route index element={<NotFound />} />
+                                <Route index element={<SimulationDetail />} />
                                 <Route path="graph" element={<NotFound />} />
                             </Route>
                         </Route>

@@ -1,8 +1,10 @@
 import api from "/src/utils/api"
 import { useEffect, useState, useLayoutEffect } from "react"
 import { useSearchParams, Link } from "react-router-dom"
+import Skeleton from "react-loading-skeleton"
 import { useAppState } from "/src/states/app"
 import { typeMapper } from "/src/utils/simulation"
+import { useLocale } from "/src/utils/hooks"
 import {
     IconArrowForwardIos,
     IconCheckCircleStatus,
@@ -10,11 +12,13 @@ import {
     IconHistoryStatus,
     IconCancelStatus,
 } from "/src/components/Icons/Emph/20"
+import {
+    IconAdd
+} from "/src/components/Icons/Emph/24"
 import { IconSwapVert } from "/src/components/Icons/20"
-import { Select } from "/src/components/Inputs"
+import { Select, Button } from "/src/components/Inputs"
 import * as classes from "./SimulationsList.module.sass"
 import fakeData from "/src/fakeData"
-
 
 const fetchAllSimulations = async (dispatch) => {
     let ids
@@ -44,8 +48,6 @@ const fetchAllSimulations = async (dispatch) => {
     if (simulations.length !== requests.length) {
         // warning bad action
     }
-
-    console.log(simulations)
 
     dispatch({
         type: "setSimulations",
@@ -83,12 +85,13 @@ function SimulationsList() {
 
     // page correction
     useLayoutEffect(() => {
+        console.log(page)
         if (!page || page < 1) {
             setPage(1)
-        } else if (simulations && page > Math.ceil(simulations.length / 10)) {
+        } else if (simulations?.length && page > Math.ceil(simulations.length / 10)) {
             setPage(Math.ceil(simulations.length / 10))
         }
-    }, [simulations])
+    }, [page, simulations])
 
     // sort correction
     useLayoutEffect(() => {
@@ -96,17 +99,6 @@ function SimulationsList() {
             setSort(Object.keys(sortings)[0])
         }
     }, [])
-    
-    //page correction
-    useEffect(() => {
-        if (!page || page < 1) {
-            setPage(1)
-            return
-        } else if (simulations && page > Math.ceil(simulations.length / 10)) {
-            setPage(Math.ceil(simulations.length / 10))
-            return
-        }
-    }, [page, simulations])
     
     // all simulations fetch
     useEffect(() => {
@@ -118,7 +110,9 @@ function SimulationsList() {
     
     return (
         <>
-            <section className={classes.primaryActions}></section>
+            <section className={classes.primaryActions}>
+                <Button IconTop={IconAdd} outlined>Pridať simuláciu</Button>
+            </section>
             <section className={classes.container}>
                 <ListControls sort={sort} setSort={setSort}/>
                 <ListLabels />
@@ -166,30 +160,38 @@ function ListFilters() {
 }
 
 function List({ simulations, sort }) {
-    if (!simulations) {
-        return <ul className={classes.listLoading}>Načítavam</ul>
-    }
-
-    if (!simulations.length) {
-        return <ul className={classes.listEmpty}>Žiadne simulácie</ul>
-    }
-
     return (
         <ul className={classes.list}>
             {
-                simulations.sort(sortings[sort]).map(({ name, simulationType, beginTime, finished, endTime, uuid }, i) => (
-                    <li key={i}>
-                        <Link to={"/simulation/" + uuid}>
-                            <div><span>{name}</span></div>
+                !simulations &&
+                <div className={classes.skeleton}>
+                    <a href="#" tabindex="-1" aria-disabled="true">
+                        <div><Skeleton /></div>
+                        <div><Skeleton /></div>
+                        <div><Skeleton /></div>
+                        <div><Skeleton /></div>
+                        <div><Skeleton /></div>
+                    </a>
+                </div>
+            }
+            {
+                simulations?.length == 0 &&
+                <div className={classes.empty}>Žiadné simulácie</div>
+            }
+            {
+                simulations?.sort(sortings[sort]).map(sim => 
+                    <li key={sim.uuid}>
+                        <Link to={"/simulations/" + sim.uuid}>
+                            <div><span>{sim.name}</span></div>
                             <div><span>1.1.2023</span></div>
-                            <div><span>{typeMapper(simulationType)}</span></div>
+                            <div><span>{typeMapper(sim.simulationType)}</span></div>
                             <div>
                                 {
-                                    finished ?
+                                    sim.finished ?
                                         <><IconCheckCircleStatus /><span>Dokončené</span></> :
-                                    endTime ?
+                                    sim.endTime ?
                                         <><IconCancelStatus /><span>Zrušené</span></> :
-                                    beginTime ?
+                                    sim.beginTime ?
                                         <><IconHistoryStatus /><span>Vykonáva sa</span></> :
                                         <><IconScheduleStatus /><span>V poradí</span></>
                                 }
@@ -199,7 +201,7 @@ function List({ simulations, sort }) {
                             </div>
                         </Link>
                     </li>
-                ))
+                )
             }
         </ul>
     )

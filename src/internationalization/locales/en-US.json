@@ -1,0 +1,21 @@
+{
+    "header.simulation_list": "List of simulations",
+    "header.node_list": "List of nodes",
+    "header.settings": "User settings",
+    "header.simulation_detail": "Simulation",
+    "nav.search": "Search",
+    "nav.nodes_list": "List of nodes",
+    "nav.settings": "Settings",
+    "sort.new": "Recently added",
+    "sort.alph": "Alphabetical",
+    "sort.recent": "Recently viewed",
+    "name": "Name",
+    "date": "Date",
+    "type": "Type",
+    "status.done": "Finished",
+    "status.pending": "Pending",
+    "status.in_progress": "In progress",
+    "status.canceled": "Canceled",
+    "page.not_found.title": "We are sorry!",
+    "page.not_found.description": "This page couldn't be found..."
+}

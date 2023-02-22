@@ -1,42 +1,46 @@
 import * as classes from "./Button.module.sass"
 
-function ButtonRaw({ children, ...props }) {
-    return (
-        <button
-            type="button"
-            {...props}
-            className={[classes.buttonRaw, props.className].join(" ")}
-        >
-            { children }
-        </button>
-    )
-}
+function Button({ children, raw, unstyled, disabled, outlined, dangerous, IconLeft, IconRight, IconTop, ...props }) {
+    let classNames = []
 
-function ButtonUnstyled({ children, IconLeft, IconRight, IconTop, ...props }) {
-    return (
-        <button
-            type="button"
-            {...props}
-            className={[classes.buttonUnstyled, props.className].join(" ")}
-        >
-            { IconTop && <IconTop /> }
-            <span>
-                { IconLeft && <IconLeft />}
-                { children }
-                { IconRight && <IconRight />}
-            </span>
-        </button>
-    )
-}
-
-function Button({ children, raw, unstyled, IconLeft, IconRight, IconTop, ...props }) {
     if (raw) {
-        return ButtonRaw({ children, ...props })
+        classNames.push(classes.raw)
+    } else if (unstyled) {
+        classNames.push(classes.unstyled)
+    } else {
+        classNames.push(classes.styled)
+        
+        if (disabled) {
+            classNames.push(classes.disabled)
+        }
+        if (outlined) {
+            classNames.push(classes.outlined)
+        }
+        if (dangerous) {
+            classNames.push(classes.dangerous)
+        } 
     }
 
-    if (unstyled) {
-        return ButtonUnstyled({ children, IconLeft, IconRight, IconTop, ...props })
-    }
+    return (
+        <button
+            type="button"
+            {...props}
+            disabled={disabled}
+            className = {[ ...classNames, props.className ].join(" ")}
+        >
+            {
+                raw ? children :
+                <>
+                    { IconTop && <IconTop /> }
+                    <span>
+                        { IconLeft && <IconLeft />}
+                        { children }
+                        { IconRight && <IconRight />}
+                    </span>
+                </>
+            }
+        </button>
+    )
 }
 
 export default Button
