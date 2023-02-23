@@ -1,8 +1,14 @@
+import { Link } from "react-router-dom"
 import * as classes from "./Button.module.sass"
 
-function Button({ children, raw, unstyled, disabled, outlined, dangerous, IconLeft, IconRight, IconTop, ...props }) {
+const HTMLButton = props => <button {...props}></button>
+
+function Button({ children, to, raw, unstyled, disabled, outlined, dangerous, IconLeft, IconRight, IconTop, ...props }) {
     let classNames = []
 
+    if (disabled) {
+        classNames.push(classes.disabled)
+    }
     if (raw) {
         classNames.push(classes.raw)
     } else if (unstyled) {
@@ -10,9 +16,6 @@ function Button({ children, raw, unstyled, disabled, outlined, dangerous, IconLe
     } else {
         classNames.push(classes.styled)
         
-        if (disabled) {
-            classNames.push(classes.disabled)
-        }
         if (outlined) {
             classNames.push(classes.outlined)
         }
@@ -21,12 +24,16 @@ function Button({ children, raw, unstyled, disabled, outlined, dangerous, IconLe
         } 
     }
 
+    const Wrapper = to ? Link : HTMLButton
+
     return (
-        <button
-            type="button"
+        <Wrapper
+            type={to ? null : "button"}
             {...props}
+            to={to && disabled ? "#" : to}
+            tabIndex={disabled ? "-1" : props.tabIndex}
             disabled={disabled}
-            className = {[ ...classNames, props.className ].join(" ")}
+            className={[ ...classNames, props.className ].join(" ")}
         >
             {
                 raw ? children :
@@ -39,7 +46,7 @@ function Button({ children, raw, unstyled, disabled, outlined, dangerous, IconLe
                     </span>
                 </>
             }
-        </button>
+        </Wrapper>
     )
 }
 

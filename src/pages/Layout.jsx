@@ -1,4 +1,4 @@
-import { Outlet, Link, useParams } from "react-router-dom"
+import { Outlet, useParams } from "react-router-dom"
 import { 
     IconManageSearch,
     IconDns,
@@ -15,12 +15,7 @@ function Layout() {
 
     return (
         <div className={classes.container}>
-            {
-                currentRoute == "/simulations" || currentRoute == "/nodes" ?
-                    <NavigationMain currentRoute={currentRoute}/>
-                :
-                    <NavigationReturn currentRoute={currentRoute}/>
-            }
+            <NavigationMain currentRoute={currentRoute}/>
             <main>
                 <Header currentRoute={currentRoute}/>
                 <div className={classes.content}>
@@ -34,66 +29,45 @@ function Layout() {
 function NavigationMain({ currentRoute }) {
     return (
         <nav>
-            <div className={classes.top}>
-                <h3>HelioLogo</h3>  
-            </div>
-            <div className={classes.middle}>
-                <NavigationItem onClick={() => {}} label="Vyhľadávať" Icon={IconManageSearch}/>
-                {
-                    currentRoute == "/simulations" ?
-                        <NavigationItem href="/nodes" label="Zoznam uzlov" Icon={IconDns}/>
-                    :
-                        <NavigationItem href="/simulations" label="Zoznam Simulácií" Icon={IconReceiptLong}/>
-                    
-                }
-            </div>
-            <div className={classes.bottom}>
-                <NavigationItem href="/settings" label="Nastavenia" Icon={IconSettings}/>
-            </div>
+            {
+                currentRoute == "/simulations" || currentRoute == "/nodes" ?
+                    <>
+                        <div className={classes.top}>
+                            <h3>HelioLogo</h3>  
+                        </div>
+                        <div className={classes.middle}>
+                            <Button unstyled IconLeft={IconManageSearch}>Vyhľadávať</Button>
+                            {
+                                currentRoute == "/simulations" ?
+                                    <Button unstyled IconLeft={IconDns} to="/nodes">Zoznam uzlov</Button>
+                                :
+                                    <Button unstyled IconLeft={IconReceiptLong} to="/simulations">Zoznam Simulácií</Button>
+                                
+                            }
+                        </div>
+                        <div className={classes.bottom}>
+                            <Button unstyled IconLeft={IconSettings} to="/settings">Nastavenia</Button>
+                        </div>
+                    </>
+                :
+                    <Button unstyled IconLeft={IconArrowBackIosNew} to={-1}>Vrátiť sa</Button>
+            }
         </nav>
     )
-}
-
-function NavigationReturn({ currentRoute }) {
-    return (
-        <nav className={classes.collapsed}>
-            <div className={classes.middle}>
-                <NavigationItem href={-1} label="Vrátiť sa" Icon={IconArrowBackIosNew} collapsed/>
-            </div>
-        </nav>
-    )
-}
-
-function NavigationItem({ href, onClick, label, Icon }) {
-    const content = (
-        <>
-            <Icon />
-            <span>{label}</span>
-        </>
-    )
-    
-    if (href) {
-        return <Link className={classes.item} to={href}>{content}</Link>
-    } else {
-        return <Button raw className={classes.item} onClick={onClick}>{content}</Button>
-    }
 }
 
 function Header({ currentRoute }) {
-    switch (currentRoute) {
-        case "/simulations":
-            return <h1>Zoznam simulácií</h1>
-        case "/nodes":
-            return <h1>Zoznam uzlov</h1>
-        case "/settings":
-            return <h1>Používateľské nastavenia</h1>
-        case "/simulations/:id":
-            return <h1>Simulácia <span>{useParams().id.split("-")[0]}</span></h1>
-        case "/simulations/:id/graph":
-            return <h1>Graf simulácie</h1>
-        default:
-            return null
+    const labels = {
+        "/simulations": "Zoznam simulácií",
+        "/nodes": "Zoznam uzlov",
+        "/settings": "Používateľské nastavenia",
+        "/simulations/new": "Pridať simuláciu",
+        "/simulations/:id": <>Simulácia <span>{useParams().id?.split("-")[0]}</span></>,
+        "/simulations/:id/graph": "Graf simulácie",
+
     }
+    
+    return <h1>{labels[currentRoute]}</h1>
 }
 
 export default Layout

@@ -109,7 +109,7 @@ function SimulationsList() {
     return (
         <>
             <section className={classes.primaryActions}>
-                <Button IconTop={IconAdd} outlined >Pridať simuláciu</Button>
+                <Button IconTop={IconAdd} outlined to="new" >Pridať simuláciu</Button>
             </section>
             <section>
                 <ListControls sort={sort} setSort={setSort} />
@@ -171,7 +171,7 @@ function List({ simulations, sort, locale }) {
                 :
                     simulations?.sort(sortings[sort]).map(sim => 
                         <li key={sim.uuid}>
-                            <Link to={"/simulations/" + sim.uuid}>
+                            <Link to={sim.uuid}>
                                 <div><span>{sim.name}</span></div>
                                 <div><span>{new Date(sim.createTime).toLocaleDateString(locale)}</span></div>
                                 <div><span>{typeMapper(sim.simulationType)}</span></div>

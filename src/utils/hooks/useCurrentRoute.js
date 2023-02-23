@@ -1,6 +1,6 @@
 import { matchRoutes, useLocation } from "react-router-dom"
 
-const routes = ["/", "*", "/simulations", "/simulations/:id", "/simulations/:id/graph", "/nodes", "/settings"]
+const routes = ["/", "*", "/simulations", "/simulations/new", "/simulations/:id", "/simulations/:id/graph", "/nodes", "/settings"]
     .map(path => ({ path }))
 
 export default function useCurrentRoute() {
