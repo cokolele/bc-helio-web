@@ -127,6 +127,7 @@ function ListControls({ sort, setSort }) {
     return (
         <div className={classes.controls}> 
             <Select
+                unstyled 
                 IconLeft={IconSwapVert}
                 list={sortIds.map(sortId => sortLabels[sortId])}
                 selected={sortIds.indexOf(sort)}
@@ -169,8 +170,8 @@ function List({ simulations, sort, locale }) {
                 empty ?
                     "Žiadne simulácie"
                 :
-                    simulations?.sort(sortings[sort]).map(sim => 
-                        <li key={sim.uuid}>
+                    simulations?.sort(sortings[sort]).map((sim, i) => 
+                        <li key={i}>
                             <Link to={sim.uuid}>
                                 <div><span>{sim.name}</span></div>
                                 <div><span>{new Date(sim.createTime).toLocaleDateString(locale)}</span></div>

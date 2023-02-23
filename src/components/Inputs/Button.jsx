@@ -3,15 +3,14 @@ import * as classes from "./Button.module.sass"
 
 const HTMLButton = props => <button {...props}></button>
 
-function Button({ children, to, raw, unstyled, disabled, outlined, dangerous, IconLeft, IconRight, IconTop, ...props }) {
+function Button({ children, to, unstyled, disabled, outlined, dangerous, IconLeft, IconRight, IconTop, ...props }) {
     let classNames = []
 
     if (disabled) {
         classNames.push(classes.disabled)
     }
-    if (raw) {
-        classNames.push(classes.raw)
-    } else if (unstyled) {
+    
+    if (unstyled) {
         classNames.push(classes.unstyled)
     } else {
         classNames.push(classes.styled)
@@ -21,7 +20,9 @@ function Button({ children, to, raw, unstyled, disabled, outlined, dangerous, Ic
         }
         if (dangerous) {
             classNames.push(classes.dangerous)
-        } 
+        } else {
+            classNames.push(classes.base)
+        }
     }
 
     const Wrapper = to ? Link : HTMLButton
@@ -35,17 +36,14 @@ function Button({ children, to, raw, unstyled, disabled, outlined, dangerous, Ic
             disabled={disabled}
             className={[ ...classNames, props.className ].join(" ")}
         >
-            {
-                raw ? children :
-                <>
-                    { IconTop && <IconTop /> }
-                    <span>
-                        { IconLeft && <IconLeft />}
-                        { children }
-                        { IconRight && <IconRight />}
-                    </span>
-                </>
-            }
+            <>
+                { IconTop && <IconTop /> }
+                <span>
+                    { IconLeft && <IconLeft />}
+                    { children }
+                    { IconRight && <IconRight />}
+                </span>
+            </>
         </Wrapper>
     )
 }

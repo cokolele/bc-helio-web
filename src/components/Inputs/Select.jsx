@@ -4,18 +4,20 @@ import Button from "./Button"
 import { useClickedOutside } from "/src/utils/hooks"
 import * as classes from "./Select.module.sass"
 
-function SelectList({ list, selected, onSelect }) {
+function SelectList({ list, selected, onSelect, ...buttonProps }) {
     return (
-        <ul className={classes.list}>
+        <ul>
             {
                 list.map((label, i) => 
                     <li key={i}>
-                        <Button raw
-                            tabIndex={i == selected ? -1 : 0}
+                        <Button
+                            unstyled
+                            disabled={i == selected}
                             onClick={() => i != selected && onSelect(i)}
+                            IconLeft={i == selected && IconCheck}
+                            {...buttonProps}
                         >
-                            {i == selected && <IconCheck />}
-                            <span>{label}</span>
+                            { label }
                         </Button>
                     </li>
                 )
@@ -52,7 +54,7 @@ function Select({ children, list, selected, onSelect, ...buttonProps }) {
 
     return (
         <div className={classes.container} ref={ref} onBlur={onBlur}>
-            <Button unstyled {...buttonProps} onClick={onClick}>
+            <Button {...buttonProps} onClick={onClick}>
                 { children }
             </Button>
             {
@@ -68,3 +70,7 @@ function Select({ children, list, selected, onSelect, ...buttonProps }) {
 }
 
 export default Select
+
+export {
+    SelectList
+}

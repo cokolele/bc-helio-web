@@ -117,7 +117,7 @@ function ListControls({ sort, setSort }) {
     return (
         <div className={simulationsListClasses.controls}> 
             <Select
-                className={simulationsListClasses.button}
+                unstyled 
                 IconLeft={IconSwapVert}
                 list={sortIds.map(sortId => sortLabels[sortId])}
                 selected={sortIds.indexOf(sort)}
@@ -172,7 +172,7 @@ function ListItem({ node, locale }) {
                         <IconFiberManualRecordStatusGrey />
                 }
                 <span>{node.gpu != "UKNOWN" ? node.gpu : "Neznámy"}</span>
-                <Button raw><IconExpandMore /></Button>
+                <Button unstyled IconLeft={IconExpandMore} />
             </div>
             {
                 open &&

@@ -18,9 +18,7 @@ function Layout() {
             <NavigationMain currentRoute={currentRoute}/>
             <main>
                 <Header currentRoute={currentRoute}/>
-                <div className={classes.content}>
-                    <Outlet />
-                </div>
+                <Outlet />
             </main>
         </div>
     )
@@ -28,7 +26,7 @@ function Layout() {
 
 function NavigationMain({ currentRoute }) {
     return (
-        <nav>
+        <nav className={classes.collapsedd}>
             {
                 currentRoute == "/simulations" || currentRoute == "/nodes" ?
                     <>
