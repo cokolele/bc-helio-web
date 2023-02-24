@@ -4,7 +4,11 @@ import Button from "./Button"
 import { useClickedOutside } from "/src/utils/hooks"
 import * as classes from "./Select.module.sass"
 
-function SelectList({ list, selected, onSelect, ...buttonProps }) {
+function SelectList({ list, disabledList = [], selected, onSelect, ...buttonProps }) {
+    if (disabledList.includes(list[selected])) {
+        onSelect(selected == 0 ? 1 : 0)
+    }
+
     return (
         <ul>
             {
@@ -12,9 +16,10 @@ function SelectList({ list, selected, onSelect, ...buttonProps }) {
                     <li key={i}>
                         <Button
                             unstyled
-                            disabled={i == selected}
+                            data-selected={i == selected ? true : null}
+                            disabled={i == selected || disabledList.includes(label)}
                             onClick={() => i != selected && onSelect(i)}
-                            IconLeft={i == selected && IconCheck}
+                            IconLeft={i == selected && <IconCheck/>}
                             {...buttonProps}
                         >
                             { label }

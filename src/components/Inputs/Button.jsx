@@ -37,11 +37,11 @@ function Button({ children, to, unstyled, disabled, outlined, dangerous, IconLef
             className={[ ...classNames, props.className ].join(" ")}
         >
             <>
-                { IconTop && <IconTop /> }
+                { IconTop }
                 <span>
-                    { IconLeft && <IconLeft />}
+                    { IconLeft }
                     { children }
-                    { IconRight && <IconRight />}
+                    { IconRight }
                 </span>
             </>
         </Wrapper>

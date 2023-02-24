@@ -1,0 +1,50 @@
+@import "/src/styles/mixins.sass"
+
+.container
+    span:first-child
+        position: relative
+        top: 2rem
+        transition: top 0.2s ease-out
+        pointer-events: none
+
+    &.hasValue, &:focus-within
+        span:first-child
+            top: 0
+            pointer-events: initial
+
+    &.disabled
+        input, span
+            color: var(--color-black-primary-disabled)
+
+        input
+            background-color: transparent
+            border-radius: 0.2rem
+            box-shadow: inset 0 -0.2rem 0 0 var(--color-black-primary-disabled)
+
+    &.hasError
+        &:not(.disabled)
+            span, input
+                color: var(--color-red-dangerous)
+
+            input
+                box-shadow: inset 0 -0.2rem 0 0 var(--color-red-dangerous)
+        &.disabled
+            span, input
+                color: var(--color-red-dangerous-disabled)
+
+            input
+                box-shadow: inset 0 -0.2rem 0 0 var(--color-red-dangerous-disabled)
+
+    input
+        @include reset
+        @include input
+        padding: 0.75rem
+        background-color: var(--color-grey-primary)
+        box-shadow: inset 0 -0.2rem 0 0 var(--color-black-primary)
+        border-radius: 0.75rem
+        transition: border-radius 0.2s ease
+
+        &:focus-visible
+            border-radius: 0.2rem
+            outline: none
+            box-shadow: inset 0 -0.25rem 0 0 var(--color-blue-focus)

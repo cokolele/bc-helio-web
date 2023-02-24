@@ -4,8 +4,17 @@ import * as classes from "./SegmentedButton.module.sass"
 
 function SegmentedButton({ label, helperText, list, selected, onSelect, ...buttonProps }) {
     return (
-        <LabelWrapper label={label} helperText={helperText} className={classes.container}>
-            <SelectList list={list} selected={selected} onSelect={onSelect} {...buttonProps}/>
+        <LabelWrapper
+            label={label}
+            helperText={helperText}
+            className={classes.container}
+        >
+            <SelectList
+                list={list}
+                selected={selected}
+                onSelect={onSelect}
+                {...buttonProps}
+            />
         </LabelWrapper>
     )
 }

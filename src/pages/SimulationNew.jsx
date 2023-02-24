@@ -1,19 +1,35 @@
-import { SegmentedButton, Button } from "/src/components/Inputs"
+import { SegmentedButton, Input, Button } from "/src/components/Inputs"
+import { IconUploadFile, IconAdd } from "/src/components/Icons/Emph/24"
 import { useState } from "react"
-import * as classes from "./simulationNew.module.sass"
+import * as classes from "./SimulationNew.module.sass"
  
 function simulationNew() {
-    const [i, setI] = useState(0)
+
+    const [value, setValue] = useState("Value")
 
     return (
-        <div>
-            <SegmentedButton
-                label="label babel"
-                helperText="label babel"
-                list={["option1", "option2", "option3"]}
-                selected={i}
-                onSelect={setI}
-            />
+        <div className={classes.container}>
+            <div className={classes.primaryButtons}>
+                <Button outlined IconTop={<IconUploadFile/>}>Nahrať zo súboru</Button>
+                <Button outlined IconTop={<IconAdd/>}>Vytvoriť</Button>
+            </div>
+            <form>
+                <Input
+                    label="Názov"
+                />
+
+                <SegmentedButton
+                    label="Dimenzionalita"
+                    list={["1D", "2D"]}
+                    selected={0}
+                />
+
+                <SegmentedButton
+                    label="Spôsob simulovania"
+                    list={["BP", "FP", "FP-T"]}
+                    selected={0}
+                />
+            </form>
         </div>
     )
 }

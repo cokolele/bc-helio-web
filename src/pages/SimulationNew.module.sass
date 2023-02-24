@@ -1,1 +1,30 @@
 @import "/src/styles/mixins.sass"
+
+.container
+    height: 100%
+    display: flex
+
+.primaryButtons, form
+    display: flex
+    flex-direction: column
+    justify-content: center
+
+.primaryButtons
+    align-items: center
+    flex-grow: 1
+    gap: 2rem
+
+    button
+        width: 20rem
+
+        &:first-child
+            height: 6rem
+
+        &:last-child
+            height: 15rem
+
+    svg
+        height: 1.5rem
+
+form
+    gap: 1rem

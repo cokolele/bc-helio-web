@@ -109,10 +109,10 @@ function SimulationsList() {
     return (
         <>
             <section className={classes.primaryActions}>
-                <Button IconTop={IconAdd} outlined to="new" >Pridať simuláciu</Button>
+                <Button IconTop={<IconAdd/>} outlined to="new" >Pridať simuláciu</Button>
             </section>
             <section>
-                <ListControls sort={sort} setSort={setSort} />
+                <ListControls sort={sort} setSort={setSort} disabled={!simulations}/>
                 <ListLabels />
                 <ListFilters />
                 <List simulations={simulations} sort={sort} locale={locale} />
@@ -121,17 +121,19 @@ function SimulationsList() {
     )
 }
 
-function ListControls({ sort, setSort }) {
+function ListControls({ sort, setSort, disabled }) {
     const sortIds = Object.keys(sortings)
 
     return (
         <div className={classes.controls}> 
             <Select
-                unstyled 
-                IconLeft={IconSwapVert}
+                unstyled
+                IconLeft={<IconSwapVert/>}
                 list={sortIds.map(sortId => sortLabels[sortId])}
                 selected={sortIds.indexOf(sort)}
                 onSelect={i => setSort(sortIds[i])}
+                disabled={disabled}
+                className={classes.mainButton}
             >
                 {sortLabels[sort]}
             </Select>

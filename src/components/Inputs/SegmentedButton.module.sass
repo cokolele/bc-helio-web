@@ -8,13 +8,15 @@
         @include clickable-styled($outlined: true)
         cursor: auto
         display: flex
-        position: relative
 
         button
             @include label-large
             padding: 0.375rem 0.75rem
-            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out
+            transition: background-color 0.2s cubic-bezier(0,.5,1,.5), color 0.2s cubic-bezier(0,.5,1,.5)
 
             &[disabled]
+                color: var(--color-black-primary-disabled)
+
+            &[data-selected]
                 background-color: var(--color-black-primary)
                 color: var(--color-white-primary)

@@ -19,9 +19,14 @@
     & > *:first-child
         margin-left: -1rem
 
-    button
+    .mainButton, ul button
         @include text-small
+
+    .mainButton
         padding: 1rem
+
+        &[disabled]
+            color: var(--color-black-primary-disabled)
 
 .labels
     padding: 1rem 2rem

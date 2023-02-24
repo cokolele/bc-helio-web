@@ -104,24 +104,26 @@ function NodesList() {
     
     return (
         <>
-            <ListControls sort={sort} setSort={setSort}/>
+            <ListControls sort={sort} setSort={setSort} disabled={!nodes}/>
             <ListFilters />
             <List nodes={nodes} sort={sort} locale={locale} />
         </>
     )
 }
 
-function ListControls({ sort, setSort }) {
+function ListControls({ sort, setSort, disabled }) {
     const sortIds = Object.keys(sortings)
 
     return (
         <div className={simulationsListClasses.controls}> 
             <Select
                 unstyled 
-                IconLeft={IconSwapVert}
+                IconLeft={<IconSwapVert/>}
                 list={sortIds.map(sortId => sortLabels[sortId])}
                 selected={sortIds.indexOf(sort)}
                 onSelect={i => setSort(sortIds[i])}
+                disabled={disabled}
+                className={simulationsListClasses.mainButton}
             >
                 {sortLabels[sort]}
             </Select>
@@ -172,7 +174,7 @@ function ListItem({ node, locale }) {
                         <IconFiberManualRecordStatusGrey />
                 }
                 <span>{node.gpu != "UKNOWN" ? node.gpu : "Neznámy"}</span>
-                <Button unstyled IconLeft={IconExpandMore} />
+                <Button unstyled IconLeft={<IconExpandMore/>} />
             </div>
             {
                 open &&

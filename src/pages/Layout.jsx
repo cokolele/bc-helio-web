@@ -34,21 +34,21 @@ function NavigationMain({ currentRoute }) {
                             <h3>HelioLogo</h3>  
                         </div>
                         <div className={classes.middle}>
-                            <Button unstyled IconLeft={IconManageSearch}>Vyhľadávať</Button>
+                            <Button unstyled IconLeft={<IconManageSearch/>}>Vyhľadávať</Button>
                             {
                                 currentRoute == "/simulations" ?
-                                    <Button unstyled IconLeft={IconDns} to="/nodes">Zoznam uzlov</Button>
+                                    <Button unstyled IconLeft={<IconDns/>} to="/nodes">Zoznam uzlov</Button>
                                 :
-                                    <Button unstyled IconLeft={IconReceiptLong} to="/simulations">Zoznam Simulácií</Button>
+                                    <Button unstyled IconLeft={<IconReceiptLong/>} to="/simulations">Zoznam Simulácií</Button>
                                 
                             }
                         </div>
                         <div className={classes.bottom}>
-                            <Button unstyled IconLeft={IconSettings} to="/settings">Nastavenia</Button>
+                            <Button unstyled IconLeft={<IconSettings/>} to="/settings">Nastavenia</Button>
                         </div>
                     </>
                 :
-                    <Button unstyled IconLeft={IconArrowBackIosNew} to={-1}>Vrátiť sa</Button>
+                    <Button unstyled IconLeft={<IconArrowBackIosNew/>} to={-1}>Vrátiť sa</Button>
             }
         </nav>
     )
