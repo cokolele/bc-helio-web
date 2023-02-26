@@ -5,7 +5,7 @@ import Layout from "/src/pages/Layout"
 import NotFound from "/src/pages/NotFound"
 import SimulationsList from "/src/pages/SimulationsList"
 import SimulationDetail from "/src/pages/SimulationDetail"
-import SimulationNew from "/src/pages/SimulationNew"
+import { SimulationNewChoose, SimulationNewCreate } from "/src/pages/SimulationNew"
 import NodesList from "/src/pages/NodesList"
 
 function App() {
@@ -21,7 +21,8 @@ function App() {
                                 <Route index element={<SimulationDetail />} />
                                 <Route path="graph" element={<NotFound />} />
                             </Route>
-                            <Route path="new" element={<SimulationNew />} />
+                            <Route path="new" element={<SimulationNewChoose />} />
+                            <Route path="new/create" element={<SimulationNewCreate />} />
                         </Route>
                         <Route path="nodes" element={<NodesList />} />
                         <Route path="settings" element={<NotFound />} />

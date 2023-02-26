@@ -6,11 +6,25 @@
     gap: 0.2rem
 
 .label, .helperText
-    margin-left: 0.75rem
+    margin: 0 0.75rem
     text-transform: capitalize
 
 .label
     @include label
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+    input
+        @include reset
+        @include input
+        background-color: var(--color-grey-primary)
+        padding: 0.375rem
+        border-radius: 0.75rem
+        max-width: 12.2ch
+
+        &:focus-visible
+            outline: none
 
 .helperText
     @include label($disabled: true)

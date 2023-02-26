@@ -31,7 +31,7 @@ function Button({ children, to, unstyled, disabled, outlined, dangerous, IconLef
         <Wrapper
             type={to ? null : "button"}
             {...props}
-            to={to && disabled ? "#" : to}
+            to={to}
             tabIndex={disabled ? "-1" : props.tabIndex}
             disabled={disabled}
             className={[ ...classNames, props.className ].join(" ")}

@@ -1,7 +1,6 @@
 import { useState, useRef } from "react"
 import { IconCheck } from "/src/components/Icons/Emph/20"
 import Button from "./Button"
-import { useClickedOutside } from "/src/utils/hooks"
 import * as classes from "./Select.module.sass"
 
 function SelectList({ list, disabledList = [], selected, onSelect, ...buttonProps }) {
@@ -47,15 +46,13 @@ function Select({ children, list, selected, onSelect, ...buttonProps }) {
         onSelect(i)
     }
 
+    const ref = useRef(null)
+    
     const onBlur = e => {
         if (ref.current && !ref.current.contains(e.relatedTarget)) {
             setShow(false)
         }
     }
-
-    const ref = useRef(null)
-
-    useClickedOutside(ref, () => setShow(false))
 
     return (
         <div className={classes.container} ref={ref} onBlur={onBlur}>

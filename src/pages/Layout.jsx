@@ -62,6 +62,7 @@ function Header({ currentRoute }) {
         "/simulations/new": "Pridať simuláciu",
         "/simulations/:id": <>Simulácia <span>{useParams().id?.split("-")[0]}</span></>,
         "/simulations/:id/graph": "Graf simulácie",
+        "/simulations/new/create": "Pridať novú simuláciu"
 
     }
     

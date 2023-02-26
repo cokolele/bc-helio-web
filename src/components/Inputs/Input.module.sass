@@ -1,50 +1,120 @@
 @import "/src/styles/mixins.sass"
 
-.container
-    span:first-child
-        position: relative
-        top: 2rem
-        transition: top 0.2s ease-out
-        pointer-events: none
+@mixin sliderThumb
+    @include reset
+    width: 1rem
+    height: 1rem
+    border-radius: 100%
+    background-color: var(--color-black-primary)
 
-    &.hasValue, &:focus-within
+@mixin sliderThumbFocused
+    background-color: var(--color-white-primary)
+    box-sizing: border-box
+    border: 0.2rem solid var(--color-blue-focus)
+
+@mixin sliderThumbDisabled
+    background-color: var(--color-black-primary-disabled)
+
+@mixin sliderTrack
+    @include reset
+    height: 0.25rem
+    background-color: var(--color-black-primary-disabled)
+    border-radius: 1rem
+
+@mixin sliderTrackDisabled
+    background-color: var(--color-grey-primary)
+
+.container
+    width: 100%
+
+    &.movableLabel
         span:first-child
-            top: 0
-            pointer-events: initial
+            position: relative
+            top: 2rem
+            transition: top 0.2s ease-out
+            pointer-events: none
+
+        &.hasValue, &:focus-within
+            span:first-child
+                top: 0
 
     &.disabled
-        input, span
+        span
             color: var(--color-black-primary-disabled)
 
-        input
-            background-color: transparent
-            border-radius: 0.2rem
-            box-shadow: inset 0 -0.2rem 0 0 var(--color-black-primary-disabled)
+    &.invalid
+        span
+            color: var(--color-red-dangerous)
 
-    &.hasError
-        &:not(.disabled)
-            span, input
-                color: var(--color-red-dangerous)
+    & > input
+        &:not([type]), &[type="text"], &[type="email"], &[type="month"], &[type="password"], &[type="tel"], &[type="url"]
+            @include reset
+            @include input
+            padding: 0.75rem
+            background-color: var(--color-grey-primary)
+            box-shadow: inset 0 -0.2rem 0 0 var(--color-black-primary)
+            border-radius: 0.75rem
+            transition: border-radius 0.2s ease
 
-            input
+            &:invalid
                 box-shadow: inset 0 -0.2rem 0 0 var(--color-red-dangerous)
-        &.disabled
-            span, input
-                color: var(--color-red-dangerous-disabled)
 
-            input
-                box-shadow: inset 0 -0.2rem 0 0 var(--color-red-dangerous-disabled)
+            &:focus-visible
+                border-radius: 0.2rem
+                outline: none
+                box-shadow: inset 0 -0.25rem 0 0 var(--color-blue-focus)
 
-    input
-        @include reset
-        @include input
-        padding: 0.75rem
-        background-color: var(--color-grey-primary)
-        box-shadow: inset 0 -0.2rem 0 0 var(--color-black-primary)
-        border-radius: 0.75rem
-        transition: border-radius 0.2s ease
+            &[disabled]
+                color: var(--color-black-primary-disabled)
+                background-color: transparent
+                border-radius: 0.2rem
+                box-shadow: inset 0 -0.2rem 0 0 var(--color-black-primary-disabled)
+                cursor: not-allowed
 
-        &:focus-visible
-            border-radius: 0.2rem
-            outline: none
-            box-shadow: inset 0 -0.25rem 0 0 var(--color-blue-focus)
+        &[type="range"]
+            @include reset
+            cursor: pointer
+            height: 1.5rem
+
+            &::-ms-thumb
+                @include sliderThumb
+            &::-moz-range-thumb
+                @include sliderThumb
+            &::-webkit-slider-thumb
+                position: relative
+                top: -0.4rem
+                @include sliderThumb
+
+            &::-webkit-slider-runnable-track
+                @include sliderTrack
+            &::-moz-range-track
+                @include sliderTrack
+            &::-ms-track
+                @include sliderTrack
+
+            &[disabled]
+                cursor: not-allowed
+
+                &::-ms-thumb
+                    @include sliderThumbDisabled
+                &::-moz-range-thumb
+                    @include sliderThumbDisabled
+                &::-webkit-slider-thumb
+                    @include sliderThumbDisabled
+
+                &::-webkit-slider-runnable-track
+                    @include sliderTrackDisabled
+                &::-moz-range-track
+                    @include sliderTrackDisabled
+                &::-ms-track
+                    @include sliderTrackDisabled
+
+            &:focus-visible
+                outline: none
+
+                &::-ms-thumb
+                    @include sliderThumbFocused
+                &::-moz-range-thumb
+                    @include sliderThumbFocused
+                &::-webkit-slider-thumb
+                    @include sliderThumbFocused
