@@ -4,6 +4,7 @@
     height: 100%
     display: grid
     grid-template-columns: auto 1fr
+    overflow-x: hidden
 
     main
         padding: 4rem
@@ -14,15 +15,36 @@
         h1
             @include header
             margin-bottom: 2rem
+            white-space: nowrap
+
+            span
+                margin-left: 1rem
+                color: var(--color-black-primary-disabled)
+
+                &:before
+                    content: "#"
 
     nav
-        width: 19rem
+        width: 17rem
         padding: 2rem 0
         background-color: var(--color-white-primary)
         box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25)
         display: flex
         flex-direction: column
-        justify-content: center
+        overflow-y: auto
+        gap: 2rem
+
+        &.collapsed
+            width: auto
+
+            h3
+                display: none
+
+            span
+                gap: 0
+                letter-spacing: 0
+                text-indent: 0
+                font-size: 0
 
         .top, .middle, .bottom
             flex: 1
@@ -57,15 +79,3 @@
 
             &:hover
                 text-indent: 0.2rem
-
-        &.collapsed
-            width: auto
-
-            h3
-                display: none
-
-            span
-                gap: 0
-                letter-spacing: 0
-                text-indent: 0
-                font-size: 0

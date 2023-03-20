@@ -1,78 +1,81 @@
 import { useState, useRef } from "react"
-import { IconCheck } from "/src/components/Icons/Emph/20"
-import Button from "./Button"
+import { Input, Button, SegmentedButton, Label } from "/src/components/Inputs"
+import { IconExpandMore } from "/src/components/Icons/20/Emph"
 import * as classes from "./Select.module.sass"
 
-function SelectList({ list, disabledList = [], selected, onSelect, ...buttonProps }) {
-    if (disabledList.includes(list[selected])) {
-        onSelect(selected == 0 ? 1 : 0)
-    }
-
-    return (
-        <ul>
-            {
-                list.map((label, i) => 
-                    <li key={i}>
-                        <Button
-                            unstyled
-                            data-selected={i == selected ? true : null}
-                            disabled={i == selected || disabledList.includes(label)}
-                            onClick={() => i != selected && onSelect(i)}
-                            IconLeft={i == selected && <IconCheck/>}
-                            {...buttonProps}
-                        >
-                            { label }
-                        </Button>
-                    </li>
-                )
-            }
-        </ul>
-    )
-}
-
-function Select({ children, list, selected, onSelect, ...buttonProps }) {
+function Select({ list, value, onChange, allowBlank, button, unstyled, className, ...props }) {
     const [show, setShow] = useState(false)
-
-    const onClick = e => {
-        setShow(!show)
-
-        if (buttonProps.onClick) {
-            buttonProps.onClick(e)
-        }
-    }
-
-    const _onSelect = i => {
-        setShow(false)
-        onSelect(i)
-    }
-
     const ref = useRef(null)
-    
-    const onBlur = e => {
-        if (ref.current && !ref.current.contains(e.relatedTarget)) {
-            setShow(false)
-        }
-    }
 
     return (
-        <div className={classes.container} ref={ref} onBlur={onBlur}>
-            <Button {...buttonProps} onClick={onClick}>
-                { children }
-            </Button>
+        <div
+            className={unstyled ? className : [classes.container, className].join(" ")}
+            ref={ref}
+            onBlur={e => {
+                if (ref.current && !ref.current.contains(e.relatedTarget)) {
+                    setShow(false)
+                }
+            }}
+        >
+            {
+                button ?
+                    <Button
+                        unstyled={unstyled}
+                        onClick={e => {
+                            setShow(!show)
+
+                            if (props.onClick) {
+                                props.onClick(e)
+                            }
+                        }}
+                        {...props}
+                    >
+                        { value }
+                    </Button>
+                :
+                    <Input
+                        unstyled={unstyled}
+                        className={unstyled ? null : [classes.inputContainer, show ? classes.opened : null].join(" ")}
+                        type="button"
+                        value={value}
+                        onClick={() => setShow(!show)}
+                        Icon={!unstyled && <IconExpandMore/>}
+                        {...props}
+                    />
+            }
             {
                 show &&
-                <SelectList
-                    list={list}
-                    selected={selected}
-                    onSelect={_onSelect}
+                <SegmentedButton
+                    unstyled
+                    className={unstyled ? null : classes.list}
+                    list={allowBlank ? ["-", ...list] : list}
+                    value={value}
+                    onChange={value => {
+                        onChange(value)
+                        setShow(false)
+                    }}
                 />
             }
         </div>
     )
 }
 
-export default Select
+function SelectLabeled({ children, label, helperText, labelInput, invalid, className, ...props }) {
+    return (
+        <Label
+            label={label}
+            helperText={helperText}
+            labelInput={labelInput}
+            className={className}
+            invalid={invalid}
+            disabled={props.disabled}
+        >
+            <Select {...props}/>
+        </Label>
+    )
+}
 
 export {
-    SelectList
+    Select,
+    SelectLabeled
 }

@@ -17,11 +17,11 @@ https://www.figma.com/proto/vGEHZUWjlSlS2JlslDvW2D/Helio-Web-App?page-id=0%3A1&n
 
 ## To do
 Thing               | Progress
---------------------|-----------------------------------------------------------------
-UI design mobile    | ✔️ všetky podstránky ❌ filtre, modal, snackbar, bottom sheet
-UI design desktop   | ✔️ všetky podstránky ❌ filtre, modal, snackbar, bottom sheet
+--------------------|-----------------------------------------------------
+UI design mobile    | ✔️ všetky podstránky ❌ modal, snackbar, bottom sheet
+UI design desktop   | ✔️ všetky podstránky ❌ modal, snackbar, bottom sheet
 Docker              | ✔️
-Functionality       | ✔️ načítanie simulácií ❌ detail simulácity, vytváranie simulácií
+Functionality       | ✔️
 Typescript          | ❌
 PWA                 | ❌
 Tests               | ❌
@@ -35,11 +35,11 @@ Responsivity        | ❌
 Animations          | ❌
 Accessibility       | ❌
 Dark mode           | ❌
-Languages           | ❌
+Languages           | ✔️
 Components          | ✔️
-Filter              | ❌
+Filter              | ✔️
 Sorting             | ✔️
-Pagination          | ❌
+Pagination          | ✔️
 Font                | ✔️ (možno pridať hostovanie fontov)
 Icons               | ✔️
 Sass                | ✔️

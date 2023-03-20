@@ -1,22 +1,54 @@
-import { SelectList } from "/src/components/Inputs/Select"
-import LabelWrapper from "/src/components/Inputs/LabelWrapper"
+import { Button, Label } from "/src/components/Inputs"
+import { IconCheck } from "/src/components/Icons/20/Emph"
 import * as classes from "./SegmentedButton.module.sass"
 
-function SegmentedButton({ label, helperText, list, selected, onSelect, ...buttonProps }) {
+function SegmentedButton({ list, value, onChange, disabledList, unstyled, className }) {
+    console.log(className)
+
+    if (disabledList?.includes(value)) {
+        onChange(list[0] == value ? list[1] : list[0])
+    }
+
     return (
-        <LabelWrapper
-            label={label}
-            helperText={helperText}
-            className={classes.container}
-        >
-            <SelectList
-                list={list}
-                selected={selected}
-                onSelect={onSelect}
-                {...buttonProps}
-            />
-        </LabelWrapper>
+        <ul className={[unstyled ? null : classes.list, className].join(" ")}>
+            {
+                list.map((item, i) => (
+                    <li
+                        key={i}
+                        className={unstyled ? null : classes.item}
+                    >
+                        <Button
+                            unstyled
+                            className={unstyled ? null : [classes.option, item === value ? classes.selected : null].join(" ")}
+                            disabled={item === value || disabledList?.includes(item)}
+                            IconLeft={item === value && <IconCheck />}
+                            onClick={() => onChange(item === "-" ? "" : item)}
+                        >
+                            {item}
+                        </Button>
+                    </li>
+                ))
+            }
+        </ul>
     )
 }
 
-export default SegmentedButton
+function SegmentedButtonLabeled({ children, label, helperText, labelInput, invalid, className, ...props }) {
+    return (
+        <Label
+            label={label}
+            helperText={helperText}
+            labelInput={labelInput}
+            className={className}
+            invalid={invalid}
+            disabled={props.disabled}
+        >
+            <SegmentedButton {...props}/>
+        </Label>
+    )
+}
+
+export {
+    SegmentedButton,
+    SegmentedButtonLabeled
+}

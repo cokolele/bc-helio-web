@@ -25,6 +25,363 @@
             "resultMap": {},
             "nodeSimulationApiModelList": [],
             "createTime": "2023-02-18T11:59:17.171",
+            "beginTime": "2023-02-18T11:59:17.171",
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 480,
+            "kparKper": 0.06,
+            "k0": 5e+22,
+            "v": 1400,
+            "finished": false
+        },
+        {
+            "uuid": "b4f797b7-cc26-4fae-a4db-49b413e124b8",
+            "name": "Á My simulation #3️⃣<掳𘏑򇫞㣞טQ𼉵󜕄򪛦𒚤򗟸췼񜢩窖낯᚟s¤ݓ𤡜",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-05T11:59:17.171",
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": 0.01,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": false
+        },
+        {
+            "uuid": "ab5f34b6-e4c4-4ad3-a249-4abaaeb84ef3",
+            "name": "My simulation 1",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-20T11:59:17.171",
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "ONE_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": null,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": true
+        },
+        {
+            "uuid": "1a452cbe-b72d-4e20-94d6-91a4e5e0414e",
+            "name": "Đ My simulation 2 name too long to render properly and probably breaks layout",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-18T11:59:17.171",
+            "beginTime": 100,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 480,
+            "kparKper": 0.06,
+            "k0": 5e+22,
+            "v": 1400,
+            "finished": false
+        },
+        {
+            "uuid": "b4f797b7-cc26-4fae-a4db-49b413e124b8",
+            "name": "Á My simulation #3️⃣<掳𘏑򇫞㣞טQ𼉵󜕄򪛦𒚤򗟸췼񜢩窖낯᚟s¤ݓ𤡜",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-05T11:59:17.171",
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": 0.01,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": false
+        },
+        {
+            "uuid": "ab5f34b6-e4c4-4ad3-a249-4abaaeb84ef3",
+            "name": "My simulation 1",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-20T11:59:17.171",
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "ONE_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": null,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": true
+        },
+        {
+            "uuid": "1a452cbe-b72d-4e20-94d6-91a4e5e0414e",
+            "name": "Đ My simulation 2 name too long to render properly and probably breaks layout",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-18T11:59:17.171",
+            "beginTime": 100,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 480,
+            "kparKper": 0.06,
+            "k0": 5e+22,
+            "v": 1400,
+            "finished": false
+        },
+        {
+            "uuid": "b4f797b7-cc26-4fae-a4db-49b413e124b8",
+            "name": "Á My simulation #3️⃣<掳𘏑򇫞㣞טQ𼉵󜕄򪛦𒚤򗟸췼񜢩窖낯᚟s¤ݓ𤡜",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-05T11:59:17.171",
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": 0.01,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": false
+        },
+        {
+            "uuid": "ab5f34b6-e4c4-4ad3-a249-4abaaeb84ef3",
+            "name": "My simulation 1",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-20T11:59:17.171",
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "ONE_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": null,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": true
+        },
+        {
+            "uuid": "1a452cbe-b72d-4e20-94d6-91a4e5e0414e",
+            "name": "Đ My simulation 2 name too long to render properly and probably breaks layout",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-18T11:59:17.171",
+            "beginTime": 100,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 480,
+            "kparKper": 0.06,
+            "k0": 5e+22,
+            "v": 1400,
+            "finished": false
+        },
+        {
+            "uuid": "b4f797b7-cc26-4fae-a4db-49b413e124b8",
+            "name": "Á My simulation #3️⃣<掳𘏑򇫞㣞טQ𼉵󜕄򪛦𒚤򗟸췼񜢩窖낯᚟s¤ݓ𤡜",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-05T11:59:17.171",
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": 0.01,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": false
+        },
+        {
+            "uuid": "ab5f34b6-e4c4-4ad3-a249-4abaaeb84ef3",
+            "name": "My simulation 1",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-20T11:59:17.171",
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "ONE_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": null,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": true
+        },
+        {
+            "uuid": "1a452cbe-b72d-4e20-94d6-91a4e5e0414e",
+            "name": "Đ My simulation 2 name too long to render properly and probably breaks layout",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-18T11:59:17.171",
+            "beginTime": 100,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 480,
+            "kparKper": 0.06,
+            "k0": 5e+22,
+            "v": 1400,
+            "finished": false
+        },
+        {
+            "uuid": "b4f797b7-cc26-4fae-a4db-49b413e124b8",
+            "name": "Á My simulation #3️⃣<掳𘏑򇫞㣞טQ𼉵󜕄򪛦𒚤򗟸췼񜢩窖낯᚟s¤ݓ𤡜",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-05T11:59:17.171",
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": 0.01,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": false
+        },
+        {
+            "uuid": "ab5f34b6-e4c4-4ad3-a249-4abaaeb84ef3",
+            "name": "My simulation 1",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-20T11:59:17.171",
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "ONE_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": null,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": true
+        },
+        {
+            "uuid": "1a452cbe-b72d-4e20-94d6-91a4e5e0414e",
+            "name": "Đ My simulation 2 name too long to render properly and probably breaks layout",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-18T11:59:17.171",
+            "beginTime": 100,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 480,
+            "kparKper": 0.06,
+            "k0": 5e+22,
+            "v": 1400,
+            "finished": false
+        },
+        {
+            "uuid": "b4f797b7-cc26-4fae-a4db-49b413e124b8",
+            "name": "Á My simulation #3️⃣<掳𘏑򇫞㣞טQ𼉵󜕄򪛦𒚤򗟸췼񜢩窖낯᚟s¤ݓ𤡜",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-05T11:59:17.171",
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": 0.01,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": false
+        },
+        {
+            "uuid": "ab5f34b6-e4c4-4ad3-a249-4abaaeb84ef3",
+            "name": "My simulation 1",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-20T11:59:17.171",
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "ONE_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": null,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": true
+        },
+        {
+            "uuid": "1a452cbe-b72d-4e20-94d6-91a4e5e0414e",
+            "name": "Đ My simulation 2 name too long to render properly and probably breaks layout",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-18T11:59:17.171",
+            "beginTime": 100,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 480,
+            "kparKper": 0.06,
+            "k0": 5e+22,
+            "v": 1400,
+            "finished": false
+        },
+        {
+            "uuid": "b4f797b7-cc26-4fae-a4db-49b413e124b8",
+            "name": "Á My simulation #3️⃣<掳𘏑򇫞㣞טQ𼉵󜕄򪛦𒚤򗟸췼񜢩窖낯᚟s¤ݓ𤡜",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-05T11:59:17.171",
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "TWO_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": 0.01,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": false
+        },
+        {
+            "uuid": "ab5f34b6-e4c4-4ad3-a249-4abaaeb84ef3",
+            "name": "My simulation 1",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-20T11:59:17.171",
+            "beginTime": null,
+            "endTime": null,
+            "simulationType": "ONE_DIMENSION_BP",
+            "dt": 5,
+            "kparKper": null,
+            "k0": 5e+22,
+            "v": 400,
+            "finished": true
+        },
+        {
+            "uuid": "1a452cbe-b72d-4e20-94d6-91a4e5e0414e",
+            "name": "Đ My simulation 2 name too long to render properly and probably breaks layout",
+            "billionsOfSimulations": 10,
+            "billionsOfSimulationsLeft": 10,
+            "resultMap": {},
+            "nodeSimulationApiModelList": [],
+            "createTime": "2023-02-18T11:59:17.171",
             "beginTime": 100,
             "endTime": null,
             "simulationType": "TWO_DIMENSION_BP",
@@ -107,10 +464,298 @@
             "lastUpdatedTime": "2023-01-22T18:59:17.171"
         },
         {
+            "gpu": "GTX_1080",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-01T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1070",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-08T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2060",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-10T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2080_TI",
+            "isActive": true,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-12T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1660_TI",
+            "isActive": false,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-15T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080_TI",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-22T18:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-01T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1070",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-08T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2060",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-10T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2080_TI",
+            "isActive": true,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-12T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1660_TI",
+            "isActive": false,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-15T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080_TI",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-22T18:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-01T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1070",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-08T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2060",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-10T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2080_TI",
+            "isActive": true,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-12T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1660_TI",
+            "isActive": false,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-15T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080_TI",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-22T18:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-01T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1070",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-08T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2060",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-10T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2080_TI",
+            "isActive": true,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-12T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1660_TI",
+            "isActive": false,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-15T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080_TI",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-22T18:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-01T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1070",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-08T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2060",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-10T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2080_TI",
+            "isActive": true,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-12T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1660_TI",
+            "isActive": false,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-15T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080_TI",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-22T18:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-01T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1070",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-08T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2060",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-10T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2080_TI",
+            "isActive": true,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-12T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1660_TI",
+            "isActive": false,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-15T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080_TI",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-22T18:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-01T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1070",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-08T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2060",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-10T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2080_TI",
+            "isActive": true,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-12T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1660_TI",
+            "isActive": false,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-15T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080_TI",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-22T18:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-01T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1070",
+            "isActive": true,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-08T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2060",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-10T11:59:17.171"
+        },
+        {
+            "gpu": "RTX_2080_TI",
+            "isActive": true,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-12T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1660_TI",
+            "isActive": false,
+            "isComputing": false,
+            "lastUpdatedTime": "2023-01-15T11:59:17.171"
+        },
+        {
+            "gpu": "GTX_1080_TI",
+            "isActive": false,
+            "isComputing": true,
+            "lastUpdatedTime": "2023-01-22T18:59:17.171"
+        },
+        {
             "gpu": "UKNOWN",
             "isActive": true,
             "isComputing": true,
             "lastUpdatedTime": "2023-01-25T13:59:17.171"
-        },
+        }
     ]
 }

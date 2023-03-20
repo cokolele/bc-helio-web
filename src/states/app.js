@@ -3,7 +3,8 @@ import { useReducer, createContext, useContext } from 'react'
 const initialState = {
     simulations: null,
     nodes: null,
-    locale: "sk-SK",
+    showFilters: false,
+    locale: navigator?.languages?.some(lang => ["en", "en-US", "en-GB"].includes(lang)) ? "en-US" : "sk-SK",
     theme: window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
 }
 
@@ -15,7 +16,7 @@ function reducer(state, action) {
             case "toggleLocale": {
                 return {
                     ...state,
-                    locale: state.locale === "sk-SK" ? "en-GB" : "sk-SK"
+                    locale: state.locale === "sk-SK" ? "en-US" : "sk-SK"
                 }
             }
             case "toggleTheme": {
@@ -34,6 +35,12 @@ function reducer(state, action) {
                 return {
                     ...state,
                     nodes: action.nodes
+                }
+            }
+            case "setShowFilters": {
+                return {
+                    ...state,
+                    showFilters: action.show
                 }
             }
             default: {

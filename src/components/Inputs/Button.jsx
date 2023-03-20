@@ -1,9 +1,21 @@
 import { Link } from "react-router-dom"
 import * as classes from "./Button.module.sass"
 
-const HTMLButton = props => <button {...props}></button>
+const HTMLButtonElement = props => <button {...props}></button>
 
-function Button({ children, to, unstyled, disabled, outlined, dangerous, IconLeft, IconRight, IconTop, ...props }) {
+function Button({
+    children,
+    to,
+    unstyled,
+    disabled,
+    outlined,
+    dangerous,
+    IconLeft,
+    IconRight,
+    IconTop,
+    className,
+    ...props
+}) {
     let classNames = []
 
     if (disabled) {
@@ -25,7 +37,7 @@ function Button({ children, to, unstyled, disabled, outlined, dangerous, IconLef
         }
     }
 
-    const Wrapper = to ? Link : HTMLButton
+    const Wrapper = to ? Link : HTMLButtonElement
 
     return (
         <Wrapper
@@ -33,8 +45,8 @@ function Button({ children, to, unstyled, disabled, outlined, dangerous, IconLef
             {...props}
             to={to}
             tabIndex={disabled ? "-1" : props.tabIndex}
-            disabled={disabled}
-            className={[ ...classNames, props.className ].join(" ")}
+            disabled={disabled ? true : null}
+            className={[ ...classNames, className ].join(" ")}
         >
             <>
                 { IconTop }

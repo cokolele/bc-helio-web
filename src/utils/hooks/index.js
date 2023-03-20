@@ -1,11 +1,13 @@
 import useCurrentDevice from "./useCurrentDevice"
 import useCurrentRoute from "./useCurrentRoute"
 import useClickedOutside from "./useClickedOutside"
-import useLocale from "/src/internationalization/useLocale"
+import useUpdateEffect from "./useUpdateEffect"
+import useLanguage from "/src/localization/useLanguage"
 
 export {
     useCurrentDevice,
     useCurrentRoute,
     useClickedOutside,
-    useLocale
+    useUpdateEffect,
+    useLanguage
 }

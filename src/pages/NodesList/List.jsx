@@ -1,0 +1,144 @@
+import { useEffect, useState } from "react"
+import { useSearchParams } from "react-router-dom"
+import Skeleton from "react-loading-skeleton"
+import { useAppState } from "/src/states/app"
+import { useLanguage } from "/src/utils/hooks"
+import {
+    IconFiberManualRecordStatusGreen,
+    IconFiberManualRecordStatusYellow,
+    IconFiberManualRecordStatusGrey
+} from "/src/components/Icons/20/Emph"
+import {
+    IconExpandMore,
+    IconArrowForward,
+    IconArrowBack
+} from "/src/components/Icons/24/Emph"
+import { Button } from "/src/components/Inputs"
+import * as simulationsListClasses from "/src/pages/SimulationsList/SimulationsList.module.sass"
+import * as classes from "./NodesList.module.sass"
+
+const limit = 21
+
+function List({ listState, listSorterState }) {
+    const [list, setList] = listState
+    const [listSorter, setListSorter] = listSorterState
+    const language = useLanguage()
+    const [page, setPage] = useState(1)
+
+    const loading = !list || !listSorter
+    const empty = list?.length == 0
+
+    return (
+        <div>
+            <ul className={loading || empty ? classes.listSkeleton : classes.list}>
+                {
+                    loading ?
+                        <>
+                            <Skeleton inline />
+                            <Skeleton inline />
+                            <Skeleton inline />
+                        </>
+                    : empty ?
+                        language["page.node_list.empty"]
+                    :
+                        list.filter((node, i) => i >= (page - 1) * limit && i < page * limit)
+                            .sort(listSorter)
+                            .map((node, i) => (
+                                <ListItem key={i} node={node}/>
+                            ))
+                }
+            </ul>
+            <Pagination
+                listState={listState}
+                pageState={[page, setPage]}
+            />
+        </div>
+    )
+}
+
+function ListItem({ node }) {
+    const [{ locale }, dispatch] = useAppState()
+    const language = useLanguage()
+    const [open, setOpen] = useState(false)
+
+    return (
+        <li>
+            <div
+                className={classes.header}
+                onClick={() => setOpen(!open)}
+            >
+                {
+                    node.isComputing ?
+                        <IconFiberManualRecordStatusGreen />
+                    : node.isActive ?
+                        <IconFiberManualRecordStatusYellow />
+                    :
+                        <IconFiberManualRecordStatusGrey />
+                }
+                <span>{ node.gpu != "UKNOWN" ? node.gpu : language["page.node_list.unknown"] }</span>
+                <Button
+                    unstyled
+                    IconLeft={<IconExpandMore />}
+                />
+            </div>
+            {
+                open &&
+                <div className={classes.details}>
+                    <span>{ language["page.node_list.is_active"] }</span>
+                    <span>{ node.isActive ? language["yes"] : language["no"] }</span>
+                    <span>{ language["page.node_list.is_computing"] }</span>
+                    <span>{ node.isComputing ? language["yes"] : language["no"] }</span>
+                    <span>{ language["page.node_list.last_update_time"] }</span>
+                    <span>{ new Date(node.lastUpdatedTime).toLocaleString(locale) }</span>
+                </div>
+            }
+        </li>
+    )
+}
+
+function Pagination({ listState, pageState }) {
+    const [params, setParams] = useSearchParams()
+    const [list, setList] = listState
+    const [page, setPage] = pageState
+
+    useEffect(() => {
+        const pageParam = parseInt(params.get("page"), 10)
+
+        if (!isNaN(pageParam)) {
+            if (pageParam < 1) {
+                setPage(1)
+            } else if (list?.length && pageParam > Math.ceil(list.length / limit)) {
+                setPage(Math.ceil(list.length / limit))
+            } else {
+                setPage(pageParam)
+            }
+        }
+    }, [params, list])
+
+    if (!list || list.length == 0) {
+        return null
+    }
+
+    return (
+        <div className={simulationsListClasses.pagination}>
+            {
+                page != 1 &&
+                <Button
+                    IconLeft={<IconArrowBack />}
+                    outlined
+                    onClick={() => setParams({ ...params, page: page - 1 })}
+                />
+            }
+            {
+                page != Math.ceil(list.length / limit) &&
+                <Button
+                    IconLeft={<IconArrowForward />}
+                    outlined
+                    onClick={() => setParams({ ...params, page: page + 1 })}
+                />
+            }
+        </div>
+    )
+}
+
+export default List

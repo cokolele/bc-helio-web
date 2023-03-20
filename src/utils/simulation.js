@@ -14,3 +14,6 @@ export function typeMapper(apiType) {
             return "Unknown"
     }
 }
+
+export const typesList = ["BP", "FP", "FT"]
+export const dimensionsList = ["1D", "2D"]

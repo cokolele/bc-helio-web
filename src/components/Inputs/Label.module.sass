@@ -5,6 +5,18 @@
     flex-direction: column
     gap: 0.2rem
 
+    &.disabled
+        .label, .helperText
+            color: var(--color-black-primary-disabled)
+
+    &.invalid
+        .label, .helperText
+            color: var(--color-red-dangerous)
+
+        &.disabled
+            .label, .helperText
+                color: var(--color-red-dangerous-disabled)
+
 .label, .helperText
     margin: 0 0.75rem
     text-transform: capitalize
@@ -25,6 +37,10 @@
 
         &:focus-visible
             outline: none
+
+        &[disabled]
+            background-color: var(--color-primary-white)
+            color: var(--color-black-primary-disabled)
 
 .helperText
     @include label($disabled: true)

@@ -1,1 +1,44 @@
 @import "/src/styles/mixins.sass"
+
+.container
+    height: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+
+.simulation
+    display: flex
+    flex-direction: column
+    gap: 1.5rem
+    width: 38rem
+
+    section
+        display: grid
+        grid-template-columns: 2fr 1fr
+        gap: 1.25rem 1rem
+
+        & > span
+            @include text
+
+    .warning
+        @include text-small
+        display: flex
+        align-items: center
+        gap: 1rem
+
+    .warning, .status, .actions
+        margin-top: 1rem
+
+    .status, .parameters
+        gap: 1rem 0
+        border-left: var(--color-grey-primary) 0.2rem solid
+        padding: 0.5rem 0 0.5rem 0.5rem
+
+        span:nth-child(odd)
+            @include text--regular
+
+    .actions
+        display: flex
+
+        button, a
+            width: 100%
