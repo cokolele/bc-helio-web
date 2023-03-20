@@ -68,7 +68,7 @@ function simulationDetail() {
     return (
         <div className={classes.container}>
             <div className={classes.simulation}>
-                <section>
+                <section className={classes.metadata}>
                     <span>{ language["label.name"] }</span>
                     <span>{ simulation.name }</span>
                     <span>{ language["label.type"] }</span>

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
 import { useLanguage } from "/src/utils/hooks"
-import { IconSwapVert } from "/src/components/Icons/20"
-import { Select } from "/src/components/Inputs"
+import { IconSwapVert, IconViewAgenda } from "/src/components/Icons/20"
+import { Select, Button } from "/src/components/Inputs"
 import * as classes from "./SimulationsList.module.sass"
 
 function Controls({ listState, listSorterState }) {
@@ -52,6 +52,11 @@ function Controls({ listState, listSorterState }) {
                 unstyled
                 IconLeft={<IconSwapVert />}
                 disabled={!list}
+            />
+            <Button
+                className={classes.listView}
+                unstyled
+                IconTop={<IconViewAgenda/>}
             />
         </div>
     )

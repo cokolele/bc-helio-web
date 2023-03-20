@@ -12,10 +12,12 @@
         display: flex
         flex-direction: column
 
+        @include mappy-query(max-mobile)
+            padding: 2rem
+
         h1
             @include header
             margin-bottom: 2rem
-            white-space: nowrap
 
             span
                 margin-left: 1rem
@@ -34,17 +36,19 @@
         overflow-y: auto
         gap: 2rem
 
-        &.collapsed
-            width: auto
+        @include mappy-query(max-mobile)
+            width: 4.5rem
+            overflow: hidden
+
+            svg
+                margin: 0
 
             h3
                 display: none
 
-            span
-                gap: 0
-                letter-spacing: 0
-                text-indent: 0
-                font-size: 0
+        @include mappy-query(min-mobile)
+            svg
+                margin: 0 1rem
 
         .top, .middle, .bottom
             flex: 1
@@ -73,9 +77,6 @@
                 line-height: 1.5
                 gap: 1rem
                 transition: text-indent 200ms ease
-
-                svg
-                    margin: 0 1rem
 
             &:hover
                 text-indent: 0.2rem

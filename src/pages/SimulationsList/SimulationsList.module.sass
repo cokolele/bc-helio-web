@@ -19,6 +19,23 @@
     display: flex
     justify-content: space-between
 
+    @include mappy-query(max-mobile)
+        margin-top: 0.5rem
+
+        .sort > button:active
+            @include tappable
+
+        .listView
+            @include tappable
+            color: var(--color-black-primary)
+            gap: 0
+            padding: 0 1rem
+            margin-right: -1rem
+
+    @include mappy-query(min-mobile)
+        .listView
+            display: none
+
     .sort
         position: relative
         margin-left: -1rem

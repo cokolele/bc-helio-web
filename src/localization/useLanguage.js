@@ -11,5 +11,5 @@ const languages = {
 export default function useLanguage() {
     const [{ locale }] = useAppState()
 
-    return languages[locale] || languages[skSK]
+    return languages[locale] || skSK
 }

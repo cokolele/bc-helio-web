@@ -1,3 +1,13 @@
+@import "npm:mappy-breakpoints"
+
+// sorry, unsupported multiline
+$breakpoints: ( "mobile": 768px, "tablet": 992px, "laptop": 1260px )
+$mappy-queries: ( max-mobile: mappy-bp(max-width mobile), min-mobile: mappy-bp(mobile), max-tablet: mappy-bp(max-width tablet), min-tablet: mappy-bp(tablet), max-laptop: mappy-bp(max-width laptop), min-laptop: mappy-bp(laptop) )
+
+@include mappy-bp(max 320px)
+    html
+        background-color: red !important
+
 @mixin reset
     -webkit-appearance: none
     -moz-appearance: none
@@ -143,10 +153,14 @@
                 @else
                     background-color: var(--color-black-primary)
 
+@mixin tappable
+    &:active
+        background-color: var(--color-grey-light)
+
 @mixin font-style($size, $weight, $uppercase: false, $spaced: false, $disabled)
     font-size: $size
     font-weight: $weight
-    font-family: "Roboto"
+    font-family: "Roboto", Arial, Helvetica, sans-serif
     line-height: normal
     text-decoration: none
     color: var(--color-black-primary)
@@ -179,7 +193,11 @@
     @include font-style(1rem, 700, $uppercase: true, $spaced: true, $disabled: $disabled)
 
 @mixin header($disabled: false)
-    @include font-style(1.75rem, 700, $uppercase: true, $spaced: true, $disabled: $disabled)
+    @include mappy-query(max-mobile)
+        @include font-style(1.125rem, 700, $uppercase: true, $spaced: true, $disabled: $disabled)
+
+    @include mappy-query(min-mobile)
+        @include font-style(1.75rem, 700, $uppercase: true, $spaced: true, $disabled: $disabled)
 
 @mixin input($disabled: false)
     @include font-style(1rem, 700, $spaced: true, $disabled: $disabled)

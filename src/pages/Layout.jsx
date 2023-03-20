@@ -32,7 +32,7 @@ function NavigationMain({ currentRoute }) {
 
     if (currentRoute == "/simulations" || currentRoute == "/nodes") {
         return (
-            <nav>
+            <nav className={classes.collapsed}>
                 <div className={classes.top}>
                     <h3>HelioLogo</h3>  
                 </div>
