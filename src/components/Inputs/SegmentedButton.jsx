@@ -3,8 +3,6 @@ import { IconCheck } from "/src/components/Icons/20/Emph"
 import * as classes from "./SegmentedButton.module.sass"
 
 function SegmentedButton({ list, value, onChange, disabledList, unstyled, className }) {
-    console.log(className)
-
     if (disabledList?.includes(value)) {
         onChange(list[0] == value ? list[1] : list[0])
     }

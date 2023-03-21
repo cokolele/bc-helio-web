@@ -1,12 +1,15 @@
+import { useLanguage } from "/src/utils/hooks"
 import * as classes from "./NotFound.module.sass"
 
 function NotFound() {
+    const language = useLanguage()
+
     return (
         <div className={classes.container}>
             <div className={classes.left}>404</div>
             <div className={classes.right}>
-                <span className={classes.header}>Mrzí nás to!</span>
-                <span className={classes.text}>Nenašli sme stránku, ktorú hľadáte...</span>
+                <span className={classes.header}>{ language["page.not_found.title"] }</span>
+                <span className={classes.text}>{ language["page.not_found.description"] }</span>
             </div>
         </div>
     )

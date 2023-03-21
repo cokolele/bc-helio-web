@@ -8,6 +8,8 @@
     "header.simulation_add": "Pridať simuláciu",
     "header.simulation_add_new": "Pridať novú simuláciu",
     "header.simulation_graph": "Graf simulácie",
+    "nav.menu_open": "Zobraziť",
+    "nav.menu_close": "Zatvoriť",
     "nav.search": "Vyhľadávať",
     "nav.node_list": "Uzly",
     "nav.simulation_list": "Simulácie",

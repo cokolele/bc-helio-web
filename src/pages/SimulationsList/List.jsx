@@ -17,36 +17,37 @@ import * as classes from "./SimulationsList.module.sass"
 
 const limit = 10
 
-function List({ listState, listSorterState }) {
-    const [list, setList] = listState
-    const [listSorter, setListSorter] = listSorterState
+function List() {
+    const [{ simulations }, dispatch] = useAppState()
     const language = useLanguage()
     const [page, setPage] = useState(1)
 
-    const loading = !list || !listSorter
-    const empty = list?.length == 0
+    const loading = !simulations.listShown || !simulations.sort
+    const empty = simulations.listShown?.length == 0
 
     return (
-        <div>
+        <>
             <ul className={loading || empty ? classes.listSkeleton : classes.list}>
                 {
                     loading ?
-                        <Skeleton inline count={5} />
+                        <>
+                            <Skeleton inline count={5} />
+                            <Skeleton inline count={5} />
+                            <Skeleton inline count={5} />
+                        </>
                     : empty ?
                         language["page.simulation_list.empty"]
                     :
-                        list.filter((sim, i) => i >= (page - 1) * limit && i < page * limit)
-                            .sort(listSorter)
+                        simulations.listShown
+                            .filter((sim, i) => i >= (page - 1) * limit && i < page * limit)
+                            .sort(simulations.sort.comparer)
                             .map((sim, i) => (
                                 <ListItem key={i} sim={sim} />
                             ))
                 }
             </ul>
-            <Pagination
-                listState={listState}
-                pageState={[page, setPage]}
-            />
-        </div>
+            <Pagination pageState={[page, setPage]} />
+        </>
     )
 }
 
@@ -57,16 +58,16 @@ function ListItem({ sim }) {
     return (
         <li>
             <Link to={sim.uuid}>
-                <div>
+                <div className={classes.name}>
                     <span>{ sim.name }</span>
                 </div>
-                <div>
+                <div className={classes.date}>
                     <span>{ new Date(sim.createTime).toLocaleDateString(locale) }</span>
                 </div>
-                <div>
+                <div className={classes.type}>
                     <span>{ typeMapper(sim.simulationType) }</span>
                 </div>
-                <div>
+                <div className={classes.status}>
                     {
                         sim.finished ?
                             <>
@@ -90,17 +91,17 @@ function ListItem({ sim }) {
                             </>
                     }
                 </div>
-                <div>
-                    <IconArrowForwardIos className={classes.iconArrow} />
+                <div className={classes.iconArrow}>
+                    <IconArrowForwardIos/>
                 </div>
             </Link>
         </li>
     )
 }
 
-function Pagination({ listState, pageState }) {
+function Pagination({ pageState }) {
+    const [{ simulations }, dispatch] = useAppState()
     const [params, setParams] = useSearchParams()
-    const [list, setList] = listState
     const [page, setPage] = pageState
 
     useEffect(() => {
@@ -109,15 +110,15 @@ function Pagination({ listState, pageState }) {
         if (!isNaN(pageParam)) {
             if (pageParam < 1) {
                 setPage(1)
-            } else if (list?.length && pageParam > Math.ceil(list.length / limit)) {
-                setPage(Math.ceil(list.length / limit))
+            } else if (simulations.listShown?.length && pageParam > Math.ceil(simulations.listShown.length / limit)) {
+                setPage(Math.ceil(simulations.listShown.length / limit))
             } else {
                 setPage(pageParam)
             }
         }
-    }, [params, list])
+    }, [simulations.listShown])
 
-    if (!list || list.length == 0) {
+    if (!simulations.listShown || simulations.listShown.length == 0) {
         return null
     }
 
@@ -128,15 +129,21 @@ function Pagination({ listState, pageState }) {
                 <Button
                     IconLeft={<IconArrowBack />}
                     outlined
-                    onClick={() => setParams({ ...params, page: page - 1 })}
+                    onClick={() => {
+                        setParams({ ...params, page: page - 1 })
+                        setPage(page - 1)
+                    }}
                 />
             }
             {
-                page != Math.ceil(list.length / limit) &&
+                page != Math.ceil(simulations.listShown.length / limit) &&
                 <Button
                     IconLeft={<IconArrowForward />}
                     outlined
-                    onClick={() => setParams({ ...params, page: page + 1 })}
+                    onClick={() => {
+                        setParams({ ...params, page: page + 1 })
+                        setPage(page + 1)
+                    }}
                 />
             }
         </div>

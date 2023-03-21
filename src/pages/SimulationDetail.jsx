@@ -38,7 +38,7 @@ function simulationDetail() {
     const [{ simulations, locale }, dispatch] = useAppState()
     const { id } = useParams()
     const language = useLanguage()
-    const [simulation, setSimulation] = useState(simulations?.find(s => s.uuid == id))
+    const [simulation, setSimulation] = useState(simulations.list?.find(s => s.uuid == id))
 
     useEffect(() => {
         if (!simulation) {

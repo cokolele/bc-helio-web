@@ -3,24 +3,59 @@
 .filters
     position: relative
     z-index: 5
-
     display: flex
     align-items: flex-end
     gap: 2rem
     margin: 0 0.2rem 2em 0.2rem
 
-    li:first-of-type .select
-        width: 20rem
-
     .select
-        width: 10rem
+        width: 100%
 
-    .filler
-        flex-grow: 1
-
-    button
+    .closeFiltersButton
         padding: 0.75rem 2rem
-        margin-right: 3rem
+
+    @include mappy-bp(1550px)
+        & > li
+            width: 10rem
+
+            &:first-child
+                width: 20rem
+
+            &:last-child
+                width: auto
+
+        .filler
+            flex-grow: 1
+
+        .closeFiltersButton
+            margin-right: 3rem
+
+    @include mappy-bp(tablet 1550px)
+        & > li
+            flex: 1
+
+            &:first-child
+                flex: 2
+
+        .select
+            width: 100%
+
+    @include mappy-query(max-tablet)
+        flex-wrap: wrap
+        gap: 1rem 2rem
+
+        & > li
+            flex: 1 0 calc(50% - 1rem)
+
+            &:first-child
+                flex: 1 0 100%
+
+            &:last-child
+                display: flex
+                justify-content: flex-end
+
+        .closeFiltersButton
+            margin-top: 0.75rem
 
 .listSkeleton
     @include label-large($disabled: true)
@@ -29,18 +64,50 @@
     justify-content: center
     gap: 2rem
 
+    @include mappy-bp(1550px)
+        & > span
+            //idk
+            flex: 0 1 33.33%
+
+    @include mappy-bp(mobile 1550px)
+        & > span
+            flex: 0 1 50%
+
+            &:first-of-type
+                display: none
+
+    @include mappy-query(max-mobile)
+        text-align: center
+        flex-direction: column
+
     & > span
         @include clickable-styled($outlined: true, $block: true, $disabled: true)
         @include text
         width: 100%
-        padding: 1rem
+        padding: 1.7rem 1rem
+        display: flex
+        gap: 2rem
+
+        span
+            flex: 1
+
+        span:first-of-type
+            flex: 5
 
 .list
-    margin-top: 1rem
     display: grid
     grid-template-columns: repeat(3, 1fr)
     gap: 2rem
     align-items: center
+
+    @include mappy-bp(laptop)
+        margin-top: 1rem
+
+    @include mappy-bp(mobile 1550px)
+        grid-template-columns: repeat(2, 1fr)
+
+    @include mappy-query(max-mobile)
+        grid-template-columns: 1fr
 
     li
         @include clickable-styled($outlined: true, $block: true)

@@ -8,6 +8,8 @@
     "header.simulation_add": "Add simulation",
     "header.simulation_add_new": "Add new simulation",
     "header.simulation_graph": "Simulation Graph",
+    "nav.menu_open": "Expand",
+    "nav.menu_close": "Close",
     "nav.search": "Search",
     "nav.node_list": "Nodes",
     "nav.simulation_list": "Simulations",

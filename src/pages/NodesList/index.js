@@ -1,7 +1,6 @@
 import api from "/src/utils/api"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useAppState } from "/src/states/app"
-import { useLanguage } from "/src/utils/hooks"
 import fakeData from "/src/fakeData"
 
 import Controls from "./Controls"
@@ -9,6 +8,15 @@ import Filters from "./Filters"
 import List from "./List"
 
 const fetchAllSimulations = async (dispatch) => {
+    await new Promise(resolve => setTimeout(resolve, 4000));
+
+    dispatch({
+        type: "setNodes",
+        nodes: fakeData.nodes
+    })
+
+    return
+
     let ids
 
     try {
@@ -43,53 +51,20 @@ const fetchAllSimulations = async (dispatch) => {
     })
 }
 
-const fetchFake = async (dispatch) => {
-    await new Promise(resolve => setTimeout(resolve, 4000));
-
-    dispatch({
-        type: "setNodes",
-        nodes: fakeData.nodes
-    })
-}
-
 function NodesList() {
-    const [{ nodes, showFilters }, dispatch] = useAppState()
-    const [list, setList] = useState(null)
-    const [listSorter, setListSorter] = useState(null)
-    const language = useLanguage()
+    const [{ nodes }, dispatch] = useAppState()
 
     useEffect(() => {
-        setList(nodes)
-    }, [nodes])
-
-    useEffect(() => {
-        if (!nodes) {
-            //fetchAllSimulations(dispatch)
-            fetchFake(dispatch)
+        if (!nodes.list) {
+            fetchAllSimulations(dispatch)
         }
-    }, [])
-
-    useEffect(() => () => {
-        dispatch({
-            type: "setShowFilters",
-            show: false
-        })
     }, [])
 
     return (
         <>
-            <Controls
-                listState={[list, setList]}
-                listSorterState={[listSorter, setListSorter]}
-            />
-            {
-                showFilters &&
-                <Filters listState={[list, setList]} />
-            }
-            <List
-                listState={[list, setList]}
-                listSorterState={[listSorter, setListSorter]}
-            />
+            <Controls />
+            <Filters />
+            <List />
         </>
     )
 }

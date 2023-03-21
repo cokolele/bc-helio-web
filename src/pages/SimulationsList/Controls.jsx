@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
+import { useAppState } from "/src/states/app"
 import { useLanguage } from "/src/utils/hooks"
-import { IconSwapVert, IconViewAgenda } from "/src/components/Icons/20"
+import {
+    IconSwapVert,
+    IconViewAgenda,
+    IconListAlt
+} from "/src/components/Icons/20"
 import { Select, Button } from "/src/components/Inputs"
 import * as classes from "./SimulationsList.module.sass"
 
-function Controls({ listState, listSorterState }) {
-    const [list, setList] = listState
-    const [listSorter, setListSorter] = listSorterState
+function Controls() {
+    const [{ simulations }, dispatch] = useAppState()
     const [params, setParams] = useSearchParams()
     const language = useLanguage()
 
@@ -27,36 +31,55 @@ function Controls({ listState, listSorterState }) {
     }
 
     const labelMapper = Object.fromEntries(Object.entries(sortings).map(([name, sort]) => [sort.label, name]))
-
-    const [sort, setSort] = useState(Object.keys(sortings)[0])
+    const [sort, setSort] = useState(null)
 
     useEffect(() => {
         const sortParam = params.get("sort")
 
-        if (sortings[sortParam]) {
-            setSort(sortParam)
-            setListSorter(() => sortings[sortParam].comparer)
-        } else if (listSorter == null) {
-            setListSorter(() => sortings[sort].comparer)
+        if (!simulations.sort) {
+            setSort(sortings[sortParam] ? sortParam : Object.keys(sortings)[0])
+        } else {
+            const prevSort = labelMapper[simulations.sort.label]
+            setParams({
+                ...params,
+                sort: prevSort
+            })
+            setSort(prevSort)
         }
-    }, [params])
+    }, [])
+
+    useEffect(() => {
+        if (sort) {
+            dispatch({
+                type: "setSimulationsSort",
+                sort: sortings[sort]
+            })
+        }
+    }, [sort])
 
     return (
         <div className={classes.controls}>
             <Select
                 className={classes.sort}
                 list={Object.keys(labelMapper)}
-                value={sortings[sort].label}
-                onChange={value => setParams({ ...params, sort: labelMapper[value] })}
+                value={sort && sortings[sort].label}
+                onChange={value => {
+                    value = labelMapper[value]
+                    setSort(value)
+                    setParams({
+                        ...params,
+                        sort: value
+                    })
+                }}
                 button
                 unstyled
                 IconLeft={<IconSwapVert />}
-                disabled={!list}
+                disabled={!simulations.list}
             />
             <Button
                 className={classes.listView}
                 unstyled
-                IconTop={<IconViewAgenda/>}
+                IconTop={<IconListAlt/>}
             />
         </div>
     )

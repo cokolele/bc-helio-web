@@ -1,23 +1,42 @@
-import { useEffect, useState } from "react"
 import { useAppState } from "/src/states/app"
 import { useLanguage } from "/src/utils/hooks"
 import { Button, SelectLabeled } from "/src/components/Inputs"
 import * as classes from "./NodesList.module.sass"
 
-function Filters({ listState }) {
-    const [list, setList] = listState
+function Filters() {
     const [{ nodes }, dispatch] = useAppState()
     const language = useLanguage()
 
-    const [type, setType] = useState("")
-    const [active, setActive] = useState("")
-    const [computing, setComputing] = useState("")
+    if (!nodes.filters) {
+        return null
+    }
 
-    const disabled = !list
+    if (nodes.filters === true) {
+        nodes.filters = {
+            type: "",
+            active: "",
+            computing: ""
+        }
+    }
 
-    useEffect(() => {
-        if (!disabled) {
-            setList(nodes.filter(node => {
+    const disabled = !nodes.list
+
+    const onFilterChange = filter => {
+        const newFilters = {
+            ...nodes.filters,
+            ...filter
+        }
+
+        dispatch({
+            type: "setNodesFilters",
+            filters: newFilters
+        })
+
+        dispatch({
+            type: "setNodesShown",
+            nodes: nodes.list.filter(node => {
+                const { type, active, computing } = newFilters
+
                 if (type && node.gpu !== type) {
                     return false
                 }
@@ -32,9 +51,8 @@ function Filters({ listState }) {
 
                 return true
             })
-            )
-        }
-    }, [type, active, computing])
+        })
+    }
 
     return (
         <ul className={classes.filters}>
@@ -43,9 +61,9 @@ function Filters({ listState }) {
                     className={classes.select}
                     allowBlank
                     label={language["label.type"]}
-                    list={list ? list.map(({ gpu }) => gpu) : []}
-                    value={type}
-                    onChange={setType}
+                    list={nodes.list ? nodes.list.map(({ gpu }) => gpu) : []}
+                    value={nodes.filters.type}
+                    onChange={value => onFilterChange({type: value})}
                     disabled={disabled}
                 />
             </li>
@@ -55,8 +73,8 @@ function Filters({ listState }) {
                     allowBlank
                     label={language["page.node_list.is_active"]}
                     list={[language["yes"], language["no"]]}
-                    value={active}
-                    onChange={setActive}
+                    value={nodes.filters.active}
+                    onChange={value => onFilterChange({active: value})}
                     disabled={disabled}
                 />
             </li>
@@ -66,21 +84,26 @@ function Filters({ listState }) {
                     allowBlank
                     label={language["page.node_list.is_computing"]}
                     list={[language["yes"], language["no"]]}
-                    value={computing}
-                    onChange={setComputing}
+                    value={nodes.filters.computing}
+                    onChange={value => onFilterChange({computing: value})}
                     disabled={disabled}
                 />
             </li>
             <div className={classes.filler}></div>
             <li>
                 <Button
+                    className={classes.closeFiltersButton}
                     dangerous
                     outlined
                     onClick={() => {
-                        setList(nodes)
                         dispatch({
-                            type: "setShowFilters",
-                            show: false
+                            type: "setNodesFilters",
+                            filters: null
+                        })
+
+                        dispatch({
+                            type: "setNodesShown",
+                            nodes: nodes.list
                         })
                     }}
                 >

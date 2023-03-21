@@ -76,8 +76,11 @@
             color: var(--color-black-primary-disabled)
             background-color: var(--color-grey-light)
             border-radius: 0
-            box-shadow: inset 0 -0.2rem 0 0 var(--color-black-primary-disabled)
+            box-shadow: inset 0 -0.2rem 0 0 var(--color-black-primary-disabled) !important
             cursor: not-allowed
+
+    &[type="date"]
+        min-height: 2.6rem
 
     &[type="button"]
         cursor: pointer

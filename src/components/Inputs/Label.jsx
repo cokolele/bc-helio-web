@@ -1,8 +1,6 @@
 import * as classes from "./Label.module.sass"
 
 function Label({ children, label, helperText, labelInput, disabled, invalid, className, ...props }) {
-    console.log(className)
-
     return (
         <div
             className={[

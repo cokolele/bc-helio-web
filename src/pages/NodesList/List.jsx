@@ -19,40 +19,37 @@ import * as classes from "./NodesList.module.sass"
 
 const limit = 21
 
-function List({ listState, listSorterState }) {
-    const [list, setList] = listState
-    const [listSorter, setListSorter] = listSorterState
+function List() {
+    const [{ nodes }, dispatch] = useAppState()
     const language = useLanguage()
     const [page, setPage] = useState(1)
 
-    const loading = !list || !listSorter
-    const empty = list?.length == 0
+    const loading = !nodes.listShown || !nodes.sort
+    const empty = nodes.listShown?.length == 0
 
     return (
-        <div>
+        <>
             <ul className={loading || empty ? classes.listSkeleton : classes.list}>
                 {
                     loading ?
                         <>
-                            <Skeleton inline />
-                            <Skeleton inline />
-                            <Skeleton inline />
+                            <Skeleton inline count={2}/>
+                            <Skeleton inline count={2}/>
+                            <Skeleton inline count={2}/>
                         </>
                     : empty ?
                         language["page.node_list.empty"]
                     :
-                        list.filter((node, i) => i >= (page - 1) * limit && i < page * limit)
-                            .sort(listSorter)
+                        nodes.listShown
+                            .filter((node, i) => i >= (page - 1) * limit && i < page * limit)
+                            .sort(nodes.sort.comparer)
                             .map((node, i) => (
                                 <ListItem key={i} node={node}/>
                             ))
                 }
             </ul>
-            <Pagination
-                listState={listState}
-                pageState={[page, setPage]}
-            />
-        </div>
+            <Pagination pageState={[page, setPage]} />
+        </>
     )
 }
 
@@ -96,9 +93,9 @@ function ListItem({ node }) {
     )
 }
 
-function Pagination({ listState, pageState }) {
+function Pagination({ pageState }) {
+    const [{ nodes }, dispatch] = useAppState()
     const [params, setParams] = useSearchParams()
-    const [list, setList] = listState
     const [page, setPage] = pageState
 
     useEffect(() => {
@@ -107,15 +104,15 @@ function Pagination({ listState, pageState }) {
         if (!isNaN(pageParam)) {
             if (pageParam < 1) {
                 setPage(1)
-            } else if (list?.length && pageParam > Math.ceil(list.length / limit)) {
-                setPage(Math.ceil(list.length / limit))
+            } else if (nodes.listShown?.length && pageParam > Math.ceil(nodes.listShown.length / limit)) {
+                setPage(Math.ceil(nodes.listShown.length / limit))
             } else {
                 setPage(pageParam)
             }
         }
-    }, [params, list])
+    }, [nodes.listShown])
 
-    if (!list || list.length == 0) {
+    if (!nodes.listShown || nodes.listShown.length == 0) {
         return null
     }
 
@@ -126,15 +123,21 @@ function Pagination({ listState, pageState }) {
                 <Button
                     IconLeft={<IconArrowBack />}
                     outlined
-                    onClick={() => setParams({ ...params, page: page - 1 })}
+                    onClick={() => {
+                        setParams({ ...params, page: page - 1 })
+                        setPage(page - 1)
+                    }}
                 />
             }
             {
-                page != Math.ceil(list.length / limit) &&
+                page != Math.ceil(nodes.listShown.length / limit) &&
                 <Button
                     IconLeft={<IconArrowForward />}
                     outlined
-                    onClick={() => setParams({ ...params, page: page + 1 })}
+                    onClick={() => {
+                        setParams({ ...params, page: page + 1 })
+                        setPage(page + 1)
+                    }}
                 />
             }
         </div>

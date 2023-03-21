@@ -1,7 +1,7 @@
 @import "/src/styles/mixins.sass"
 
 .containerChoose, form
-    height: 100%
+    flex-grow: 1
     display: flex
     flex-direction: column
     align-items: center
@@ -11,7 +11,8 @@
     gap: 2rem
 
     button, a
-        width: 20rem
+        width: 100%
+        max-width: 20rem
 
         &:first-child
             height: 6rem
@@ -31,7 +32,6 @@ form
 
     .top, .bottom
         width: 100%
-        max-width: 35rem
 
     .top
         display: flex
@@ -57,3 +57,12 @@ form
     .bottom
         display: flex
         justify-content: flex-end
+
+    @include mappy-query(min-tablet)
+        .top, .bottom
+            max-width: 35rem
+
+    @include mappy-query(max-tablet)
+        .middle
+            gap: 2rem
+            flex-direction: column

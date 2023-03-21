@@ -23,9 +23,7 @@ function Settings() {
                     label={language["label.language"]}
                     list={Object.values(localeMap)}
                     value={localeMap[locale]}
-                    onChange={value => dispatch({
-                        type: "toggleLocale"
-                    })}
+                    onChange={value => dispatch({ type: "toggleLocale" })}
                 />
             </div>
         </div>

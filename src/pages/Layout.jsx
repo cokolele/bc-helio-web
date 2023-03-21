@@ -5,12 +5,13 @@ import {
     IconDns,
     IconSettings,
     IconReceiptLong,
-    IconArrowBackIosNew
+    IconArrowBackIosNew,
+    IconArrowForwardIos
 } from "/src/components/Icons/40"
 import { Button } from "/src/components/Inputs"
 import { useCurrentRoute, useLanguage } from "/src/utils/hooks"
 import * as classes from "./Layout.module.sass"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 function Layout() {
     const currentRoute = useCurrentRoute()
@@ -28,70 +29,93 @@ function Layout() {
 
 function NavigationMain({ currentRoute }) {
     const [state, dispatch] = useAppState()
+    const [open, setOpen] = useState(false)
     const language = useLanguage()
 
-    if (currentRoute == "/simulations" || currentRoute == "/nodes") {
-        return (
-            <nav className={classes.collapsed}>
-                <div className={classes.top}>
-                    <h3>HelioLogo</h3>  
-                </div>
-                <div className={classes.middle}>
-                    <Button
-                        unstyled
-                        IconLeft={<IconManageSearch/>}
-                        onClick={() => dispatch({
-                            type: "setShowFilters",
-                            show: true
-                        })}
-                    >
-                        { language["nav.search"] }
-                    </Button>
-                    {
-                        currentRoute == "/simulations" ?
-                            <Button
-                                unstyled
-                                IconLeft={<IconDns/>}
-                                to="/nodes"
-                            >
-                                { language["nav.node_list"] }
-                            </Button>
-                        :
-                            <Button
-                                unstyled
-                                IconLeft={<IconReceiptLong/>}
-                                to="/simulations"
-                            >
-                                { language["nav.simulation_list"] }
-                            </Button>
-                        
-                    }
-                </div>
-                <div className={classes.bottom}>
-                    <Button
-                        unstyled
-                        IconLeft={<IconSettings/>}
-                        to="/settings"
-                    >
-                        { language["nav.settings"] }
-                    </Button>
-                </div>
-            </nav>
-        )
-    }
-
     return (
-        <nav>
-            <div className={classes.middle}>
-                <Button
-                    unstyled
-                    IconLeft={<IconArrowBackIosNew/>}
-                    to={-1}
-                >
-                    { language["nav.back"] }
-                </Button>
-            </div>
-        </nav>
+        <>
+            <nav
+                className={open ? classes.menuOpened : null}
+                onClick={e => {
+                    if (open && (e.target.closest("button") || e.target.closest("a"))) {
+                        setOpen(false)
+                    }
+                }}
+            >
+                {
+                    (currentRoute == "/simulations" || currentRoute == "/nodes") ?
+                        <>
+                            <div className={classes.top}>
+                                <h3>HelioLogo</h3>
+                                <Button
+                                    className={classes.menuButtonOpen}
+                                    unstyled
+                                    IconLeft={<IconArrowForwardIos/>}
+                                    onClick={() => !open && setOpen(true)}
+                                >
+                                    { language[open ? "nav.menu_close" : "nav.menu_open"] }
+                                </Button>
+                            </div>
+                            <div className={classes.middle}>
+                                <Button
+                                    unstyled
+                                    IconLeft={<IconManageSearch/>}
+                                    onClick={() => dispatch({
+                                        type: currentRoute == "/simulations" ? "setSimulationsFilters" : "setNodesFilters",
+                                        filters: true
+                                    })}
+                                >
+                                    { language["nav.search"] }
+                                </Button>
+                                {
+                                    currentRoute == "/simulations" ?
+                                        <Button
+                                            unstyled
+                                            IconLeft={<IconDns/>}
+                                            to="/nodes"
+                                        >
+                                            { language["nav.node_list"] }
+                                        </Button>
+                                    :
+                                        <Button
+                                            unstyled
+                                            IconLeft={<IconReceiptLong/>}
+                                            to="/simulations"
+                                        >
+                                            { language["nav.simulation_list"] }
+                                        </Button>
+                                    
+                                }
+                            </div>
+                            <div className={classes.bottom}>
+                                <Button
+                                    unstyled
+                                    IconLeft={<IconSettings/>}
+                                    to="/settings"
+                                >
+                                    { language["nav.settings"] }
+                                </Button>
+                            </div>
+                        </>
+                    :
+                        <>
+                            <div className={classes.middle}>
+                                <Button
+                                    unstyled
+                                    IconLeft={<IconArrowBackIosNew/>}
+                                    to={-1}
+                                >
+                                    { language["nav.back"] }
+                                </Button>
+                            </div>
+                        </>
+                }
+            </nav>
+            <div
+                className={classes.menuBackground}
+                onClick={() => setOpen(false)}
+            ></div>
+        </>
     )
 }
 

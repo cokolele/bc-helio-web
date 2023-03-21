@@ -7,8 +7,13 @@
     align-items: center
     gap: 2rem
 
+    @include mappy-query(max-tablet)
+        flex-direction: column
+
     .left
         @include header
+
+    .left
         font-size: 8rem
         color: var(--color-black-primary-disabled)
 
@@ -19,6 +24,8 @@
 
         .header
             @include header
+
+        .header
             font-size: 2rem
             color: var(--color-black-primary-disabled)
 

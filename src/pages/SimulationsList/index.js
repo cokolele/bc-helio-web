@@ -1,5 +1,5 @@
 import api from "/src/utils/api"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useAppState } from "/src/states/app"
 import { useLanguage } from "/src/utils/hooks"
 import { IconAdd } from "/src/components/Icons/24/Emph"
@@ -12,6 +12,15 @@ import Filters from "./Filters"
 import List from "./List"
 
 const fetchAllSimulations = async (dispatch) => {
+    await new Promise(resolve => setTimeout(resolve, 4000));
+
+    dispatch({
+        type: "setSimulations",
+        simulations: fakeData.simulations
+    })
+
+    return
+
     let ids
 
     try {
@@ -46,37 +55,14 @@ const fetchAllSimulations = async (dispatch) => {
     })
 }
 
-const fetchAllSimulationsFake = async (dispatch) => {
-    await new Promise(resolve => setTimeout(resolve, 4000));
-
-    dispatch({
-        type: "setSimulations",
-        simulations: fakeData.simulations
-    })
-}
-
 function SimulationsList() {
-    const [{ simulations, showFilters }, dispatch] = useAppState()
-    const [list, setList] = useState(null)
-    const [listSorter, setListSorter] = useState(null)
+    const [{ simulations }, dispatch] = useAppState()
     const language = useLanguage()
 
     useEffect(() => {
-        setList(simulations)
-    }, [simulations])
-
-    useEffect(() => {
-        if (!simulations) {
-            //fetchAllSimulations(dispatch)
-            fetchAllSimulationsFake(dispatch)
+        if (!simulations.list) {
+            fetchAllSimulations(dispatch)
         }
-    }, [])
-
-    useEffect(() => () => {
-        dispatch({
-            type: "setShowFilters",
-            show: false
-        })
     }, [])
 
     return (
@@ -90,36 +76,19 @@ function SimulationsList() {
                     {language["button.add_simulation"]}
                 </Button>
             </section>
-            <section>
-                <Controls
-                    listState={[list, setList]}
-                    listSorterState={[listSorter, setListSorter]}
-                />
-                <Labels />
-                {
-                    showFilters &&
-                    <Filters listState={[list, setList]} />
-                }
-                <List
-                    listState={[list, setList]}
-                    listSorterState={[listSorter, setListSorter]}
-                />
+            <section className={classes.simulationsList}>
+                <Controls />
+                <div className={classes.labels}>
+                    <span>{language["label.name"]}</span>
+                    <span>{language["label.date"]}</span>
+                    <span>{language["label.type"]}</span>
+                    <span>{language["label.status"]}</span>
+                    <span></span>
+                </div>
+                <Filters />
+                <List />
             </section>
         </>
-    )
-}
-
-function Labels() {
-    const language = useLanguage()
-
-    return (
-        <div className={classes.labels}>
-            <span>{language["label.name"]}</span>
-            <span>{language["label.date"]}</span>
-            <span>{language["label.type"]}</span>
-            <span>{language["label.status"]}</span>
-            <span></span>
-        </div>
     )
 }
 

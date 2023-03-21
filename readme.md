@@ -31,7 +31,7 @@ Router              | ✔️ navigácia podstránok
 Graph interactivity | ❌
 Download / Upload   | ❌
 Portals             | ❌
-Responsivity        | ❌
+Responsivity        | ✔️
 Animations          | ❌
 Accessibility       | ❌
 Dark mode           | ❌

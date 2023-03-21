@@ -1,11 +1,22 @@
 import { useReducer, createContext, useContext } from 'react'
 
 const initialState = {
-    simulations: null,
-    nodes: null,
-    showFilters: false,
     locale: navigator?.languages?.some(lang => ["en", "en-US", "en-GB"].includes(lang)) ? "en-US" : "sk-SK",
-    theme: window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+    theme: window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light",
+
+    simulations: {
+        list: null,
+        listShown: null,
+        compactView: false,
+        sort: null,
+        filters: null
+    },
+    nodes: {
+        list: null,
+        listShown: null,
+        sort: null,
+        filters: null
+    }
 }
 
 function reducer(state, action) {
@@ -26,22 +37,51 @@ function reducer(state, action) {
                 }
             }
             case "setSimulations": {
-                return {
-                    ...state,
-                    simulations: action.simulations
-                }
+                state.simulations.list = action.simulations
+                state.simulations.listShown = action.simulations
+
+                return { ...state }
+            }
+            case "setSimulationsShown": {
+                state.simulations.listShown = action.simulations
+
+                return { ...state }
+            }
+            case "setSimulationsFilters": {
+                state.simulations.filters = action.filters
+
+                return { ...state }
+            }
+            case "setSimulationsSort": {
+                state.simulations.sort = action.sort
+
+                return { ...state }
+            }
+            case "toggleSimulationsView": {
+                state.simulations.compactView = !state.simulations.compactView
+
+                return { ...state }
             }
             case "setNodes": {
-                return {
-                    ...state,
-                    nodes: action.nodes
-                }
+                state.nodes.list = action.nodes
+                state.nodes.listShown = action.nodes
+
+                return { ...state }
             }
-            case "setShowFilters": {
-                return {
-                    ...state,
-                    showFilters: action.show
-                }
+            case "setNodesShown": {
+                state.nodes.listShown = action.nodes
+
+                return { ...state }
+            }
+            case "setNodesFilters": {
+                state.nodes.filters = action.filters
+
+                return { ...state }
+            }
+            case "setNodesSort": {
+                state.nodes.sort = action.sort
+
+                return { ...state }
             }
             default: {
                 throw Error("Unknown action: " + action.type)

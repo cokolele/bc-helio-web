@@ -61,7 +61,7 @@ function InputLabeled({ children, label, helperText, labelInput, invalid, classN
             className={[
                 className,
                 movableTypes.includes(props.type) ? classes.movableLabel : null,
-                props.value || props.placeholder || validity ? classes.moved : null,
+                props.value || props.placeholder || validity || props.disabled ? classes.moved : null,
             ].join(" ")}
             invalid={validity || invalid}
             disabled={props.disabled}
