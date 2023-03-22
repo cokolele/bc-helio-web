@@ -17,7 +17,7 @@ https://www.figma.com/proto/vGEHZUWjlSlS2JlslDvW2D/Helio-Web-App?page-id=0%3A1&n
 
 ## To do
 Thing               | Progress
---------------------|------------------------------------
+--------------------|---------
 UI design mobile    | ✔️
 UI design desktop   | ✔️
 Docker              | ✔️
@@ -25,9 +25,9 @@ Functionality       | ✔️
 Typescript          | ➖
 PWA                 | ❌
 Tests               | ❌
-App State           | ✔️ globálny state
-Api lib             | ✔️ object pre pripájanie na API
-Router              | ✔️ navigácia podstránok
+App State           | ✔️
+Api lib             | ✔️
+Router              | ✔️
 Graph interactivity | ❌
 Download / Upload   | ❌
 Portals             | ➖
@@ -40,7 +40,7 @@ Components          | ✔️
 Filter              | ✔️
 Sorting             | ✔️
 Pagination          | ✔️
-Font                | ✔️ (možno pridať hostovanie fontov)
+Font                | ✔️
 Icons               | ✔️
 Sass                | ✔️
 Parcel skeleton     | ✔️
@@ -49,3 +49,4 @@ Parcel skeleton     | ✔️
 
 - Nedostatočný endpoint /simulations/all
 - SimulationsList flex namiesto table
+- možno pridať hostovanie fontov
