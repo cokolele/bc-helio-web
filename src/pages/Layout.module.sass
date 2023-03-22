@@ -4,10 +4,12 @@
     height: 100%
     overflow-x: hidden
     display: grid
-    grid-template-columns: auto 1fr
+    grid-template-columns: 17rem 1fr
     grid-template-rows: 1fr
 
     @include mappy-query(max-laptop)
+        grid-template-columns: 4.5rem 1fr
+
         .menuBackground
             position: relative
             z-index: 50
@@ -19,6 +21,30 @@
             pointer-events: all
             background-color: rgba(0,0,0,0.65)
 
+    .snackbars
+        position: relative
+        z-index: 40
+        grid-area: 1 / 2 / 2 / 3
+        pointer-events: none
+        display: flex
+        flex-direction: column
+        justify-content: flex-end
+        align-items: center
+        gap: 1rem
+        padding-bottom: 1rem
+
+        .snackbar
+            pointer-events: all
+
+            @include mappy-query(max-tablet)
+                margin: 0 1rem
+
+            @include mappy-bp(tablet 1550px)
+                max-width: 65vw
+
+            @include mappy-bp(1550px)
+                max-width: 40vw
+
     main
         grid-area: 1 / 2 / 2 / 3
         padding: 4rem
@@ -27,7 +53,7 @@
         flex-direction: column
 
         @include mappy-query(max-laptop)
-            padding: 2rem 2rem 2rem 6.5rem
+            padding: 2rem
 
         h1
             @include header
@@ -44,7 +70,6 @@
 
     nav
         grid-area: 1 / 1 / 2 / 2
-        width: 17rem
         padding: 2rem 0
         background-color: var(--color-white-primary)
         box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25)
@@ -70,6 +95,8 @@
                     opacity: 0
 
             &.menuOpened
+                width: 17rem
+
                 .menuButtonOpen svg
                     transform: rotateY(180deg)
 

@@ -3,6 +3,7 @@ import { useReducer, createContext, useContext } from 'react'
 const initialState = {
     locale: navigator?.languages?.some(lang => ["en", "en-US", "en-GB"].includes(lang)) ? "en-US" : "sk-SK",
     theme: window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light",
+    error: null,
 
     simulations: {
         list: null,
@@ -80,6 +81,11 @@ function reducer(state, action) {
             }
             case "setNodesSort": {
                 state.nodes.sort = action.sort
+
+                return { ...state }
+            }
+            case "setError": {
+                state.error = action.message
 
                 return { ...state }
             }

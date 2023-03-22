@@ -10,27 +10,28 @@ import {
 } from "/src/components/Icons/40"
 import { Button } from "/src/components/Inputs"
 import { useCurrentRoute, useLanguage } from "/src/utils/hooks"
+import { useState, useEffect } from "react"
+import Snackbar from "/src/components/Snackbar"
 import * as classes from "./Layout.module.sass"
-import { useEffect, useState } from "react"
 
 function Layout() {
-    const currentRoute = useCurrentRoute()
-
     return (
         <div className={classes.container}>
-            <NavigationMain currentRoute={currentRoute}/>
+            <Navigation />
             <main>
-                <Header currentRoute={currentRoute}/>
+                <Header />
                 <Outlet />
             </main>
+            <SnackbarErrors />
         </div>
     )
 }
 
-function NavigationMain({ currentRoute }) {
+function Navigation() {
     const [state, dispatch] = useAppState()
     const [open, setOpen] = useState(false)
     const language = useLanguage()
+    const currentRoute = useCurrentRoute()
 
     return (
         <>
@@ -119,8 +120,9 @@ function NavigationMain({ currentRoute }) {
     )
 }
 
-function Header({ currentRoute }) {
+function Header() {
     const language = useLanguage()
+    const currentRoute = useCurrentRoute()
 
     const labels = {
         "/simulations": language["header.simulation_list"],
@@ -133,6 +135,40 @@ function Header({ currentRoute }) {
     }
     
     return <h1>{labels[currentRoute]}</h1>
+}
+
+function SnackbarErrors() {
+    const [{ error }, dispatch] = useAppState()
+    const [queue, setQueue] = useState([])
+
+    useEffect(() => {
+        if (error) {
+            setQueue([...queue, error])
+            dispatch({
+                type: "setError",
+                message: null
+            })
+        }
+    }, [error])
+
+    useEffect(() => {
+        timer = setTimeout(() => setQueue(prevQueue => prevQueue.slice(1)), 2500)
+        
+        return () => clearTimeout(timer)
+    }, [queue])
+
+    return (
+        <div className={classes.snackbars}>
+            {
+                queue[0] &&
+                <Snackbar
+                    className={classes.snackbar}
+                    text={queue[0]}
+                    onClose={() => setQueue(prevQueue => prevQueue.slice(1))}
+                />
+            }
+        </div>
+    )
 }
 
 export default Layout

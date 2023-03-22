@@ -42,3 +42,7 @@ export const IconDownload = wrapper(
 export const IconShowChart = wrapper(
     <path d="m3.35 19.05-2-2L9.45 9l4.05 4.05 7.35-8.15 1.85 1.85-9.2 10.3L9.45 13Z" />
 )
+
+export const IconCancel = wrapper(
+    <path d="M6.3,19.6l-1.8-1.9l5.7-5.7L4.5,6.2l1.8-1.9l5.7,5.8l5.7-5.8l1.9,1.9L13.9,12l5.7,5.7l-1.9,1.9L12,13.9L6.3,19.6z" />
+)
