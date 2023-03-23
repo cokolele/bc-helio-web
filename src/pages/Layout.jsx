@@ -22,7 +22,7 @@ function Layout() {
                 <Header />
                 <Outlet />
             </main>
-            <SnackbarErrors />
+            <Snackbars />
         </div>
     )
 }
@@ -137,22 +137,32 @@ function Header() {
     return <h1>{labels[currentRoute]}</h1>
 }
 
-function SnackbarErrors() {
+function Snackbars() {
     const [{ error }, dispatch] = useAppState()
     const [queue, setQueue] = useState([])
+    const language = useLanguage()
+
+    useEffect(() => {
+        const onOnline = () => setQueue([...queue, language["notification.on_online"]])
+        const onOffline = () => setQueue([...queue, language["notification.on_offline"]])
+
+        window.addEventListener("online", onOnline)
+        window.addEventListener("offline", onOffline)
+
+        return () => {
+            window.removeEventListener("online", onOnline)
+            window.removeEventListener("offline", onOffline)
+        }
+    }, [])
 
     useEffect(() => {
         if (error) {
             setQueue([...queue, error])
-            dispatch({
-                type: "setError",
-                message: null
-            })
         }
     }, [error])
 
     useEffect(() => {
-        timer = setTimeout(() => setQueue(prevQueue => prevQueue.slice(1)), 2500)
+        timer = setTimeout(() => setQueue(prevQueue => prevQueue.slice(1)), 3000)
         
         return () => clearTimeout(timer)
     }, [queue])

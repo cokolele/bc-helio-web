@@ -124,7 +124,10 @@ function Pagination({ pageState }) {
                     IconLeft={<IconArrowBack />}
                     outlined
                     onClick={() => {
-                        setParams({ ...params, page: page - 1 })
+                        setParams({
+                            ...Object.fromEntries(params),
+                            page: page - 1
+                        })
                         setPage(page - 1)
                     }}
                 />
@@ -135,7 +138,10 @@ function Pagination({ pageState }) {
                     IconLeft={<IconArrowForward />}
                     outlined
                     onClick={() => {
-                        setParams({ ...params, page: page + 1 })
+                        setParams({
+                            ...Object.fromEntries(params),
+                            page: page + 1
+                        })
                         setPage(page + 1)
                     }}
                 />

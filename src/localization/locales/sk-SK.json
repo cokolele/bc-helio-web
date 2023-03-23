@@ -57,5 +57,12 @@
     "page.node_list.last_update_time": "Posledná odozva",
     "page.simulation_detail.unfinished_warning": "Simulácia nie je dokončená. Kompletné dáta budú dostupné po jej dokončení.",
     "page.not_found.title": "Mrzí nás to!",
-    "page.not_found.description": "Nenašli sme stránku, ktorú hľadáte..."
+    "page.not_found.description": "Nenašli sme stránku, ktorú hľadáte...",
+    "notification.on_online": "Späť online.",
+    "notification.on_offline": "Stratenie internetového pripojenia.",
+    "api.error.offline": "Please check your network connection and try again.",
+    "api.error.unsuccessful_request": "Ľutujeme, nedokázali sme sa pripojiť k serverom. Skúste to znova neskôr.",
+    "api.error.invalid_response": "Ľutujeme, nedokázali sme získať požadované dáta. Skúste to znova neskôr.",
+    "api.error.invalid_request": "Ľutujeme, nedokázali sme získať požadované dáta. Kontaktujte prosím administrátora.",
+    "api.error.invalid_response_partial": "Ľutujeme, nedokázali sme získať niektoré z požadovaných dát. Skúste to znova neskôr."
 }

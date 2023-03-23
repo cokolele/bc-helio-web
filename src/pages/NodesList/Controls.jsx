@@ -31,12 +31,11 @@ function Controls() {
         if (!nodes.sort) {
             setSort(sortings[sortParam] ? sortParam : Object.keys(sortings)[0])
         } else {
-            const prevSort = labelMapper[nodes.sort.label]
             setParams({
-                ...params,
-                sort: prevSort
+                ...Object.fromEntries(params),
+                sort: nodes.sort.name
             })
-            setSort(prevSort)
+            setSort(nodes.sort.name)
         }
     }, [])
 
@@ -44,7 +43,10 @@ function Controls() {
         if (sort) {
             dispatch({
                 type: "setNodesSort",
-                sort: sortings[sort]
+                sort: {
+                    comparer: sortings[sort].comparer,
+                    name: sort
+                }
             })
         }
     }, [sort])
@@ -59,14 +61,14 @@ function Controls() {
                     value = labelMapper[value]
                     setSort(value)
                     setParams({
-                        ...params,
+                        ...Object.fromEntries(params),
                         sort: value
                     })
                 }}
                 button
                 unstyled
                 IconLeft={<IconSwapVert />}
-                disabled={!nodes.list}
+                disabled={!nodes.listShown || nodes.listShown.length == 0}
             />
         </div>
     )

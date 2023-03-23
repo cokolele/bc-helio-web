@@ -11,48 +11,88 @@ import Controls from "./Controls"
 import Filters from "./Filters"
 import List from "./List"
 
+const useFakeData = true
+
 const fetchAllSimulations = async (dispatch) => {
-    await new Promise(resolve => setTimeout(resolve, 4000));
+    if (useFakeData) {
+        await new Promise(resolve => setTimeout(resolve, 4000));
 
-    dispatch({
-        type: "setSimulations",
-        simulations: fakeData.simulations
-    })
+        dispatch({
+            type: "setSimulations",
+            simulations: fakeData.simulations
+        })
 
-    return
+        return
+    }
+
+    if (!window.navigator.onLine) {
+        dispatch({
+            type: "setError",
+            message: language["api.error.offline"]
+        })
+        dispatch({
+            type: "setSimulations",
+            nodes: []
+        })
+
+        return
+    }
 
     let ids
 
     try {
         ids = await api.get("/simulation/all")
-        ids = ids.json.map(simulation => simulation.uuid)
     } catch (e) {
         if (e instanceof api.ApiNetworkError || e instanceof api.ApiBodyParseError) {
-            // warning bad server
+            dispatch({
+                type: "setError",
+                message: language["api.error.unsuccessful_request"]
+            })
         } else if (e instanceof api.ApiResponseError) {
-            // warning bad action
-        } else {
-            console.log(e)
-            // warning unexpected json server responses should never happen
+            dispatch({
+                type: "setError",
+                message: language["api.error.invalid_request"]
+            })
         }
+
+        dispatch({
+            type: "setSimulations",
+            nodes: []
+        })
 
         return
     }
 
-    let requests = await Promise.allSettled(ids.map(id => api.get("/simulation/" + id)))
+    try {
+        ids = ids.json.map(simulation => simulation.uuid)
 
-    const simulations = requests
-        .filter(request => request.status === "fulfilled")
-        .map(request => request.value.json)
+        let requests = await Promise.allSettled(ids.map(id => api.get("/simulation/" + id)))
 
-    if (simulations.length !== requests.length) {
-        // warning bad action
+        const simulations = requests
+            .filter(request => request.status === "fulfilled")
+            .map(request => request.value.json)
+
+        if (simulations.length !== requests.length) {
+            dispatch({
+                type: "setError",
+                message: language["api.error.invalid_response_partial"]
+            })
+        }
+
+        dispatch({
+            type: "setSimulations",
+            simulations
+        })
+    } catch (e) {
+        dispatch({
+            type: "setError",
+            message: language["api.error.invalid_response"]
+        })
+        dispatch({
+            type: "setSimulations",
+            nodes: []
+        })
     }
-
-    dispatch({
-        type: "setSimulations",
-        simulations
-    })
 }
 
 function SimulationsList() {

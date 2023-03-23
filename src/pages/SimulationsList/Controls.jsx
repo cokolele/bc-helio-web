@@ -39,12 +39,11 @@ function Controls() {
         if (!simulations.sort) {
             setSort(sortings[sortParam] ? sortParam : Object.keys(sortings)[0])
         } else {
-            const prevSort = labelMapper[simulations.sort.label]
             setParams({
-                ...params,
-                sort: prevSort
+                ...Object.fromEntries(params),
+                sort: simulations.sort.name
             })
-            setSort(prevSort)
+            setSort(simulations.sort.name)
         }
     }, [])
 
@@ -52,7 +51,10 @@ function Controls() {
         if (sort) {
             dispatch({
                 type: "setSimulationsSort",
-                sort: sortings[sort]
+                sort: {
+                    comparer: sortings[sort].comparer,
+                    name: sort
+                }
             })
         }
     }, [sort])
@@ -67,7 +69,7 @@ function Controls() {
                     value = labelMapper[value]
                     setSort(value)
                     setParams({
-                        ...params,
+                        ...Object.fromEntries(params),
                         sort: value
                     })
                 }}
