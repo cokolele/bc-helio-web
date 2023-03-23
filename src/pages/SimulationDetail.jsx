@@ -1,3 +1,5 @@
+import api from "/src/utils/api"
+import Skeleton from "react-loading-skeleton"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { useAppState } from "/src/states/app"
@@ -12,26 +14,47 @@ import { Button } from "/src/components/Inputs"
 import * as classes from "./SimulationDetail.module.sass"
 import fakeData from "/src/fakeData"
 
-const fetchDetails = async (id, setSimulation) => {
+const useFakeData = true
+
+const fetchDetails = async (id, setSimulation, dispatch, language) => {
+    if (useFakeData) {
+        await new Promise(resolve => setTimeout(resolve, 4000))
+
+        setSimulation(fakeData.simulations.find(s => s.uuid == id))
+
+        return
+    }
+
+    if (!window.navigator.onLine) {
+        dispatch({
+            type: "setError",
+            message: language["api.error.offline"]
+        })
+
+        setSimulation(-1)
+
+        return
+    }
+
+
     try {
         const details = await api.get("/simulation/" + id)
         setSimulation(details.json)
     } catch (e) {
         if (e instanceof api.ApiNetworkError || e instanceof api.ApiBodyParseError) {
-            // warning bad server
+            dispatch({
+                type: "setError",
+                message: language["api.error.unsuccessful_request"]
+            })
         } else if (e instanceof api.ApiResponseError) {
-            // warning bad action
-        } else {
-            console.log(e)
-            // warning unexpected json server responses should never happen
+            dispatch({
+                type: "setError",
+                message: language["api.error.invalid_request"]
+            })
         }
 
-        return
+        setSimulation(-1)
     }
-}
-
-const fetchDetailsFake = async (id, setSimulation) => {
-    setSimulation(fakeData.simulations.find(s => s.uuid == id))
 }
  
 function simulationDetail() {
@@ -42,17 +65,13 @@ function simulationDetail() {
 
     useEffect(() => {
         if (!simulation) {
-            fetchDetailsFake(id, setSimulation)
+            fetchDetails(id, setSimulation, dispatch, language)
         }
     }, [])
 
-    if (!simulation) {
-        return null
-    }
-
     let duration
 
-    if (simulation.beginTime) {
+    if (simulation?.beginTime) {
         const timeDiff = Math.abs(
             (simulation.endtime ? new Date(simulation.endTime) : Date.now()) - new Date(simulation.beginTime)
         )
@@ -63,6 +82,71 @@ function simulationDetail() {
         let secs = (minutes % 1) * 60;
         
         duration = [Math.floor(days), Math.floor(hours), Math.floor(minutes), Math.floor(secs)]
+    }
+
+    const loading = !simulation
+    const error = simulation == -1
+
+    console.log(simulation, loading, error)
+
+    if (error) {
+        return (
+            <div className={classes.container}>
+                <span className={classes.error}>{ language["page.simulation_details.empty"] }</span>
+            </div>
+        )
+    }
+
+    if (loading) {
+        return (
+            <div className={classes.container}>
+                <div className={classes.simulation}>
+                    <section className={classes.metadata}>
+                        {
+                            [...new Array(6)].map(() => <Skeleton inline />)
+                        }
+                    </section>
+                    <section className={classes.status}>
+                        {
+                            [...new Array(6)].map(() => (
+                                <Skeleton
+                                    inline 
+                                    className={classes.skelet}
+                                    containerClassName={classes.skelet}
+                                />
+                            ))
+                        }
+                    </section>
+                    <section className={classes.parameters}>
+                        {
+                            [...new Array(12)].map(() => (
+                                <Skeleton
+                                    inline
+                                    className={classes.skelet}
+                                    containerClassName={classes.skelet}
+                                />
+                            ))
+                        }
+                    </section>
+                    <section className={classes.actions}>
+                        <Button
+                            IconLeft={<IconDownload/>}
+                            outlined
+                            disabled
+                        >
+                            { language["button.download_simulation"] }
+                        </Button>
+                        <Button
+                            IconLeft={<IconShowChart/>}
+                            to="graph"
+                            disabled
+                        >
+                            { language["button.show_simulation_graph"] }
+                        </Button>
+                    </section>
+                </div>
+            </div>
+        )
     }
 
     return (

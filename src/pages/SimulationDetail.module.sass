@@ -6,6 +6,9 @@
     align-items: center
     justify-content: center
 
+.error
+    @include label-large($disabled: true)
+
 .simulation
     display: flex
     flex-direction: column
@@ -16,8 +19,8 @@
         display: grid
         grid-template-columns: 2fr 1fr
 
-        & > span
-            @include text
+    section > span
+        @include text
 
     .metadata
         margin-top: 2rem
@@ -38,18 +41,21 @@
         span
             padding: 0.75rem
 
+            span.skelet
+                padding: 0
+
         span:nth-child(odd)
             @include text--regular
 
     .status
-        span:nth-child(4n + 3), span:nth-child(4n + 4)
+        span:not(.skelet):nth-child(4n + 3), span:not(.skelet):nth-child(4n + 4)
             background-color: var(--color-grey-light)
 
         span:nth-child(4n + 4)
             border-radius: 0 0.75rem 0.75rem 0
 
     .parameters
-        span:nth-child(4n + 1), span:nth-child(4n + 2)
+        span:not(.skelet):nth-child(4n + 1), span:not(.skelet):nth-child(4n + 2)
             background-color: var(--color-grey-light)
 
         span:nth-child(4n + 2)

@@ -50,6 +50,7 @@
     "date.minutes_short": "m",
     "date.seconds_short": "s",
     "page.simulation_list.empty": "No simulations",
+    "page.simulation_details.empty": "Simulation couldn't be found",
     "page.node_list.unknown": "Unknown",
     "page.node_list.empty": "No nodes",
     "page.node_list.is_active": "Active",
@@ -63,6 +64,6 @@
     "api.error.offline": "Please check your network connection and try again.",
     "api.error.unsuccessful_request": "Sorry, we were unable to retrieve the requested data. Please try again later.",
     "api.error.invalid_response": "Sorry, we were unable to retrieve the requested data. Please try again later.",
-    "api.error.invalid_request": "Sorry, we were unable to retrieve the requested data. Please contant the administrator.",
+    "api.error.invalid_request": "Sorry, we were unable to retrieve the requested data. Please contact the administrator.",
     "api.error.invalid_response_partial": "Sorry, we were unable to retrieve some of the requested data. Please try again later."
 }

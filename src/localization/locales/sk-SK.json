@@ -50,6 +50,7 @@
     "date.minutes_short": "m",
     "date.seconds_short": "s",
     "page.simulation_list.empty": "Žiadne simulácie",
+    "page.simulation_details.empty": "Simulácia nebola nájdená",
     "page.node_list.unknown": "Neznámy",
     "page.node_list.empty": "Žiadne uzly",
     "page.node_list.is_active": "Aktívny",
