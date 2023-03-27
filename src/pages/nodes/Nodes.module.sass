@@ -14,7 +14,7 @@
     .closeFiltersButton
         padding: 0.75rem 2rem
 
-    @include mappy-bp(1550px)
+    @include mappy-bp(desktop)
         & > li
             width: 10rem
 
@@ -30,7 +30,7 @@
         .closeFiltersButton
             margin-right: 3rem
 
-    @include mappy-bp(tablet 1550px)
+    @include mappy-bp(tablet desktop)
         & > li
             flex: 1
 
@@ -40,7 +40,7 @@
         .select
             width: 100%
 
-    @include mappy-query(max-tablet)
+    @include mappy-bp(max tablet)
         flex-wrap: wrap
         gap: 1rem 2rem
 
@@ -64,19 +64,19 @@
     justify-content: center
     gap: 2rem
 
-    @include mappy-bp(1550px)
+    @include mappy-bp(desktop)
         & > span
             //idk
             flex: 0 1 33.33%
 
-    @include mappy-bp(mobile 1550px)
+    @include mappy-bp(mobile desktop)
         & > span
             flex: 0 1 50%
 
             &:first-of-type
                 display: none
 
-    @include mappy-query(max-mobile)
+    @include mappy-bp(max mobile)
         text-align: center
         flex-direction: column
 
@@ -103,10 +103,10 @@
     @include mappy-bp(laptop)
         margin-top: 1rem
 
-    @include mappy-bp(mobile 1550px)
+    @include mappy-bp(mobile desktop)
         grid-template-columns: repeat(2, 1fr)
 
-    @include mappy-query(max-mobile)
+    @include mappy-bp(max mobile)
         grid-template-columns: 1fr
 
     li

@@ -38,15 +38,13 @@ const get = async (resource = "/", contentType = "application/json") => {
         }
     }
 
-    let response
+    let response, json
 
     try {
         response = await fetch(base + resource, options)
     } catch (e) {
         throw new ApiNetworkError(e)
     }
-
-    let json
 
     if (contentType == "application/json") {
         try {
@@ -64,89 +62,49 @@ const get = async (resource = "/", contentType = "application/json") => {
 }
 
 const post = async (resource = "/", body = {}, contentType = "application/json") => {
-    try {
-        const options = {
-            method: "POST",
-            headers: {},
-            body: contentType == "application/json" ? JSON.stringify(body) : body
-        }
+    const options = {
+        method: "POST",
+        headers: {},
+        body: contentType == "application/json" ? JSON.stringify(body) : body
+    }
 
-        if (contentType) {
-            options.headers = {
-                ...options.headers,
-                "Content-Type": contentType
+    if (contentType) {
+        options.headers = {
+            ...options.headers,
+            "Content-Type": contentType
+        }
+    }
+
+    let response, json
+
+    try {
+        response = await fetch(base + resource, options)
+    } catch (e) {
+        throw new ApiNetworkError(e)
+    }
+
+    try {
+        if (response?.headers["content-type"] == "application/json") {
+            if (response?.headers["content-length"]) {
+                json = await response.json()
+            } else {
+                json = {}
             }
         }
-
-        const response = await fetch(base + resource, options)
-        const json = await response.json()
-
-        return { response, json }
     } catch (e) {
-        return fetchError(e)
+        throw new ApiBodyParseError(response, e)
     }
-}
 
-const put = async (resource = "/", body = {}, contentType = "application/json") => {
-    try {
-        const options = {
-            method: "PUT",
-            headers: {
-                "Content-Type": contentType
-            },
-            body: contentType == "application/json" ? JSON.stringify(body) : body
-        }
-
-        const response = await fetch(base + resource, options)
-        const json = await response.json()
-
-        return { response, json }
-    } catch (e) {
-        return fetchError(e)
+    if (!response.ok) {
+        throw new ApiResponseError(response, json)
     }
-}
 
-const patch = async (resource = "/", body = {}, contentType = "application/json") => {
-    try {
-        const options = {
-            method: "PATCH",
-            headers: {
-                "Content-Type": contentType
-            },
-            body: contentType == "application/json" ? JSON.stringify(body) : body
-        }
-
-        const response = await fetch(base + resource, options)
-        const json = await response.json()
-
-        return { response, json }
-    } catch (e) {
-        return fetchError(e)
-    }
-}
-
-const delete_ = async (resource = "/") => {
-    try {
-        const options = {
-            method: "DELETE",
-            credentials: "include"
-        }
-
-        const response = await fetch(base + resource, options)
-        const json = await response.json()
-
-        return { response, json }
-    } catch (e) {
-        return fetchError(e)
-    }
+    return { response, json }
 }
 
 export default {
     get,
     post,
-    put,
-    patch,
-    delete: delete_,
     ApiNetworkError,
     ApiBodyParseError,
     ApiResponseError

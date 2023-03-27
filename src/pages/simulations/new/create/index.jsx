@@ -1,35 +1,47 @@
+import api from "/src/utils/api"
+import { useNavigate } from "react-router-dom"
+import { useAppState } from "/src/states/app"
 import { SegmentedButtonLabeled, InputLabeled, Button } from "/src/components/Inputs"
-import { IconUploadFile, IconAdd, IconCheck } from "/src/components/Icons/24/Emph"
+import { IconCheck, IconLoaderSpinning } from "/src/components/Icons/24/Emph"
 import { useLanguage } from "/src/utils/hooks"
 import { useState } from "react"
 import { map as mapRange } from "/src/utils/number"
 import { typesList, dimensionsList } from "/src/utils/simulation"
-import * as classes from "./SimulationNew.module.sass"
- 
-function SimulationNewChoose() {
-    const language = useLanguage()
+import * as classes from "./SimulationNewCreate.module.sass"
 
-    return (
-        <div className={classes.containerChoose}>
-            <Button
-                outlined
-                IconTop={<IconUploadFile/>}
-            >
-                { language["button.upload_file_simulation"] }
-            </Button>
-            <Button
-                outlined
-                IconTop={<IconAdd/>}
-                to="create"
-            >
-                { language["button.create_simulation"] }
-            </Button>
-        </div>
-    )
+const sendForm = async (data, dispatch, language) => {
+    try {
+        const sent = await api.post("/simulation/", data)
+        const all = await api.get("/simulation/all")
+        return all.json.reverse().find(({ name, uuid }) => name == data.name).uuid
+    } catch(e) {
+        console.error(e)
+
+        if (e instanceof api.ApiNetworkError || e instanceof api.ApiBodyParseError) {
+            dispatch({
+                type: "setError",
+                message: language["api.error.unsuccessful_request"]
+            })
+        } else if (e instanceof api.ApiResponseError) {
+            dispatch({
+                type: "setError",
+                message: language["api.error.send.invalid_response"]
+            })
+        } else {
+            dispatch({
+                type: "setError",
+                message: language["api.error.invalid_response"]
+            })
+        }
+    }
 }
 
 function SimulationNewCreate() {
+    const [state, dispatch] = useAppState()
     const language = useLanguage()
+    const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
+
     const [name, setName] = useState("")
     const [dimension, setDimension] = useState(dimensionsList[0])
     const [type, setType] = useState(typesList[0])
@@ -38,18 +50,49 @@ function SimulationNewCreate() {
     const [dt, setDt] = useState(10)
     const [dtMapping, setDtMapping] = useState(50)
     const [v, setV] = useState(800)
-    const [k, setK] = useState("5.5e19")
+    const [k, setK] = useState("5.5e22")
     const [kMapping, setKMapping] = useState(5.5)
     const [kpp, setKpp] = useState(0.05)
     const [mu, setMu] = useState(0.5)
 
+    const onSubmit = async (e) => {
+        e.preventDefault()
+        setLoading(true)
+
+        const timeStart = Date.now()
+
+        const sent = await sendForm({
+            name,
+            simulationType: (dimension == "1D" ? "ONE_DIMENSION_" : "TWO_DIMENSION_") + type,
+            billionsOfSimulations: n,
+            dt,
+            v,
+            k0: Number(k),
+            kparKper: kpp,
+            mu
+        }, dispatch, language)
+
+        const elapsed = Date.now() - timeStart
+        
+        if (sent) {
+            if (elapsed < 2500) {
+                await new Promise(resolve => setTimeout(resolve, 2500 - elapsed))
+            }
+
+            navigate("/simulations/" + sent)
+        }
+
+        setLoading(false)
+    }
+
     return (
-        <form>
+        <form onSubmit={onSubmit}>
             <div className={classes.top}>
                 <InputLabeled
                     label={language["label.name"]}
                     value={name}
                     onChange={e => setName(e.target.value)}
+                    required
                 />
                 <SegmentedButtonLabeled
                     label={language["label.dimensionality"]}
@@ -149,7 +192,7 @@ function SimulationNewCreate() {
                         step={0.1}
                         onChange={e => {
                             setKMapping(e.target.value)
-                            setK(e.target.value == "10" ? "1e20" : e.target.value + "e19")
+                            setK(e.target.value == "10" ? "1e23" : e.target.value + "e22")
                         }}
                     />
                     <InputLabeled
@@ -193,7 +236,9 @@ function SimulationNewCreate() {
             <div className={classes.bottom}>
                 <Button
                     outlined
-                    IconLeft={<IconCheck/>}
+                    IconLeft={loading ? <IconLoaderSpinning /> : <IconCheck/>}
+                    type="submit"
+                    disabled={loading}
                 >
                     { language["button.create_simulation_confirm"] }
                 </Button>
@@ -202,7 +247,4 @@ function SimulationNewCreate() {
     )
 }
 
-export { 
-    SimulationNewChoose,
-    SimulationNewCreate
-}
+export default SimulationNewCreate

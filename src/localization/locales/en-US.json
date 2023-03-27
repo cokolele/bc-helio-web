@@ -62,8 +62,9 @@
     "notification.on_online": "Back online.",
     "notification.on_offline": "Lost network connection.",
     "api.error.offline": "Please check your network connection and try again.",
-    "api.error.unsuccessful_request": "Sorry, we were unable to retrieve the requested data. Please try again later.",
-    "api.error.invalid_response": "Sorry, we were unable to retrieve the requested data. Please try again later.",
+    "api.error.unsuccessful_request": "Sorry, we were unable to connect to our servers. Please try again later.",
     "api.error.invalid_request": "Sorry, we were unable to retrieve the requested data. Please contact the administrator.",
-    "api.error.invalid_response_partial": "Sorry, we were unable to retrieve some of the requested data. Please try again later."
+    "api.error.invalid_response": "Sorry, we were unable to retrieve the requested data. Please try again later.",
+    "api.error.invalid_response_partial": "Sorry, we were unable to retrieve some of the requested data. Please try again later.",
+    "api.error.send.invalid_response": "Sorry, we were unable to send your request. Please try again later."
 }

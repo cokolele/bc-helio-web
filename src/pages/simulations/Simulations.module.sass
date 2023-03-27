@@ -26,7 +26,7 @@
     .pagination
         order: 5
 
-    @include mappy-bp(tablet 1550px)
+    @include mappy-bp(tablet desktop)
         .labels
             order: 3
         .filters
@@ -38,11 +38,12 @@
     margin-bottom: 1rem
     display: flex
     justify-content: space-between
+    align-items: center
 
-    @include mappy-query(max-mobile)
-        margin-top: 0.5rem
+    @include mappy-bp(max mobile)
+        margin: 0.5rem 0
 
-    @include mappy-query(max-tablet)
+    @include mappy-bp(max tablet)
         .sort > button
             @include tappable
 
@@ -52,7 +53,7 @@
             gap: 0
             padding: 1rem
 
-    @include mappy-query(min-tablet)
+    @include mappy-bp(tablet)
         .listView
             display: none
 
@@ -95,10 +96,10 @@
     display: flex
     gap: 1rem
 
-    @include mappy-query(max-tablet)
+    @include mappy-bp(max tablet)
         display: none
 
-    @include mappy-bp(tablet 1550px)
+    @include mappy-bp(tablet desktop)
         span:first-of-type
             flex: 1.5
 
@@ -113,36 +114,6 @@
     display: flex
     gap: 1rem
 
-    @include mappy-query(max-mobile)
-        flex-direction: column
-
-    @include mappy-bp(mobile 1550px)
-        flex-wrap: wrap
-        gap: 1rem
-
-        & > li
-            flex-grow: 1
-            flex-basis: calc(50% - .5rem)
-
-    @include mappy-bp(tablet 1550px)
-        margin-bottom: 1rem
-
-    @include mappy-bp(1550px)
-        margin: 0 0.2rem 2em 0.2rem
-        padding: 0 2rem
-
-        label
-            display: none
-
-        & > li
-            flex: 1
-            padding-right: 2rem
-            margin-left: -1rem
-
-        button
-            margin-top: 0
-            width: 100%
-
     & > li
         display: flex
         align-items: flex-end
@@ -155,6 +126,36 @@
     .closeFiltersButton
         margin-top: 0.75rem
         padding: 0.75rem
+
+    @include mappy-bp(max mobile)
+        flex-direction: column
+
+    @include mappy-bp(mobile desktop)
+        flex-wrap: wrap
+        gap: 1rem
+
+        & > li
+            flex-grow: 1
+            flex-basis: calc(50% - .5rem)
+
+    @include mappy-bp(tablet desktop)
+        margin-bottom: 1rem
+
+    @include mappy-bp(desktop)
+        margin: 0 0.2rem 2em 0.2rem
+        padding: 0 2rem
+
+        label
+            display: none
+
+        & > li
+            flex: 1
+            padding-right: 2rem
+            margin-left: -1rem
+
+        .closeFiltersButton
+            margin-top: 0
+            width: 100%
 
 .listSkeleton
     position: relative
@@ -169,7 +170,7 @@
         display: flex
         gap: 1rem
 
-    @include mappy-bp(tablet 1550px)
+    @include mappy-bp(tablet desktop)
         & > span
             span
                 flex: 1
@@ -177,12 +178,12 @@
             span:first-of-type
                 flex: 1.5
 
-    @include mappy-query(min-tablet)
+    @include mappy-bp(tablet)
         padding: 3rem 2rem
         gap: 4rem
         @include clickable-styled($outlined: true, $block: true, $disabled: true)
 
-    @include mappy-query(max-tablet)
+    @include mappy-bp(max tablet)
         gap: 2rem
 
         & > span
@@ -195,7 +196,7 @@
             gap: 1rem 20%
 
 .list
-    @include mappy-query(min-tablet)
+    @include mappy-bp(tablet)
         @include clickable-styled($outlined: true, $block: true)
         padding: 1rem
         cursor: auto
@@ -238,7 +239,11 @@
                 .iconArrow svg
                     margin-left: 4rem
 
-    @include mappy-query(max-tablet)
+    @include mappy-bp(tablet desktop)
+        a div:first-of-type
+            flex: 1.5
+
+    @include mappy-bp(max tablet)
         display: flex
         flex-direction: column
         gap: 2rem
@@ -283,13 +288,25 @@
                 color: var(--color-white-primary)
                 grid-area: 4 / 2 / 7 / 3
 
+        &.compact
+            gap: 1rem
+
+            a
+                padding: 1rem
+                display: flex
+                align-items: center
+                justify-content: space-between
+                gap: 1rem
+
+            .name, .status
+                padding: 0
+
+            .date, .type, .iconArrow, .status span
+                display: none
+
     @include mappy-bp(mobile tablet)
         a
             grid-template-columns: 1fr 20%
-
-    @include mappy-bp(tablet 1550px)
-        a div:first-of-type
-            flex: 1.5
 
 .pagination
     justify-content: center

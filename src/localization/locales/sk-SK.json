@@ -63,7 +63,8 @@
     "notification.on_offline": "Stratenie internetového pripojenia.",
     "api.error.offline": "Please check your network connection and try again.",
     "api.error.unsuccessful_request": "Ľutujeme, nedokázali sme sa pripojiť k serverom. Skúste to znova neskôr.",
-    "api.error.invalid_response": "Ľutujeme, nedokázali sme získať požadované dáta. Skúste to znova neskôr.",
     "api.error.invalid_request": "Ľutujeme, nedokázali sme získať požadované dáta. Kontaktujte prosím administrátora.",
-    "api.error.invalid_response_partial": "Ľutujeme, nedokázali sme získať niektoré z požadovaných dát. Skúste to znova neskôr."
+    "api.error.invalid_response": "Ľutujeme, nedokázali sme získať požadované dáta. Skúste to znova neskôr.",
+    "api.error.invalid_response_partial": "Ľutujeme, nedokázali sme získať niektoré z požadovaných dát. Skúste to znova neskôr.",
+    "api.error.send.invalid_response": "Ľutujeme, nedokázali sme poslať vašu požiadavku. Skúste to znova neskôr."
 }

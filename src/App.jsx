@@ -2,12 +2,13 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { AppStateProvider } from "/src/states/app"
 
 import Layout from "/src/pages/Layout"
-import NotFound from "/src/pages/NotFound"
-import SimulationsList from "/src/pages/SimulationsList"
-import SimulationDetail from "/src/pages/SimulationDetail"
-import { SimulationNewChoose, SimulationNewCreate } from "/src/pages/SimulationNew"
-import NodesList from "/src/pages/NodesList"
-import Settings from "/src/pages/Settings"
+import NotFound from "/src/pages/404"
+import Simulations from "/src/pages/simulations"
+import SimulationDetail from "/src/pages/simulations/{uuid}"
+import SimulationNew from "/src/pages/simulations/new"
+import SimulationNewCreate from "/src/pages/simulations/new/create"
+import Nodes from "/src/pages/nodes"
+import Settings from "/src/pages/settings"
 
 function App() {
     return (
@@ -17,15 +18,15 @@ function App() {
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Navigate to="/simulations" replace />} />
                         <Route path="simulations">
-                            <Route index element={<SimulationsList />} />
+                            <Route index element={<Simulations />} />
                             <Route path=":id">
                                 <Route index element={<SimulationDetail />} />
                                 <Route path="graph" element={<NotFound />} />
                             </Route>
-                            <Route path="new" element={<SimulationNewChoose />} />
+                            <Route path="new" element={<SimulationNew />} />
                             <Route path="new/create" element={<SimulationNewCreate />} />
                         </Route>
-                        <Route path="nodes" element={<NodesList />} />
+                        <Route path="nodes" element={<Nodes />} />
                         <Route path="settings" element={<Settings />} />
                         <Route path="*" element={<NotFound />} />
                     </Route>

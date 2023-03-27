@@ -3,7 +3,7 @@ import { useLanguage } from "/src/utils/hooks"
 import { typeMapper, typesList, dimensionsList } from "/src/utils/simulation"
 import { IconSearch } from "/src/components/Icons/20/Emph"
 import { SelectLabeled, Button, InputLabeled } from "/src/components/Inputs"
-import * as classes from "./SimulationsList.module.sass"
+import * as classes from "./Simulations.module.sass"
 
 function ListFilters() {
     const [{ simulations }, dispatch] = useAppState()

@@ -1,0 +1,68 @@
+@import "/src/styles/mixins.sass"
+
+.containerChoose, form
+    flex-grow: 1
+    display: flex
+    flex-direction: column
+    align-items: center
+
+.containerChoose
+    justify-content: center
+    gap: 2rem
+
+    button, a
+        width: 100%
+        max-width: 20rem
+
+        &:first-child
+            height: 6rem
+
+        &:last-child
+            height: 15rem
+
+    svg
+        height: 1.5rem
+
+form
+    gap: 4rem
+    justify-content: space-around
+
+    input
+        width: 100%
+
+    .top, .bottom
+        width: 100%
+
+    .top
+        display: flex
+        justify-content: center
+        flex-direction: column
+        gap: 1rem
+
+        ul
+            height: 3rem
+
+    .middle
+        display: flex
+        justify-content: center
+        width: 100%
+        gap: 3rem
+
+        .left, .right
+            flex: 1
+            display: flex
+            flex-direction: column
+            gap: 2rem
+
+    .bottom
+        display: flex
+        justify-content: flex-end
+
+    @include mappy-bp(tablet)
+        .top, .bottom
+            max-width: 35rem
+
+    @include mappy-bp(max tablet)
+        .middle
+            gap: 2rem
+            flex-direction: column

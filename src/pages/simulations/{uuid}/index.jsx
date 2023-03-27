@@ -20,7 +20,7 @@ const fetchDetails = async (id, setSimulation, dispatch, language) => {
     if (useFakeData) {
         await new Promise(resolve => setTimeout(resolve, 4000))
 
-        setSimulation(fakeData.simulations.find(s => s.uuid == id))
+        setSimulation(fakeData.simulations.find(s => s.uuid == id) || - 1)
 
         return
     }
@@ -57,7 +57,7 @@ const fetchDetails = async (id, setSimulation, dispatch, language) => {
     }
 }
  
-function simulationDetail() {
+function SimulationDetail() {
     const [{ simulations, locale }, dispatch] = useAppState()
     const { id } = useParams()
     const language = useLanguage()
@@ -87,8 +87,6 @@ function simulationDetail() {
     const loading = !simulation
     const error = simulation == -1
 
-    console.log(simulation, loading, error)
-
     if (error) {
         return (
             <div className={classes.container}>
@@ -103,13 +101,14 @@ function simulationDetail() {
                 <div className={classes.simulation}>
                     <section className={classes.metadata}>
                         {
-                            [...new Array(6)].map(() => <Skeleton inline />)
+                            [...new Array(6)].map((e, i) => <Skeleton key={i} inline />)
                         }
                     </section>
                     <section className={classes.status}>
                         {
-                            [...new Array(6)].map(() => (
+                            [...new Array(6)].map((e, i) => (
                                 <Skeleton
+                                    key={i}
                                     inline 
                                     className={classes.skelet}
                                     containerClassName={classes.skelet}
@@ -119,8 +118,9 @@ function simulationDetail() {
                     </section>
                     <section className={classes.parameters}>
                         {
-                            [...new Array(12)].map(() => (
+                            [...new Array(12)].map((e, i) => (
                                 <Skeleton
+                                    key={i}
                                     inline
                                     className={classes.skelet}
                                     containerClassName={classes.skelet}
@@ -248,4 +248,4 @@ function simulationDetail() {
     )
 }
 
-export default simulationDetail
+export default SimulationDetail

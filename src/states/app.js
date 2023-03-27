@@ -1,4 +1,4 @@
-import { useReducer, createContext, useContext } from 'react'
+import { useReducer, createContext, useContext } from "react"
 
 const initialState = {
     locale: navigator?.languages?.some(lang => ["en", "en-US", "en-GB"].includes(lang)) ? "en-US" : "sk-SK",

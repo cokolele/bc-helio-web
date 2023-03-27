@@ -1,7 +1,7 @@
 import { useAppState } from "/src/states/app"
 import { useLanguage } from "/src/utils/hooks"
 import { Button, SelectLabeled } from "/src/components/Inputs"
-import * as classes from "./NodesList.module.sass"
+import * as classes from "./Nodes.module.sass"
 
 function Filters() {
     const [{ nodes }, dispatch] = useAppState()

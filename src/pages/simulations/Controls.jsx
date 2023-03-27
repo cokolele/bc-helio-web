@@ -2,13 +2,10 @@ import { useState, useEffect } from "react"
 import { useSearchParams } from "react-router-dom"
 import { useAppState } from "/src/states/app"
 import { useLanguage } from "/src/utils/hooks"
-import {
-    IconSwapVert,
-    IconViewAgenda,
-    IconListAlt
-} from "/src/components/Icons/20"
+import { IconSwapVert } from "/src/components/Icons/20"
+import { IconListAlt, IconViewAgenda } from "/src/components/Icons/24"
 import { Select, Button } from "/src/components/Inputs"
-import * as classes from "./SimulationsList.module.sass"
+import * as classes from "./Simulations.module.sass"
 
 function Controls() {
     const [{ simulations }, dispatch] = useAppState()
@@ -81,7 +78,8 @@ function Controls() {
             <Button
                 className={classes.listView}
                 unstyled
-                IconTop={<IconListAlt/>}
+                IconTop={simulations.compactView ? <IconViewAgenda /> : <IconListAlt />}
+                onClick={() => dispatch({ type: "toggleSimulationsView" })}
             />
         </div>
     )

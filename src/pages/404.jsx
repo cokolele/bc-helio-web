@@ -1,5 +1,5 @@
 import { useLanguage } from "/src/utils/hooks"
-import * as classes from "./NotFound.module.sass"
+import * as classes from "./404.module.sass"
 
 function NotFound() {
     const language = useLanguage()

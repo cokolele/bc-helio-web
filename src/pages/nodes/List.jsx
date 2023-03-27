@@ -14,8 +14,8 @@ import {
     IconArrowBack
 } from "/src/components/Icons/24/Emph"
 import { Button } from "/src/components/Inputs"
-import * as simulationsListClasses from "/src/pages/SimulationsList/SimulationsList.module.sass"
-import * as classes from "./NodesList.module.sass"
+import * as simulationsClasses from "/src/pages/Simulations/Simulations.module.sass"
+import * as classes from "./Nodes.module.sass"
 
 const limit = 21
 
@@ -117,7 +117,7 @@ function Pagination({ pageState }) {
     }
 
     return (
-        <div className={simulationsListClasses.pagination}>
+        <div className={simulationsClasses.pagination}>
             {
                 page != 1 &&
                 <Button

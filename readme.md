@@ -24,7 +24,7 @@ Docker              | ✔️
 Functionality       | ✔️
 Typescript          | ➖
 PWA                 | ❌
-Tests               | ❌
+Tests               | ➖
 App State           | ✔️
 Api lib             | ✔️
 Router              | ✔️
@@ -34,7 +34,7 @@ Portals             | ➖
 Responsivity        | ✔️
 Animations          | ❌
 Accessibility       | ❌
-Dark mode           | ❌(➖)
+Dark mode           | ➖
 Languages           | ✔️
 Components          | ✔️
 Filter              | ✔️

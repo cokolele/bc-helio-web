@@ -158,6 +158,10 @@ function Snackbars() {
     useEffect(() => {
         if (error) {
             setQueue([...queue, error])
+            dispatch({
+                type: "setError",
+                message: null
+            })
         }
     }, [error])
 

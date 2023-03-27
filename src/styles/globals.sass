@@ -34,6 +34,17 @@
     box-sizing: border-box
     line-height: normal
 
+@keyframes loader-spinning
+    0%
+        transform: rotate(0deg)
+
+    100%
+        transform: rotate(360deg)
+
+.loader-spinning
+    transform-origin: center center
+    animation: loader-spinning 0.7s cubic-bezier(.5,.2,.5,.8) infinite
+
 svg
     flex-shrink: 0
     fill: currentColor

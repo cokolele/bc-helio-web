@@ -7,7 +7,7 @@
     grid-template-columns: 17rem 1fr
     grid-template-rows: 1fr
 
-    @include mappy-query(max-laptop)
+    @include mappy-bp(max laptop)
         grid-template-columns: 4.5rem 1fr
 
         .menuBackground
@@ -36,13 +36,13 @@
         .snackbar
             pointer-events: all
 
-            @include mappy-query(max-tablet)
+            @include mappy-bp(max tablet)
                 margin: 0 1rem
 
-            @include mappy-bp(tablet 1550px)
+            @include mappy-bp(tablet desktop)
                 max-width: 65vw
 
-            @include mappy-bp(1550px)
+            @include mappy-bp(desktop)
                 max-width: 40vw
 
     main
@@ -52,7 +52,7 @@
         display: flex
         flex-direction: column
 
-        @include mappy-query(max-laptop)
+        @include mappy-bp(max laptop)
             padding: 2rem
 
         h1
@@ -82,7 +82,7 @@
             a:hover, button:hover
                 background-color: var(--color-grey-light)
 
-        @include mappy-query(max-laptop)
+        @include mappy-bp(max laptop)
             grid-area: 1 / 1 / 2 / 3
             position: relative
             z-index: 100
@@ -121,7 +121,7 @@
             a, button
                 @include tappable
 
-        @include mappy-query(min-laptop)
+        @include mappy-bp(laptop)
             .menuButtonOpen
                 display: none
 

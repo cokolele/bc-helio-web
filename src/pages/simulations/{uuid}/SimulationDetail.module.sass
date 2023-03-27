@@ -68,13 +68,13 @@
         button, a
             width: 100%
 
-    @include mappy-query(max-tablet)
+    @include mappy-bp(max tablet)
         section
             grid-template-columns: repeat(2, 1fr)
 
         .actions
             flex-direction: column-reverse
 
-    @include mappy-query(max-mobile)
+    @include mappy-bp(max mobile)
         section:first-of-type
             grid-template-columns: 1fr 2fr

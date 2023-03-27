@@ -13,7 +13,7 @@ import {
 } from "/src/components/Icons/20/Emph"
 import { IconArrowForward, IconArrowBack } from "/src/components/Icons/24/Emph"
 import { Button } from "/src/components/Inputs"
-import * as classes from "./SimulationsList.module.sass"
+import * as classes from "./Simulations.module.sass"
 
 const limit = 10
 
@@ -27,7 +27,12 @@ function List() {
 
     return (
         <>
-            <ul className={loading || empty ? classes.listSkeleton : classes.list}>
+            <ul
+                className={[
+                    loading || empty ? classes.listSkeleton : classes.list,
+                    simulations.compactView ? classes.compact : null
+                ].join(" ")}
+            >
                 {
                     loading ?
                         <>

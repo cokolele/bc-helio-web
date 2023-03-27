@@ -4,7 +4,7 @@ import { useAppState } from "/src/states/app"
 import { useLanguage } from "/src/utils/hooks"
 import { IconSwapVert } from "/src/components/Icons/20"
 import { Select } from "/src/components/Inputs"
-import * as simulationsListClasses from "/src/pages/SimulationsList/SimulationsList.module.sass"
+import * as simulationsClasses from "/src/pages/Simulations/Simulations.module.sass"
 
 function Controls() {
     const [{ nodes }, dispatch] = useAppState()
@@ -52,9 +52,9 @@ function Controls() {
     }, [sort])
 
     return (
-        <div className={simulationsListClasses.controls}>
+        <div className={simulationsClasses.controls}>
             <Select
-                className={simulationsListClasses.sort}
+                className={simulationsClasses.sort}
                 list={Object.keys(labelMapper)}
                 value={sort && sortings[sort].label}
                 onChange={value => {

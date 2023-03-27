@@ -58,11 +58,11 @@ form
         display: flex
         justify-content: flex-end
 
-    @include mappy-query(min-tablet)
+    @include mappy-bp(tablet)
         .top, .bottom
             max-width: 35rem
 
-    @include mappy-query(max-tablet)
+    @include mappy-bp(max tablet)
         .middle
             gap: 2rem
             flex-direction: column

@@ -4,7 +4,7 @@ import { useAppState } from "/src/states/app"
 import { useLanguage } from "/src/utils/hooks"
 import { IconAdd } from "/src/components/Icons/24/Emph"
 import { Button } from "/src/components/Inputs"
-import * as classes from "./SimulationsList.module.sass"
+import * as classes from "./Simulations.module.sass"
 import fakeData from "/src/fakeData"
 
 import Controls from "./Controls"
@@ -95,7 +95,7 @@ const fetchAllSimulations = async (dispatch) => {
     }
 }
 
-function SimulationsList() {
+function Simulations() {
     const [{ simulations }, dispatch] = useAppState()
     const language = useLanguage()
 
@@ -132,4 +132,4 @@ function SimulationsList() {
     )
 }
 
-export default SimulationsList
+export default Simulations
