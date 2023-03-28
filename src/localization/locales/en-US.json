@@ -57,6 +57,7 @@
     "page.node_list.is_computing": "Computing",
     "page.node_list.last_update_time": "Last update",
     "page.simulation_detail.unfinished_warning": "Simulation is not yet finished. Complete data will be available after it finishes.",
+    "page.simulation_graph.not_landscape": "Rotate your device screen for easier graph viewing",
     "page.not_found.title": "We are sorry!",
     "page.not_found.description": "This page couldn't be found...",
     "notification.on_online": "Back online.",

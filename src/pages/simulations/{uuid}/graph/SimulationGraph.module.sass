@@ -1,0 +1,28 @@
+@import "/src/styles/mixins.sass"
+
+.container
+    flex-grow: 1
+
+.rotateWarning, .graph
+    height: 100%
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    color: var(--color-black-primary-disabled)
+
+.rotateWarning
+    gap: 1rem
+
+    span
+        @include label-large
+        color: var(--color-black-primary-disabled)
+        text-align: center
+        line-height: 2
+
+    @include mappy-bp(orientation landscape)
+        display: none
+
+.graph
+    @include mappy-bp(orientation portrait)
+        display: none

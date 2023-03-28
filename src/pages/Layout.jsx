@@ -47,7 +47,7 @@ function Navigation() {
                     (currentRoute == "/simulations" || currentRoute == "/nodes") ?
                         <>
                             <div className={classes.top}>
-                                <h3>HelioLogo</h3>
+                                <h3>{"[HelioLogo]"}</h3>
                                 <Button
                                     className={classes.menuButtonOpen}
                                     unstyled

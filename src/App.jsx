@@ -5,6 +5,7 @@ import Layout from "/src/pages/Layout"
 import NotFound from "/src/pages/404"
 import Simulations from "/src/pages/simulations"
 import SimulationDetail from "/src/pages/simulations/{uuid}"
+import SimulationGraph from "/src/pages/simulations/{uuid}/graph"
 import SimulationNew from "/src/pages/simulations/new"
 import SimulationNewCreate from "/src/pages/simulations/new/create"
 import Nodes from "/src/pages/nodes"
@@ -21,7 +22,7 @@ function App() {
                             <Route index element={<Simulations />} />
                             <Route path=":id">
                                 <Route index element={<SimulationDetail />} />
-                                <Route path="graph" element={<NotFound />} />
+                                <Route path="graph" element={<SimulationGraph />} />
                             </Route>
                             <Route path="new" element={<SimulationNew />} />
                             <Route path="new/create" element={<SimulationNewCreate />} />
