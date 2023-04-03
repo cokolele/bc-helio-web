@@ -8,7 +8,8 @@ import { typeMapper } from "/src/utils/simulation"
 import {
     IconErrorStatusOrange,
     IconDownload,
-    IconShowChart
+    IconShowChart,
+    IconLoaderSpinning
 } from "/src/components/Icons/24/Emph"
 import { Button } from "/src/components/Inputs"
 import * as classes from "./SimulationDetail.module.sass"
@@ -36,7 +37,6 @@ const fetchDetails = async (id, setSimulation, dispatch, language) => {
         return
     }
 
-
     try {
         const details = await api.get("/simulation/" + id)
         setSimulation(details.json)
@@ -62,6 +62,7 @@ function SimulationDetail() {
     const { id } = useParams()
     const language = useLanguage()
     const [simulation, setSimulation] = useState(simulations.list?.find(s => s.uuid == id))
+    const [downloading, setDownloading] = useState(false)
 
     useEffect(() => {
         if (!simulation) {
@@ -149,6 +150,41 @@ function SimulationDetail() {
         )
     }
 
+    const onDownload = async () => {
+        setDownloading(true)
+
+        try {
+            let data = {...simulation}
+            
+            if (data.finished) {
+                const graphData = await api.get("/simulation/" + id + "/spectrum", "application/octet-stream")
+                const text = await graphData.response.text()
+
+                // only grap download:
+                // const blob = await graphData.response.blob()
+
+                data.graph = text.trim().split(/\s+/)
+            }
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" })
+            const link = document.createElement("a")
+            const url = URL.createObjectURL(blob)
+
+            link.href = url
+            link.download = simulation.name + ".json"
+            link.click()
+
+            URL.revokeObjectURL(url)
+        } catch (e) {
+            dispatch({
+                type: "setError",
+                message: language["page.simulation_graph.api.download_error"]
+            })
+        }
+
+        setDownloading(false)
+    }
+
     return (
         <div className={classes.container}>
             <div className={classes.simulation}>
@@ -171,7 +207,9 @@ function SimulationDetail() {
                     <span>{ language["label.status"] }</span>
                     <span>
                         {
-                            simulation.finished ?
+                            simulation.uploaded ?
+                                language["status.uploaded"]
+                            : simulation.finished ?
                                 language["status.done"]
                             : simulation.endTime ?
                                 language["status.canceled"]
@@ -231,14 +269,16 @@ function SimulationDetail() {
                 </section>
                 <section className={classes.actions}>
                     <Button
-                        IconLeft={<IconDownload/>}
+                        IconLeft={downloading ? <IconLoaderSpinning /> : <IconDownload/>}
                         outlined
+                        onClick={onDownload}
                     >
                         { language["button.download_simulation"] }
                     </Button>
                     <Button
                         IconLeft={<IconShowChart/>}
                         to="graph"
+                        disabled={!simulation.finished}
                     >
                         { language["button.show_simulation_graph"] }
                     </Button>

@@ -9,7 +9,8 @@ import {
     IconCheckCircleStatus,
     IconScheduleStatus,
     IconHistoryStatus,
-    IconCancelStatus
+    IconCancelStatus,
+    IconCloudUpload
 } from "/src/components/Icons/20/Emph"
 import { IconArrowForward, IconArrowBack } from "/src/components/Icons/24/Emph"
 import { Button } from "/src/components/Inputs"
@@ -74,7 +75,12 @@ function ListItem({ sim }) {
                 </div>
                 <div className={classes.status}>
                     {
-                        sim.finished ?
+                        sim.uploaded ?
+                            <>
+                                <IconCloudUpload />
+                                <span>{ language["status.uploaded"] }</span>
+                            </>
+                        : sim.finished ?
                             <>
                                 <IconCheckCircleStatus />
                                 <span>{ language["status.done"] }</span>

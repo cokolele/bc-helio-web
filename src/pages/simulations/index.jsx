@@ -15,14 +15,12 @@ const useFakeData = true
 
 const fetchAllSimulations = async (dispatch) => {
     if (useFakeData) {
-        await new Promise(resolve => setTimeout(resolve, 4000));
+        await new Promise(resolve => setTimeout(resolve, 4000))
 
-        dispatch({
+        return dispatch({
             type: "setSimulations",
             simulations: fakeData.simulations
         })
-
-        return
     }
 
     if (!window.navigator.onLine) {
@@ -30,12 +28,10 @@ const fetchAllSimulations = async (dispatch) => {
             type: "setError",
             message: language["api.error.offline"]
         })
-        dispatch({
+        return dispatch({
             type: "setSimulations",
             nodes: []
         })
-
-        return
     }
 
     let ids
@@ -55,12 +51,10 @@ const fetchAllSimulations = async (dispatch) => {
             })
         }
 
-        dispatch({
+        return dispatch({
             type: "setSimulations",
             nodes: []
         })
-
-        return
     }
 
     try {

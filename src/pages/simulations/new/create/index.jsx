@@ -13,10 +13,8 @@ const sendForm = async (data, dispatch, language) => {
     try {
         const sent = await api.post("/simulation/", data)
         const all = await api.get("/simulation/all")
-        return all.json.reverse().find(({ name, uuid }) => name == data.name).uuid
+        return all.json.reverse().find(({ name }) => name == data.name).uuid
     } catch(e) {
-        console.error(e)
-
         if (e instanceof api.ApiNetworkError || e instanceof api.ApiBodyParseError) {
             dispatch({
                 type: "setError",
@@ -40,7 +38,7 @@ function SimulationNewCreate() {
     const [state, dispatch] = useAppState()
     const language = useLanguage()
     const navigate = useNavigate()
-    const [loading, setLoading] = useState(false)
+    const [sending, setSending] = useState(false)
 
     const [name, setName] = useState("")
     const [dimension, setDimension] = useState(dimensionsList[0])
@@ -57,7 +55,7 @@ function SimulationNewCreate() {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        setLoading(true)
+        setSending(true)
 
         const timeStart = Date.now()
 
@@ -82,11 +80,11 @@ function SimulationNewCreate() {
             navigate("/simulations/" + sent)
         }
 
-        setLoading(false)
+        setSending(false)
     }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className={classes.container}>
             <div className={classes.top}>
                 <InputLabeled
                     label={language["label.name"]}
@@ -236,9 +234,9 @@ function SimulationNewCreate() {
             <div className={classes.bottom}>
                 <Button
                     outlined
-                    IconLeft={loading ? <IconLoaderSpinning /> : <IconCheck/>}
+                    IconLeft={sending ? <IconLoaderSpinning /> : <IconCheck/>}
                     type="submit"
-                    disabled={loading}
+                    disabled={sending}
                 >
                     { language["button.create_simulation_confirm"] }
                 </Button>

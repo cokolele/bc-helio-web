@@ -28,8 +28,8 @@ Tests               | ➖
 App State           | ✔️
 Api lib             | ✔️
 Router              | ✔️
-Graph interactivity | ❌
-Download / Upload   | ❌
+Graph interactivity | ✔️
+Download / Upload   | ✔️
 Portals             | ➖
 Responsivity        | ✔️
 Animations          | ❌

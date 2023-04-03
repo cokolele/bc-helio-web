@@ -42,6 +42,10 @@ const get = async (resource = "/", contentType = "application/json") => {
 
     try {
         response = await fetch(base + resource, options)
+
+        if (response.status >= 500) {
+            throw new Error("Unavailable server.")
+        }
     } catch (e) {
         throw new ApiNetworkError(e)
     }
@@ -79,6 +83,10 @@ const post = async (resource = "/", body = {}, contentType = "application/json")
 
     try {
         response = await fetch(base + resource, options)
+
+        if (response.status >= 500) {
+            throw new Error("Unavailable server.")
+        }
     } catch (e) {
         throw new ApiNetworkError(e)
     }

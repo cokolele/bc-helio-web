@@ -60,7 +60,9 @@ function ListFilters() {
                 }
     
                 if (status) {
-                    if (status == language["status.done"] && !sim.finished) {
+                    if (status == language["status.uploaded"] && !sim.uploaded) {
+                        return false
+                    } else if (status == language["status.done"] && !sim.finished) {
                         return false
                     } else if (status == language["status.canceled"] && !sim.endTime) {
                         return false
@@ -122,7 +124,8 @@ function ListFilters() {
                         language["status.done"],
                         language["status.in_progress"],
                         language["status.pending"],
-                        language["status.canceled"]
+                        language["status.canceled"],
+                        language["status.uploaded"]
                     ]}
                     value={simulations.filters.status}
                     onChange={value => onFilterChange({status: value})}
