@@ -95,7 +95,7 @@ const drawGraph = (el, data) => {
         .append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`)
 
-    const x = d3.scaleLinear()
+    const x = d3.scaleLog()
         .domain(d3.extent(dataX))
         .range([0, width])
 
