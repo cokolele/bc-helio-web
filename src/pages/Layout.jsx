@@ -166,7 +166,7 @@ function Snackbars() {
     }, [error])
 
     useEffect(() => {
-        timer = setTimeout(() => setQueue(prevQueue => prevQueue.slice(1)), 3000)
+        const timer = setTimeout(() => setQueue(prevQueue => prevQueue.slice(1)), 3000)
         
         return () => clearTimeout(timer)
     }, [queue])

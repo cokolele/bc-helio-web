@@ -13,7 +13,7 @@ import List from "./List"
 
 const useFakeData = true
 
-const fetchAllSimulations = async (dispatch) => {
+const fetchAllSimulations = async (dispatch, language) => {
     if (useFakeData) {
         await new Promise(resolve => setTimeout(resolve, 4000))
 
@@ -95,7 +95,7 @@ function Simulations() {
 
     useEffect(() => {
         if (!simulations.list) {
-            fetchAllSimulations(dispatch)
+            fetchAllSimulations(dispatch, language)
         }
     }, [])
 

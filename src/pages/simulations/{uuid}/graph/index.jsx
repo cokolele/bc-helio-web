@@ -6,7 +6,6 @@ import { useAppState } from "/src/states/app"
 import { useEffect, useState, useRef } from "react"
 import {
     select,
-    scaleLinear,
     scaleLog,
     extent,
     axisBottom,
@@ -14,16 +13,6 @@ import {
     line
 } from "d3"
 import * as classes from "./SimulationGraph.module.sass"
-
-const d3 = {
-    select,
-    scaleLinear,
-    scaleLog,
-    extent,
-    axisBottom,
-    axisLeft,
-    line
-}
 
 const fetchData = async (id, simulations, setData, dispatch, language) => {
     if (id.endsWith("-uploaded")) {
@@ -80,7 +69,7 @@ const drawGraph = (el, data) => {
     const dataY2 = data.filter((_, i) => (i - 1) % 3 == 0).map(d => Number(d)).filter(d => d)
     const dataY = data.filter((_, i) => (i - 2) % 3 == 0).map(d => Number(d)).filter(d => d)
     
-    d3.select(el).selectChild().remove()
+    select(el).selectChild().remove()
 
     const elRect = el.getBoundingClientRect()
 
@@ -88,33 +77,33 @@ const drawGraph = (el, data) => {
     width = elRect.width - margin.left - margin.right,
     height = elRect.height - margin.top - margin.bottom
 
-    const svg = d3.select(el)
+    const svg = select(el)
         .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
         .append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`)
 
-    const x = d3.scaleLog()
-        .domain(d3.extent(dataX))
+    const x = scaleLog()
+        .domain(extent(dataX))
         .range([0, width])
 
-    const y = d3.scaleLog()
-        .domain(d3.extent(dataY))
+    const y = scaleLog()
+        .domain(extent(dataY))
         .range([height, 0])
     
     svg.append("g")
-            .call(d3.axisLeft(y).tickArguments([5, "1.0e"]))
+            .call(axisLeft(y).tickArguments([5, "1.0e"]))
         .append("g")
             .attr("transform", `translate(0, ${height})`)
-            .call(d3.axisBottom(x))
+            .call(axisBottom(x))
     
     svg.append("path")
         .datum(dataY.map((_, i) => [dataX[i], dataY[i]]))
         .attr("fill", "none")
         .attr("stroke", "steelblue")
         .attr("stroke-width", 1.5)
-        .attr("d", d3.line()
+        .attr("d", line()
             .x(d => x(d[0]))
             .y(d => y(d[1]))
         )

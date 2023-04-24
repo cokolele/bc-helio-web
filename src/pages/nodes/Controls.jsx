@@ -4,7 +4,7 @@ import { useAppState } from "/src/states/app"
 import { useLanguage } from "/src/utils/hooks"
 import { IconSwapVert } from "/src/components/Icons/20"
 import { Select } from "/src/components/Inputs"
-import * as simulationsClasses from "/src/pages/Simulations/Simulations.module.sass"
+import * as simulationsClasses from "/src/pages/simulations/Simulations.module.sass"
 
 function Controls() {
     const [{ nodes }, dispatch] = useAppState()

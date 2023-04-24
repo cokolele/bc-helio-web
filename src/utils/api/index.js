@@ -28,7 +28,7 @@ class ApiResponseError extends Error {
     }
 }
 
-const base = process.env.NODE_ENV == "production" ? "https://api.officialdomain.com" : "/api"
+const base = process.env.NODE_ENV == "production" ? "http://localhost:8080" : "/api"
 
 const get = async (resource = "/", contentType = "application/json") => {
     const options = {

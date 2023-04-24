@@ -14,7 +14,7 @@ import {
     IconArrowBack
 } from "/src/components/Icons/24/Emph"
 import { Button } from "/src/components/Inputs"
-import * as simulationsClasses from "/src/pages/Simulations/Simulations.module.sass"
+import * as simulationsClasses from "/src/pages/simulations/Simulations.module.sass"
 import * as classes from "./Nodes.module.sass"
 
 const limit = 21
@@ -72,7 +72,7 @@ function ListItem({ node }) {
                     :
                         <IconFiberManualRecordStatusGrey />
                 }
-                <span>{ node.gpu != "UKNOWN" ? node.gpu : language["page.node_list.unknown"] }</span>
+                <span>{ node.gpu != "UKNOWN" ? node.gpu.replaceAll("_", " ") : language["page.node_list.unknown"] }</span>
                 <Button
                     unstyled
                     IconLeft={<IconExpandMore />}
