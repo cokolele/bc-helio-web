@@ -9,12 +9,16 @@
         .label, .helperText
             color: var(--color-black-primary-disabled)
 
+            input
+                background-color: var(--color-primary-white)
+                color: var(--color-black-primary-disabled)
+
     &.invalid
         .label, .helperText
             color: var(--color-red-dangerous)
 
         &.disabled
-            .label, .helperText
+            .label, .helperText, .label input
                 color: var(--color-red-dangerous-disabled)
 
 .label, .helperText
@@ -24,8 +28,12 @@
 .label
     @include label
     display: flex
-    justify-content: space-between
     align-items: center
+
+    span
+        flex-grow: 1
+        display: flex
+        justify-content: flex-end
 
     input
         @include reset

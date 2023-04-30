@@ -74,7 +74,7 @@ function SimulationDetail() {
 
     if (simulation?.beginTime) {
         const timeDiff = Math.abs(
-            (simulation.endtime ? new Date(simulation.endTime) : Date.now()) - new Date(simulation.beginTime)
+            (simulation.endTime ? new Date(simulation.endTime) : Date.now()) - new Date(simulation.beginTime)
         )
 
         let days = timeDiff / (24 * 60 * 60 * 1000);

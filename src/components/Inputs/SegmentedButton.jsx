@@ -8,12 +8,16 @@ function SegmentedButton({ list, value, onChange, disabledList, unstyled, classN
     }
 
     return (
-        <ul className={[unstyled ? null : classes.list, className].join(" ")}>
+        <ul
+            className={[unstyled ? null : classes.list, className].join(" ")}
+            role="radiogroup"
+        >
             {
                 list.map((item, i) => (
                     <li
                         key={i}
                         className={unstyled ? null : classes.item}
+                        role="radio"
                     >
                         <Button
                             unstyled

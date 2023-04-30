@@ -10,12 +10,14 @@ import SimulationNew from "/src/pages/simulations/new"
 import SimulationNewCreate from "/src/pages/simulations/new/create"
 import Nodes from "/src/pages/nodes"
 import Settings from "/src/pages/settings"
+import Showcase from "/src/pages/Showcase"
 
 function App() {
     return (
         <AppStateProvider>
             <BrowserRouter>
                 <Routes>
+                    <Route path="/showcase" element={<Showcase />} />
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Navigate to="/simulations" replace />} />
                         <Route path="simulations">

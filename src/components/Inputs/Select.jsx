@@ -3,8 +3,8 @@ import { Input, Button, SegmentedButton, Label } from "/src/components/Inputs"
 import { IconExpandMore } from "/src/components/Icons/20/Emph"
 import * as classes from "./Select.module.sass"
 
-function Select({ list, value, onChange, allowBlank, button, unstyled, className, ...props }) {
-    const [show, setShow] = useState(false)
+function Select({ list, value, onChange, allowBlank, button, unstyled, className, forceShow, ...props }) {
+    const [show, setShow] = useState(forceShow ? true : false)
     const ref = useRef(null)
 
     return (

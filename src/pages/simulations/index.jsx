@@ -30,7 +30,7 @@ const fetchAllSimulations = async (dispatch, language) => {
         })
         return dispatch({
             type: "setSimulations",
-            nodes: []
+            simulations: []
         })
     }
 
@@ -53,7 +53,7 @@ const fetchAllSimulations = async (dispatch, language) => {
 
         return dispatch({
             type: "setSimulations",
-            nodes: []
+            simulations: []
         })
     }
 
@@ -84,7 +84,7 @@ const fetchAllSimulations = async (dispatch, language) => {
         })
         dispatch({
             type: "setSimulations",
-            nodes: []
+            simulations: []
         })
     }
 }
