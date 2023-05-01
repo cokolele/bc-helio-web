@@ -19,7 +19,27 @@ function Controls() {
         },
         recent: {
             label: language["sort.recent_visited"],
-            comparer: (a, b) => Math.random() < 1 / 2
+            comparer: (a, b) => {
+                let recents = localStorage.getItem("recents")
+
+                if (!recents) {
+                    return 0
+                }
+
+                recents = JSON.parse(recents)
+                a = recents.indexOf(a.uuid)
+                b = recents.indexOf(b.uuid)
+
+                if (a !== -1 && b === -1) {
+                    return -1
+                } else if (b !== -1 && a === -1) {
+                    return 1
+                } else if (a !== -1 && b !== -1) {
+                    return a - b
+                }
+                
+                return 0
+            }
         },
         alph: {
             label: language["sort.alph"],

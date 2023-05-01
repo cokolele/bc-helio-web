@@ -1,7 +1,10 @@
 import { useReducer, createContext, useContext } from "react"
 
+const browserLocale = navigator?.languages?.some(lang => ["en", "en-US", "en-GB"].includes(lang)) ? "en-US" : "sk-SK"
+const storageLocale = localStorage.getItem("locale")
+
 const initialState = {
-    locale: navigator?.languages?.some(lang => ["en", "en-US", "en-GB"].includes(lang)) ? "en-US" : "sk-SK",
+    locale: storageLocale || browserLocale,
     theme: window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light",
     error: null,
 
@@ -26,6 +29,8 @@ function reducer(state, action) {
     try {
         switch (action.type) {
             case "toggleLocale": {
+                localStorage.setItem("locale", state.locale === "sk-SK" ? "en-US" : "sk-SK")
+
                 return {
                     ...state,
                     locale: state.locale === "sk-SK" ? "en-US" : "sk-SK"

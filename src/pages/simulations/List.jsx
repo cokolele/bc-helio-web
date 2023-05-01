@@ -18,6 +18,21 @@ import * as classes from "./Simulations.module.sass"
 
 const limit = 10
 
+const saveToRecents = uuid => {
+    let recents = localStorage.getItem("recents")
+    recents = recents ? JSON.parse(recents) : []
+
+    if (recents.includes(uuid)) {
+        recents = recents.filter(e => e != uuid)
+    }
+
+    if (recents.unshift(uuid) > limit) {
+        recents.pop()
+    }
+
+    localStorage.setItem("recents", JSON.stringify(recents))
+}
+
 function List() {
     const [{ simulations }, dispatch] = useAppState()
     const language = useLanguage()
@@ -63,7 +78,10 @@ function ListItem({ sim }) {
 
     return (
         <li>
-            <Link to={sim.uuid}>
+            <Link
+                to={sim.uuid}
+                onClick={() => saveToRecents(sim.uuid)}
+            >
                 <div className={classes.name}>
                     <span>{ sim.name }</span>
                 </div>
