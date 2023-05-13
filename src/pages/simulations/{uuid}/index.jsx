@@ -19,7 +19,7 @@ const useFakeData = true
 
 const fetchDetails = async (id, setSimulation, dispatch, language) => {
     if (useFakeData) {
-        await new Promise(resolve => setTimeout(resolve, 4000))
+        await new Promise(resolve => setTimeout(resolve, 1000))
 
         setSimulation(fakeData.simulations.find(s => s.uuid == id) || - 1)
 
@@ -157,13 +157,20 @@ function SimulationDetail() {
             let data = {...simulation}
             
             if (data.finished) {
-                const graphData = await api.get("/simulation/" + id + "/spectrum", "application/octet-stream")
-                const text = await graphData.response.text()
-
-                // only grap download:
-                // const blob = await graphData.response.blob()
-
-                data.graph = text.trim().split(/\s+/)
+                try {
+                    const graphData = await api.get("/simulation/" + id + "/spectrum", "application/octet-stream")
+                    const text = await graphData.response.text()
+    
+                    // only grap download:
+                    // const blob = await graphData.response.blob()
+    
+                    data.graph = text.trim().split(/\s+/)
+                } catch (e) {
+                    dispatch({
+                        type: "setError",
+                        message: language["page.simulation_graph.api.download_error"]
+                    })
+                }
             }
 
             const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" })
@@ -246,9 +253,11 @@ function SimulationDetail() {
                     <span>
                         {
                             (
-                                (simulation.billionsOfSimulations - simulation.billionsOfSimulationsLeft)
-                                / simulation.billionsOfSimulations
-                                * 100
+                                Math.round(
+                                    (simulation.billionsOfSimulations - simulation.billionsOfSimulationsLeft)
+                                    / simulation.billionsOfSimulations
+                                    * 100
+                                )
                             ) + "%"
                         }
                     </span>

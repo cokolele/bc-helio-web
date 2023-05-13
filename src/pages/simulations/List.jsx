@@ -60,8 +60,8 @@ function List() {
                         language["page.simulation_list.empty"]
                     :
                         simulations.listShown
-                            .filter((sim, i) => i >= (page - 1) * limit && i < page * limit)
                             .sort(simulations.sort.comparer)
+                            .filter((sim, i) => i >= (page - 1) * limit && i < page * limit)
                             .map((sim, i) => (
                                 <ListItem key={i} sim={sim} />
                             ))

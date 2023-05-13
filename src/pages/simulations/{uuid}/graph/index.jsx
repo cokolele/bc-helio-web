@@ -12,9 +12,18 @@ import {
     axisLeft,
     line
 } from "d3"
+import fakeData from "/src/fakeData"
 import * as classes from "./SimulationGraph.module.sass"
 
+const useFakeData = true
+
 const fetchData = async (id, simulations, setData, dispatch, language) => {
+    if (useFakeData) {
+        await new Promise(resolve => setTimeout(resolve, 1000))
+
+        return setData(fakeData.graph)
+    }
+
     if (id.endsWith("-uploaded")) {
         const sim = simulations.list?.find(sim => sim.uuid == id)
 

@@ -61,7 +61,7 @@
     "page.simulation_detail.unfinished_warning": "Simulácia nie je dokončená. Kompletné dáta budú dostupné po jej dokončení.",
     "page.simulation_graph.not_landscape": "Otočte obrazovku zariadenia pre lepšie zobrazenie grafu",
     "page.simulation_graph.api.download_error": "Ľutujeme, nedokázali sme získať dáta grafu.",
-    "page.simulation_graph.unavailable": "Nedokázali sme načítať graf",
+    "page.simulation_graph.unavailable": "Graf nebolo možné načítať",
     "page.not_found.title": "Mrzí nás to!",
     "page.not_found.description": "Nenašli sme stránku, ktorú hľadáte...",
     "notification.on_online": "Späť online.",

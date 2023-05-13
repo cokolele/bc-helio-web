@@ -21,3 +21,7 @@ Graph interactivity | ✔️
 Download / Upload   | ✔️
 Animations          | ❌
 Accessibility       | ❌
+
+zooming na stránke
+graf celkovo
+konceptualny model nesplneny

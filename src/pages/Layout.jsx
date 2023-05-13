@@ -104,7 +104,7 @@ function Navigation() {
                                 <Button
                                     unstyled
                                     IconLeft={<IconArrowBackIosNew/>}
-                                    to={-1}
+                                    to={currentRoute == "/simulations/:id" ? "/simulations" : -1}
                                 >
                                     { language["nav.back"] }
                                 </Button>

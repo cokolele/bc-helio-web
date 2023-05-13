@@ -9,7 +9,40 @@ import { map as mapRange } from "/src/utils/number"
 import { typesList, dimensionsList } from "/src/utils/simulation"
 import * as classes from "./SimulationNewCreate.module.sass"
 
-const sendForm = async (data, dispatch, language) => {
+const useFakeData = true
+
+const sendForm = async (data, state, dispatch, language) => {
+    if (useFakeData) {
+        const newId = crypto.randomUUID()
+
+        dispatch({
+            type: "setSimulations",
+            simulations: [
+                ...(state.simulations.list || []),
+                {
+                    "uuid": newId,
+                    "name": data.name,
+                    "billionsOfSimulations": data.billionsOfSimulations,
+                    "billionsOfSimulationsLeft": data.billionsOfSimulations,
+                    "resultMap": {},
+                    "nodeSimulationApiModelList": [],
+                    "createTime": new Date().toISOString(),
+                    "beginTime": null,
+                    "endTime": null,
+                    "simulationType": data.simulationType,
+                    "dt": data.dt,
+                    "kparKper": data.kparKper,
+                    "k0": data.k0,
+                    "v": data.v,
+                    "mu": data.mu,
+                    "finished": false
+                }
+            ]
+        })
+
+        return newId
+    }
+
     try {
         const sent = await api.post("/simulation/", data)
         const all = await api.get("/simulation/all")
@@ -68,7 +101,7 @@ function SimulationNewCreate() {
             k0: Number(k),
             kparKper: kpp,
             mu
-        }, dispatch, language)
+        }, state, dispatch, language)
 
         const elapsed = Date.now() - timeStart
         
@@ -161,7 +194,8 @@ function SimulationNewCreate() {
                         labelInput={
                             <input
                                 value={v}
-                                onChange={e => setV(parseInt(e.target.value) || 100)}
+                                onChange={e => setV(parseInt(e.target.value) || "")}
+                                onBlur={e => setV(parseInt(e.target.value) || 800)}
                                 type="number"
                             />
                         }

@@ -64,11 +64,11 @@ function ListFilters() {
                         return false
                     } else if (status == language["status.done"] && !sim.finished) {
                         return false
-                    } else if (status == language["status.canceled"] && !sim.endTime) {
+                    } else if (status == language["status.canceled"] && (!sim.endTime || sim.finished)) {
                         return false
-                    } else if (status == language["status.in_progress"] && (!sim.beginTime || sim.endTime)) {
+                    } else if (status == language["status.in_progress"] && (!sim.beginTime || sim.endTime || sim.finished)) {
                         return false
-                    } else if (status == language["status.pending"] && (sim.beginTime || sim.finished)) {
+                    } else if (status == language["status.pending"] && sim.beginTime) {
                         return false
                     }
                 }

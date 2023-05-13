@@ -12,7 +12,7 @@ const useFakeData = true
 
 const fetchAllSimulations = async (dispatch, language) => {
     if (useFakeData) {
-        await new Promise(resolve => setTimeout(resolve, 4000))
+        await new Promise(resolve => setTimeout(resolve, 1000))
 
         dispatch({
             type: "setNodes",

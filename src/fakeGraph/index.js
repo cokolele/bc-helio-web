@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 
 app.get("/simulation/:uuid/spectrum", async (req, res) => {
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    await new Promise(resolve => setTimeout(resolve, 1000))
 
     res.type("application/octet-stream")
         .status(200)
