@@ -23,8 +23,12 @@ const initialState = {
     }
 }
 
+const state_logging = process.env.NODE_ENV == "development"
+
 function reducer(state, action) {
-    console.log("app state update: ", action)
+    if (state_logging) {
+        console.log("app state update: ", action)
+    }
 
     try {
         switch (action.type) {

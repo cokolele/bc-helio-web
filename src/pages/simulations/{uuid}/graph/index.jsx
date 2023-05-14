@@ -4,14 +4,13 @@ import { IconScreenRotation, IconLoaderSpinning } from "/src/components/Icons/48
 import { useParams } from "react-router-dom"
 import { useAppState } from "/src/states/app"
 import { useEffect, useState, useRef } from "react"
-import {
-    select,
-    scaleLog,
-    extent,
-    axisBottom,
-    axisLeft,
-    line
-} from "d3"
+
+import { select } from "d3-selection"
+import { scaleLog } from "d3-scale"
+import { extent } from "d3-array"
+import { axisBottom, axisLeft } from "d3-axis"
+import { line } from "d3-shape"
+
 import fakeData from "/src/fakeData"
 import * as classes from "./SimulationGraph.module.sass"
 
@@ -75,7 +74,7 @@ const fetchData = async (id, simulations, setData, dispatch, language) => {
 
 const drawGraph = (el, data) => {
     const dataX = data.filter((_, i) => i % 3 == 0).map(d => Number(d)).filter(d => d)
-    const dataY2 = data.filter((_, i) => (i - 1) % 3 == 0).map(d => Number(d)).filter(d => d)
+    //const dataY2 = data.filter((_, i) => (i - 1) % 3 == 0).map(d => Number(d)).filter(d => d)
     const dataY = data.filter((_, i) => (i - 2) % 3 == 0).map(d => Number(d)).filter(d => d)
     
     select(el).selectChild().remove()

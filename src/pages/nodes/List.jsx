@@ -76,6 +76,7 @@ function ListItem({ node }) {
                 <Button
                     unstyled
                     IconLeft={<IconExpandMore />}
+                    aria-label={open ? language["button.collapse"] : language["button.show_more"]}
                 />
             </div>
             {
@@ -97,6 +98,7 @@ function Pagination({ pageState }) {
     const [{ nodes }, dispatch] = useAppState()
     const [params, setParams] = useSearchParams()
     const [page, setPage] = pageState
+    const language = useLanguage()
 
     useEffect(() => {
         const pageParam = parseInt(params.get("page"), 10)
@@ -123,6 +125,7 @@ function Pagination({ pageState }) {
                 <Button
                     IconLeft={<IconArrowBack />}
                     outlined
+                    aria-label={language["button.previous_page"]}
                     onClick={() => {
                         setParams({
                             ...Object.fromEntries(params),
@@ -137,6 +140,7 @@ function Pagination({ pageState }) {
                 <Button
                     IconLeft={<IconArrowForward />}
                     outlined
+                    aria-label={language["button.next_page"]}
                     onClick={() => {
                         setParams({
                             ...Object.fromEntries(params),

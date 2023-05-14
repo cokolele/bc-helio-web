@@ -98,6 +98,7 @@ function Controls() {
             <Button
                 className={classes.listView}
                 unstyled
+                aria-label={simulations.compactView ? language["button.list_compact_disable"] : language["button.list_compact_enable"]}
                 IconTop={simulations.compactView ? <IconViewAgenda /> : <IconListAlt />}
                 onClick={() => dispatch({ type: "toggleSimulationsView" })}
             />
