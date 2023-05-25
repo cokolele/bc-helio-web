@@ -129,6 +129,12 @@
             button
                 padding: 0.5rem 1rem
 
+                svg
+                    transition: transform 0.2s ease
+
+                &.opened svg
+                    transform: rotate(180deg)
+
         .details
             @include text--regular
             cursor: auto

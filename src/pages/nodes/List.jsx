@@ -76,6 +76,7 @@ function ListItem({ node }) {
                 <Button
                     unstyled
                     IconLeft={<IconExpandMore />}
+                    className={open ? classes.opened : null}
                     aria-label={open ? language["button.collapse"] : language["button.show_more"]}
                 />
             </div>
